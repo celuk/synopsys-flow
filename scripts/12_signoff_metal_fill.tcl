@@ -1,13 +1,13 @@
 source scripts/00_setup.tcl
 
-set PREVIOUS_STEP $SOPT_BLOCK
+set PREVIOUS_STEP $SEXTRACT_BLOCK
 set CURRENT_STEP $SMFILL_BLOCK
 open_lib $DESIGN_LIBRARY
 copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_STEP}
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-#create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x}
+create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x}
 
 check_legality
 

@@ -34,7 +34,10 @@ source scripts/00_pdk_setup.tcl
 
 set REFERENCE_LIBRARY [list \
 ${NDM_PATH}/stdcell.ndm \
+${NDM_PATH}/stdcell_physical_only.ndm \
 ];
+
+#${NDM_PATH}/stdcell.ndm \
 
 set TAP_CELLS ""
 
