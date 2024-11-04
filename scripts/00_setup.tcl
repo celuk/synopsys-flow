@@ -59,11 +59,12 @@ set STREAMOUT_SDF_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.sdf"
 set STREAMOUT_PARASITICS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.spef"
 
 ## report_lib $STDCELL_LIB_NAME
-set TT_OPC "NCCOM"
+set STDCELL_LIB_NAME "stdcell"
+set IO_LIB_NAME "io"
 
-## BCCOM
-## WCCOM
-
+## can also be used in library creation with
+## create_workspace -scale_factor 1000
+## command
 set STREAMOUT_RESOLUTION 1000
 
 set CLK clk_i

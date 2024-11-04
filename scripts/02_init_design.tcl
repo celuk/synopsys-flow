@@ -24,7 +24,8 @@ read_sdc $CONSTRAINT_FILE
 current_corner TT
 current_mode FUNC_12
 current_scenario FUNC_12_TT
-set_operating_conditions $TT_OPC
+set_operating_conditions $TT_OPC -library $STDCELL_LIB_NAME
+
 set_scenario_status FUNC_12_TT -all -active true
 
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
