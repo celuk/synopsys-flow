@@ -78,3 +78,6 @@ clean:
 
 clean_ndms:
 	rm -rf data/lib/*
+
+show:
+	fc_shell -gui

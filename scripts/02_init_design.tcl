@@ -7,12 +7,19 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+#set_app_options -name mv.upf.enable_golden_upf -value true
+
 #set_max_transition 5.0 [current_design]
 
 #set_attribute [get_site_defs unit] symmetry {X Y}
 #set_attribute [get_site_defs unit] is_default true
 
 read_sdc $CONSTRAINT_FILE
+
+load_upf $UPF_FILE
+#commit_upf
+
+connect_pg_net -automatic
 
 create_corner TT
 set_parasitics_parameters -early_spec nomTLU -late_spec nomTLU -corners {TT}
@@ -26,10 +33,10 @@ current_mode FUNC_12
 current_scenario FUNC_12_TT
 set_operating_conditions $TT_OPC_STDCELL -library $STDCELL_LIB_NAME
 set_operating_conditions $TT_OPC_IO -library $IO_LIB_NAME
+set_voltage -corner TT -object_list VDDPST 2.5
+set_voltage -corner TT -object_list VDD 1.2
+set_voltage -corner TT -object_list VSS 0.0
 set_scenario_status FUNC_12_TT -all -active true
-
-load_upf $UPF_FILE
-commit_upf
 
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER

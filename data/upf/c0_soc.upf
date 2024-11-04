@@ -5,7 +5,7 @@ create_supply_net VSS
 create_supply_set ss_high -function {power VDDPST} -function {ground VSS}
 create_supply_set ss_low  -function {power VDD}  -function {ground ss_high.ground}
 
-create_power_domain PD_C0_SOC -supply {primary ss_high}
+create_power_domain PD_C0_SOC -elements {.} -supply {primary ss_high}
 create_power_domain PD_CORE -elements c0_top_inst -supply {primary ss_low}
 
 create_supply_port VDDPST -domain PD_C0_SOC -direction inout
@@ -16,10 +16,11 @@ connect_supply_net VDDPST -ports VDDPST
 connect_supply_net VDD  -ports VDD
 connect_supply_net VSS  -ports VSS
 
-set_level_shifter risc_ls_in -domain PD_CORE \
-	-applies_to inputs -rule low_to_high -location self
-set_level_shifter risc_ls_out -domain PD_CORE \
-	-applies_to outputs -rule high_to_low -location parent
+## compile_fusion -initial_map --> the tool can automatically fix level shifter violations
+#set_level_shifter risc_ls_in -domain PD_CORE \
+#	-applies_to inputs -rule low_to_high -location self
+#set_level_shifter risc_ls_out -domain PD_CORE \
+#	-applies_to outputs -rule high_to_low -location parent
 
 set_design_attributes -elements {.} -attribute correlated_supply_group {*}
 
