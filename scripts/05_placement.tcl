@@ -80,6 +80,8 @@ set_dont_touch [get_lib_cells $CTS_LIB_CELL_PATTERNS] false
 set_lib_cell_purpose -include {optimization cts} [get_lib_cells $CTS_LIB_CELL_PATTERNS]
 create_placement -floorplan
 
+set_app_options -name place.fix_hard_macros -value true
+
 ## second pass
 # -congestion_effort high
 create_placement -incremental -timing_driven -congestion -congestion_effort high

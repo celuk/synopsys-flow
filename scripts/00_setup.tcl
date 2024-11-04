@@ -35,9 +35,14 @@ source scripts/00_pdk_setup.tcl
 set REFERENCE_LIBRARY [list \
 ${NDM_PATH}/stdcell.ndm \
 ${NDM_PATH}/stdcell_physical_only.ndm \
+\
+${NDM_PATH}/io.ndm \
+${NDM_PATH}/io_physical_only.ndm \
+\
+${NDM_PATH}/wb_bondpad.ndm \
 ];
 
-#${NDM_PATH}/stdcell.ndm \
+#${NDM_PATH}/sealring.ndm \
 
 set TAP_CELLS ""
 
@@ -56,9 +61,12 @@ set STREAMOUT_PARASITICS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.spef"
 ## report_lib $STDCELL_LIB_NAME
 set TT_OPC "NCCOM"
 
+## BCCOM
+## WCCOM
+
 set STREAMOUT_RESOLUTION 1000
 
-set CLK clk
+set CLK clk_i
 
 set POWER_NET "VDD"
 set GROUND_NET "VSS"

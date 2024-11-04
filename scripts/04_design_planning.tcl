@@ -7,12 +7,26 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-initialize_floorplan -side_length "100 100" -core_offset {20}
+initialize_floorplan -side_length "850 850"
+create_io_ring -name "ring" -corner_height 75
 
-set_block_pin_constraints -self -allowed_layers {M3 M4} -pin_spacing_distance 2
+#set_block_pin_constraints -self -allowed_layers {M3 M4} -pin_spacing_distance 2
 
-set pgports [remove_from_collection [get_ports] {VDD VSS}]
-place_pins -self -ports $pgports
+set_app_options -name route.common.connect_within_pins_by_layer_name -value { {M1 via_wire_all_pins} }
+
+#set pgports [remove_from_collection [get_ports] {VDD VSS}]
+place_pins -self 
+#-ports $pgports
+
+place_io
+
+source scripts/createNplace_bondpads.tcl
+sh cat scripts/createNplace_bondpads.tcl
+createNplace_bondpads -inline_pad_ref_name PAD70N
+
+source scripts/bmp2lay_offset.tcl
+sh cat scripts/bmp2lay_offset.tcl
+bmp2lay -f /home/ananas/denemeler/snpsdenemeler/kasirgalogo.bmp -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
 
 remove_pg_via_master_rules -all
 remove_pg_patterns -all
@@ -86,11 +100,22 @@ set_app_options -name plan.pgroute.merge_shapes_for_via_creation -value true
 #create_pg_vias -insert_additional_vias -from_layers M7 -to_layers M6 -via_masters default -nets {VDD VSS}
 
 connect_pg_net -automatic
-create_pg_mesh_pattern mesh_pattern -layers { {{horizontal_layer: M1} {width: 0.75} {pitch: 150} {spacing: interleaving}} {{horizontal_layer: M9} {width: 2.4} {pitch: 96} {spacing: interleaving}} {{vertical_layer: M8} {width: 0.84} {pitch: 33.6} {spacing: interleaving}} }
+create_pg_mesh_pattern mesh_pattern -layers { {{horizontal_layer: M1} {width: 0.2} {pitch: 48} {spacing: interleaving}} {{horizontal_layer: M7} {width: 0.2} {pitch: 48} {spacing: interleaving}} {{vertical_layer: M6} {width: 0.2} {pitch: 48} {spacing: interleaving}} }
 set_pg_strategy mesh_strategy -core -pattern {{pattern: mesh_pattern}{nets: {VDD VSS}}} -blockage {macros: all}
 create_pg_std_cell_conn_pattern std_cell_pattern
 set_pg_strategy std_cell_strategy -core -pattern {{pattern: std_cell_pattern}{nets: {VDD VSS}}}
 compile_pg
+
+#create_pg_ring_pattern ring_pattern -horizontal_layer M7 \
+#   -horizontal_width {5} -horizontal_spacing {2} \
+#   -vertical_layer M8 -vertical_width {5} -vertical_spacing {2} \
+#                        -corner_bridge true
+#
+#set_pg_strategy core_ring \
+#   -pattern {{name: ring_pattern} \
+#   {nets: {VDD VSS VDD VSS}} {offset: {3 3}}} -core
+#
+#compile_pg -strategies core_ring
 
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
 connect_pg_net -net VSS [get_pins -hierarchical */VSS]
@@ -99,6 +124,8 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 check_pg_connectivity
 check_pg_drc
+
+#check_pg_drc -load_routing_of_all_nets
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

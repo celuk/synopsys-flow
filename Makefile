@@ -24,7 +24,7 @@ $(LOGS_DIR):
 
 all: s1 s2 s3 s4 s5 s6 s8 s10 s12 s13 s15
 
-ndm: $(LOGS_DIR)
+ndms: $(LOGS_DIR)
 	lm_shell -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log
 
 s1: $(LOGS_DIR)

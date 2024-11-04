@@ -16,16 +16,16 @@ read_sdc $CONSTRAINT_FILE
 
 create_corner TT
 set_parasitics_parameters -early_spec nomTLU -late_spec nomTLU -corners {TT}
-create_mode FUNC_105
-current_mode FUNC_105
-create_scenario -mode FUNC_105 -corner TT -name FUNC_105_TT
-current_scenario FUNC_105_TT
+create_mode FUNC_12
+current_mode FUNC_12
+create_scenario -mode FUNC_12 -corner TT -name FUNC_12_TT
+current_scenario FUNC_12_TT
 read_sdc $CONSTRAINT_FILE
 current_corner TT
-current_mode FUNC_105
-current_scenario FUNC_105_TT
+current_mode FUNC_12
+current_scenario FUNC_12_TT
 set_operating_conditions $TT_OPC
-set_scenario_status FUNC_105_TT -all -active true
+set_scenario_status FUNC_12_TT -all -active true
 
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER

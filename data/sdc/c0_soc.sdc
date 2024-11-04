@@ -1,2 +1,2 @@
-create_clock clk -period 10
+create_clock clk_i -period 10
 
