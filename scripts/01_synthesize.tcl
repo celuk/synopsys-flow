@@ -1,0 +1,29 @@
+source scripts/00_setup.tcl
+
+set CURRENT_STEP $SYNTH_BLOCK
+create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY -scale_factor 10000
+
+read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name nomTLU -tlup $PARASITICS_NOM_TLUPLUS_FILE
+current_lib
+
+report_ref_libs
+
+set_current_mismatch_config auto_fix -enable {library netlist routing}
+
+set_app_options -name lib.setting.enable_via_region_override -value true
+derive_design_level_via_regions
+
+analyze -format sverilog $VERILOG_FILES
+elaborate $TOP_MODULE
+set_top_module $TOP_MODULE
+
+write_verilog $GATE_LEVEL_VERILOG
+
+redirect -file $REPORTS_DIR/01_${CURRENT_STEP}/${TOP_MODULE}_timing.rpt {report_timing -nosplit}
+redirect -file $REPORTS_DIR/01_${CURRENT_STEP}/${TOP_MODULE}_area.rpt {report_area -nosplit}
+
+save_lib -all
+
+save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
+
+exit
