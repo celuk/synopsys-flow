@@ -10,9 +10,9 @@ module c0_soc(
     PCORNER CornerCell3();
     PCORNER CornerCell4();
 
-    //PVDD2POC VDD2POC ( .VDDPST() );
-    //PVDD2CDG VDDPST_0 ( .VDDPST() );
-    //PVDD2CDG VDDPST_1 ( .VDDPST() );
+    PVDD2POC VDD2POC ( .VDDPST() );
+    PVDD2CDG VDDPST_0 ( .VDDPST() );
+    PVDD2CDG VDDPST_1 ( .VDDPST() );
     PVDD1CDG VDD_0 ( .VDD() );
     PVDD1CDG VDD_1 ( .VDD() );
     PVSS3CDG VSS3_0 ( .VSS() );
@@ -39,24 +39,11 @@ module c0_soc(
     PDDW0204CDG PDDW0204CDG_OUT5(.OEN(1'b0),.I(seg[5]),.PAD(seg_o[5]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
     PDDW0204CDG PDDW0204CDG_OUT6(.OEN(1'b0),.I(seg[6]),.PAD(seg_o[6]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
 
-    always @(posedge clk) begin
-        if(!rstn) begin
-            seg <= 0;
-        end
-        else begin
-            case (d)
-            4'h0: seg <= 7'b0000001;
-            4'h1: seg <= 7'b1001111;
-            4'h2: seg <= 7'b0010010;
-            4'h3: seg <= 7'b0000110;
-            4'h4: seg <= 7'b1001100;
-            4'h5: seg <= 7'b0100100;
-            4'h6: seg <= 7'b0100000;
-            4'h7: seg <= 7'b0001111;
-            4'h8: seg <= 7'b0000000;
-            4'h9: seg <= 7'b0000100;
-            default: seg <= 7'b1111110;
-            endcase
-        end
-    end
+    c0_top c0_top_inst(
+        .clk(clk),
+        .rstn(rstn),
+        .d(d),
+        .seg(seg)
+    );
+
 endmodule

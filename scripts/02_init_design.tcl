@@ -24,9 +24,12 @@ read_sdc $CONSTRAINT_FILE
 current_corner TT
 current_mode FUNC_12
 current_scenario FUNC_12_TT
-set_operating_conditions $TT_OPC -library $STDCELL_LIB_NAME
-
+set_operating_conditions $TT_OPC_STDCELL -library $STDCELL_LIB_NAME
+set_operating_conditions $TT_OPC_IO -library $IO_LIB_NAME
 set_scenario_status FUNC_12_TT -all -active true
+
+load_upf $UPF_FILE
+commit_upf
 
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
@@ -43,4 +46,4 @@ foreach direction_offset_pair $ROUTING_LAYER_DIRECTION_OFFSET_LIST {
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit

@@ -1,19 +1,34 @@
+create_supply_net VDDPST
 create_supply_net VDD
 create_supply_net VSS
 
-create_supply_set ss_main -function {power VDD} -function {ground VSS}
-create_power_domain PD_TOP  -supply {primary ss_main}
+create_supply_set ss_high -function {power VDDPST} -function {ground VSS}
+create_supply_set ss_low  -function {power VDD}  -function {ground ss_high.ground}
 
-create_supply_port VDD -domain PD_TOP -direction in
-create_supply_port VSS -domain PD_TOP -direction in
+create_power_domain PD_C0_SOC -supply {primary ss_high}
+create_power_domain PD_CORE -elements c0_top_inst -supply {primary ss_low}
 
-connect_supply_net VDD -ports VDD
-connect_supply_net VSS -ports VSS
+create_supply_port VDDPST -domain PD_C0_SOC -direction inout
+create_supply_port VDD -domain PD_CORE -direction inout
+create_supply_port VSS -domain PD_C0_SOC -direction inout
+
+connect_supply_net VDDPST -ports VDDPST
+connect_supply_net VDD  -ports VDD
+connect_supply_net VSS  -ports VSS
+
+set_level_shifter risc_ls_in -domain PD_CORE \
+	-applies_to inputs -rule low_to_high -location self
+set_level_shifter risc_ls_out -domain PD_CORE \
+	-applies_to outputs -rule high_to_low -location parent
 
 set_design_attributes -elements {.} -attribute correlated_supply_group {*}
-add_power_state -supply ss_main -state ON  { -supply_expr { power == {FULL_ON 1.05} && ground == {FULL_ON 0.0} } }
+
+#add_power_state -supply ss_high -state ON  { -supply_expr { power == {FULL_ON 2.25 2.5 2.75} && ground == {FULL_ON 0.0} } }
+#add_power_state -supply ss_low  -state ON  { -supply_expr { power == {FULL_ON 1.08 1.2 1.32} && ground == {FULL_ON 0.0} } }
+
+add_power_state -supply ss_high -state ON  { -supply_expr { power == {FULL_ON 2.5} && ground == {FULL_ON 0.0} } }
+add_power_state -supply ss_low  -state ON  { -supply_expr { power == {FULL_ON 1.2} && ground == {FULL_ON 0.0} } }
 
 create_power_state_group PST
 add_power_state -group PST \
-        -state RUN   {-logic_expr { ss_main==ON }}
-
+	-state RUN   {-logic_expr { ss_low==ON && ss_high==ON  }}

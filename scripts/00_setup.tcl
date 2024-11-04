@@ -44,6 +44,8 @@ ${NDM_PATH}/wb_bondpad.ndm \
 
 #${NDM_PATH}/sealring.ndm \
 
+set UPF_FILE "${UPF_PATH}/c0_soc.upf"
+
 set TAP_CELLS ""
 
 set CONSTRAINT_FILE "${SDC_PATH}/${DESIGN_NAME}.sdc"
@@ -189,4 +191,4 @@ set_svf -off
 
 #set_app_var search_path "scripts"
 
-#exit
+##exit

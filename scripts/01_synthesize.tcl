@@ -1,7 +1,8 @@
 source scripts/00_setup.tcl
 
 set CURRENT_STEP $SYNTH_BLOCK
-create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY -scale_factor 10000
+# -scale_factor 1000
+create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY
 
 read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name nomTLU -tlup $PARASITICS_NOM_TLUPLUS_FILE
 current_lib
@@ -26,4 +27,4 @@ save_lib -all
 
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit
