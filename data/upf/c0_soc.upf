@@ -33,3 +33,15 @@ add_power_state -supply ss_low  -state ON  { -supply_expr { power == {FULL_ON 1.
 create_power_state_group PST
 add_power_state -group PST \
 	-state RUN   {-logic_expr { ss_low==ON && ss_high==ON  }}
+
+#set iosignal_pins " \
+#c0_top_inst/seg[0] \
+#c0_top_inst/seg[1] \
+#c0_top_inst/seg[2] \
+#c0_top_inst/seg[3] \
+#c0_top_inst/seg[4] \
+#c0_top_inst/seg[5] \
+#c0_top_inst/seg[6] \
+#"
+#
+#set_related_supply_net -power VDDPST -ground VSS -object_list ${iosignal_pins}

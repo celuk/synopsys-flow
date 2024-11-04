@@ -81,3 +81,6 @@ clean_ndms:
 
 show:
 	fc_shell -gui
+
+cli:
+	fc_shell
