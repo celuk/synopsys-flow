@@ -7,7 +7,7 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-set_app_options -name mv.upf.enable_golden_upf -value true
+#set_app_options -name mv.upf.enable_golden_upf -value true
 
 #set_max_transition 5.0 [current_design]
 
@@ -16,8 +16,12 @@ set_app_options -name mv.upf.enable_golden_upf -value true
 
 read_sdc $CONSTRAINT_FILE
 
-load_upf $UPF_FILE
-commit_upf
+#load_upf $UPF_FILE
+#commit_upf
+
+create_supply_net VDDPST
+create_supply_net VDD
+create_supply_net VSS
 
 connect_pg_net -automatic
 
