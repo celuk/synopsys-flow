@@ -74,10 +74,38 @@ s15:
 	fc_shell -f $(script15) | tee $(LOGS_DIR)/$(shell basename $(script15) .tcl | sed 's|^.*/||').log
 
 clean:
-	rm -rf *.svf *.log *.txt *.nlib *_rules_* *tmp*/ *cache*/ HDL_LIBRARIES/ legalizer_debug_plots/ work_dir/ pg_model/ *StarRC*/ .node* signoff_check_drc_run/ signoff_check_lvs_run/ signoff_fix_drc_run/ signoff_check_drc_run_after_fix_drc/ signoff_create_pg_augmentation_run/ signoff_check_drc_live_run/ RAIL_DATABASE/ *.ems PreFrameCheck/ ${OUTPUTS_DIR}/ ${REPORTS_DIR}/ ${LOGS_DIR}/
+	rm -rf \
+		*.svf \
+		*.log \
+		*.txt \
+		*.nlib \
+		*_rules_* \
+		*tmp*/ \
+		*cache*/ \
+		HDL_LIBRARIES/ \
+		legalizer_debug_plots/ \
+		work_dir/ \
+		pg_model/ \
+		*StarRC*/ \
+		.node* \
+		signoff_check_drc_run/ \
+		signoff_check_lvs_run/ \
+		signoff_fix_drc_run/ \
+		signoff_check_drc_run_after_fix_drc/ \
+		signoff_create_pg_augmentation_run/ \
+		signoff_check_drc_live_run/ \
+		RAIL_DATABASE/ \
+		*.ems \
+		PreFrameCheck/ \
+		.snps_mv_reports \
+		${OUTPUTS_DIR}/ \
+		${REPORTS_DIR}/ \
+		${LOGS_DIR}/
 
 clean_ndms:
 	rm -rf data/lib/*
+
+clean_all: clean clean_ndms
 
 show:
 	fc_shell -gui

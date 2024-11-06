@@ -3,9 +3,7 @@
 *.txt
 *.nlib
 *.ndm
-
 *_rules_*
-
 *tmp*/
 *cache*/
 HDL_LIBRARIES/
@@ -23,4 +21,7 @@ signoff_check_drc_live_run/
 RAIL_DATABASE/
 *.ems
 PreFrameCheck/
-
+.snps_mv_reports
+outputs/
+reports/
+logs/
