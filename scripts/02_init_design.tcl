@@ -16,12 +16,12 @@ link_block
 
 read_sdc $CONSTRAINT_FILE
 
-#load_upf $UPF_FILE
-#commit_upf
+set_app_options -name mv.incomplete_upf.enable -value true
 
-create_supply_net VDDPST
-create_supply_net VDD
-create_supply_net VSS
+load_upf $UPF_FILE
+commit_upf
+
+report_incomplete_upf
 
 create_corner TT
 set_parasitics_parameters -early_spec nomTLU -late_spec nomTLU -corners {TT}
@@ -35,14 +35,21 @@ current_mode FUNC_12
 current_scenario FUNC_12_TT
 #set_operating_conditions $TT_OPC_STDCELL -library $STDCELL_LIB_NAME
 #set_operating_conditions $TT_OPC_IO -library $IO_LIB_NAME
-set_operating_conditions $TT_OPC_STDCELL
 set_operating_conditions $TT_OPC_IO
-#set_temperature 25
-#set_process_number 1.00
-#set_voltage -object_list VDDPST 2.5
-#set_voltage -object_list VDD 1.2
-#set_voltage -object_list VSS 0.0
+set_temperature 25
+set_process_number 1.00
+set_voltage -object_list VDDPST 2.5
+set_voltage -object_list VSS 0.0
+set_operating_conditions $TT_OPC_STDCELL
+#set_operating_conditions $TT_OPC_IO
+set_temperature 25
+set_process_number 1.00
+
+set_voltage -object_list VDD 1.2
+set_voltage -object_list VSS 0.0
 set_scenario_status FUNC_12_TT -all -active true
+
+check_mv_design
 
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER

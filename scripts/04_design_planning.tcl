@@ -117,6 +117,10 @@ compile_pg
 #
 #compile_pg -strategies core_ring
 
+#create_tap_cells -lib_cell $TAP_CELL -distance 30 -pattern every_row
+#create_tap_cells -lib_cell $tapcell_ref -pattern stagger -distance 70 -skip_fixed_cells -voltage_area "PD_RISC_CORE"
+#create_tap_cells -lib_cell $tapcell_ref -pattern stagger -distance 70 -skip_fixed_cells -voltage_area "DEFAULT_VA"
+
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
 connect_pg_net -net VSS [get_pins -hierarchical */VSS]
 connect_pg_net -net VDD [get_pins -physical_context */VDD]

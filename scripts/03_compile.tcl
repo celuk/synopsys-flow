@@ -20,9 +20,10 @@ link_block
 
 set_app_options -name place.coarse.continue_on_missing_scandef -value true
 
+compile_fusion -to initial_map
 compile_fusion -check_only
 
-compile_fusion -to initial_map
+
 compile_fusion -from logic_opto -to logic_opto
 compile_fusion -from initial_place -to initial_place
 compile_fusion -from initial_drc -to initial_drc

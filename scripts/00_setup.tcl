@@ -46,8 +46,6 @@ ${NDM_PATH}/wb_bondpad.ndm \
 
 set UPF_FILE "${UPF_PATH}/c0_soc.upf"
 
-set TAP_CELLS ""
-
 set CONSTRAINT_FILE "${SDC_PATH}/${DESIGN_NAME}.sdc"
 
 set UPF_FILE "${UPF_PATH}/${DESIGN_NAME}.upf"
