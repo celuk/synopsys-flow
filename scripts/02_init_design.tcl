@@ -35,12 +35,12 @@ current_mode FUNC_12
 current_scenario FUNC_12_TT
 #set_operating_conditions $TT_OPC_STDCELL -library $STDCELL_LIB_NAME
 #set_operating_conditions $TT_OPC_IO -library $IO_LIB_NAME
-set_operating_conditions $TT_OPC_IO
+#set_operating_conditions $TT_OPC_IO
 set_temperature 25
 set_process_number 1.00
 set_voltage -object_list VDDPST 2.5
 set_voltage -object_list VSS 0.0
-set_operating_conditions $TT_OPC_STDCELL
+#set_operating_conditions $TT_OPC_STDCELL
 #set_operating_conditions $TT_OPC_IO
 set_temperature 25
 set_process_number 1.00
@@ -52,7 +52,7 @@ set_scenario_status FUNC_12_TT -all -active true
 initialize_floorplan -side_length "850 850"
 create_io_ring -name "ring" -corner_height 75
 
-create_voltage_area -power_domains PD_CORE -region {{0 0} {850 850}} -guard_band {{10 10}}
+#create_voltage_area -power_domains PD_CORE -region {{0 0} {850 850}} -guard_band {{10 10}}
 
 connect_pg_net
 
