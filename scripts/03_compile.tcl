@@ -20,10 +20,18 @@ link_block
 
 set_app_options -name place.coarse.continue_on_missing_scandef -value true
 
-compile_fusion -to initial_map
+#set_app_options -name place.coarse.congestion_driven_max_util -value 0.83
+#set_app_options -name place.coarse.pin_density_aware -value false
+#set_app_options -name place.coarse.enhanced_auto_density_control -value false
+#set_app_options -name compile.flow.high_effort_timing -value 0
+#set_app_options -name place.coarse.auto_timing_control -value false
+#set_app_options -name place.coarse.cong_restruct -value on
+#set_app_options -name place.coarse.cong_restruct_effort -value high
+#set_app_options -name place.coarse.cong_restruct_iterations -value 2
+
 compile_fusion -check_only
 
-
+compile_fusion -to initial_map
 compile_fusion -from logic_opto -to logic_opto
 compile_fusion -from initial_place -to initial_place
 compile_fusion -from initial_drc -to initial_drc

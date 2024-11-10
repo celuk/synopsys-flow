@@ -7,8 +7,8 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-initialize_floorplan -side_length "850 850"
-create_io_ring -name "ring" -corner_height 75
+#initialize_floorplan -side_length "850 850"
+#create_io_ring -name "ring" -corner_height 75
 
 #set_block_pin_constraints -self -allowed_layers {M3 M4} -pin_spacing_distance 2
 
