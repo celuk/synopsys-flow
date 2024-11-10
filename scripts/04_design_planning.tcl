@@ -24,9 +24,9 @@ source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
 createNplace_bondpads -inline_pad_ref_name PAD70N
 
-source scripts/bmp2lay_offset.tcl
-sh cat scripts/bmp2lay_offset.tcl
-bmp2lay -f /home/ananas/denemeler/snpsdenemeler/kasirgalogo.bmp -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
+#source scripts/bmp2lay_offset.tcl
+#sh cat scripts/bmp2lay_offset.tcl
+#bmp2lay -f /home/ananas/denemeler/snpsdenemeler/kasirgalogo.bmp -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
 
 remove_pg_via_master_rules -all
 remove_pg_patterns -all
