@@ -16,6 +16,8 @@ link_block
 
 read_sdc $CONSTRAINT_FILE
 
+set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
+
 set_app_options -name mv.incomplete_upf.enable -value true
 
 load_upf $UPF_FILE
@@ -51,7 +53,7 @@ set_scenario_status FUNC_12_TT -all -active true
 
 #create_voltage_area -power_domains PD_CORE -region {{0 0} {850 850}} -guard_band {{10 10}}
 
-#connect_pg_net
+connect_pg_net
 
 check_mv_design
 

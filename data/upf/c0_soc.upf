@@ -5,17 +5,29 @@ create_supply_net VSS
 create_supply_set ss_high -function {power VDDPST} -function {ground VSS}
 create_supply_set ss_low  -function {power VDD}  -function {ground ss_high.ground}
 
-create_power_domain PD_C0_SOC -elements \
-{ \
-. \
-c0_io_inst/VDD_0/VDD
-c0_io_inst/VDD_1/VDD
-c0_io_inst/VSS_0/VSS
-c0_io_inst/VSS_1/VSS
-} -supply {primary ss_low}
+create_power_domain PD_C0_SOC -elements {.} -supply {primary ss_low}
 create_power_domain PD_C0_IO -elements \
 { \
-c0_io_inst
+VDD2POC \
+VDDPST_0 \
+VDDPST_1 \
+VDD_0 \
+VDD_1 \
+VSS3_0 \
+VSS3_1 \
+PDDW0204CDG_IN_CLK \
+PDDW0204CDG_RSTN \
+PDDW0204CDG_IN0 \
+PDDW0204CDG_IN1 \
+PDDW0204CDG_IN2 \
+PDDW0204CDG_IN3 \
+PDDW0204CDG_OUT0 \
+PDDW0204CDG_OUT1 \
+PDDW0204CDG_OUT2 \
+PDDW0204CDG_OUT3 \
+PDDW0204CDG_OUT4 \
+PDDW0204CDG_OUT5 \
+PDDW0204CDG_OUT6 \
 } \
 -supply {primary ss_high}
 
@@ -62,3 +74,12 @@ add_power_state -group PST \
 #"
 #
 #set_related_supply_net -power VDDPST -ground VSS -object_list ${iosignal_pins}
+
+#set vddvsspins " \
+#c0_io_inst/VDD_0/VDD \
+#c0_io_inst/VDD_1/VDD \
+#c0_io_inst/VSS_0/VSS \
+#c0_io_inst/VSS_1/VSS \
+#"
+#
+#set_related_supply_net -power VDD -ground VSS -object_list ${vddvsspins}

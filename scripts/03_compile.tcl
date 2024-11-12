@@ -18,6 +18,15 @@ link_block
 #set_auto_floorplan_constraints -side_length "1200 1200"
 #set_shaping_options -guard_band_size 10
 
+initialize_floorplan -side_length "850 850"
+create_io_ring -name "ring" -corner_height 75
+
+set_app_options -name compile.auto_floorplan.enable -value true
+set_app_options -name compile.auto_floorplan.initialize -value auto
+set_app_options -name compile.auto_floorplan.place_pins -value all
+set_app_options -name compile.auto_floorplan.shape_voltage_areas -value all
+set_app_options -name compile.auto_floorplan.place_ios -value all
+
 set_app_options -name place.coarse.continue_on_missing_scandef -value true
 
 #set_app_options -name place.coarse.congestion_driven_max_util -value 0.83
