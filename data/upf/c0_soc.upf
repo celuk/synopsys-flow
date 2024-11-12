@@ -8,26 +8,7 @@ create_supply_set ss_low  -function {power VDD}  -function {ground ss_high.groun
 create_power_domain PD_C0_SOC -elements {.} -supply {primary ss_low}
 create_power_domain PD_C0_IO -elements \
 { \
-VDD2POC \
-VDDPST_0 \
-VDDPST_1 \
-VDD_0 \
-VDD_1 \
-VSS3_0 \
-VSS3_1 \
-PDDW0204CDG_IN_CLK \
-PDDW0204CDG_RSTN \
-PDDW0204CDG_IN0 \
-PDDW0204CDG_IN1 \
-PDDW0204CDG_IN2 \
-PDDW0204CDG_IN3 \
-PDDW0204CDG_OUT0 \
-PDDW0204CDG_OUT1 \
-PDDW0204CDG_OUT2 \
-PDDW0204CDG_OUT3 \
-PDDW0204CDG_OUT4 \
-PDDW0204CDG_OUT5 \
-PDDW0204CDG_OUT6 \
+c0_io_inst
 } \
 -supply {primary ss_high}
 
