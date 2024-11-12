@@ -1,14 +1,14 @@
 module c0_soc(
     input clk_i,
     input rstn_i,
-    input wire [3:0] d_i,
-    output reg [0:6] seg_o
+    input [3:0] d_i,
+    output [0:6] seg_o
     );
 
     wire clk;
     wire rstn;
     wire [3:0] d;
-    reg [0:6] seg;
+    wire [0:6] seg;
     c0_io c0_io_inst(
         .clk_i(clk_i),
         .clk(clk),
