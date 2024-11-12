@@ -5,13 +5,6 @@ module c0_soc(
     output reg [0:6] seg_o
     );
 
-    c0_top c0_top_inst(
-        .clk(clk),
-        .rstn(rstn),
-        .d(d),
-        .seg(seg)
-    );
-
     wire clk;
     wire rstn;
     wire [3:0] d;
@@ -24,6 +17,13 @@ module c0_soc(
         .d_i(d_i),
         .d(d),
         .seg_o(seg_o),
+        .seg(seg)
+    );
+
+    c0_top c0_top_inst(
+        .clk(clk),
+        .rstn(rstn),
+        .d(d),
         .seg(seg)
     );
 
