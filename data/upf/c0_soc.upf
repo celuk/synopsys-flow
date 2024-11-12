@@ -5,7 +5,14 @@ create_supply_net VSS
 create_supply_set ss_high -function {power VDDPST} -function {ground VSS}
 create_supply_set ss_low  -function {power VDD}  -function {ground ss_high.ground}
 
-create_power_domain PD_C0_SOC -elements {.} -supply {primary ss_low}
+create_power_domain PD_C0_SOC -elements \
+{ \
+. \
+c0_io_inst/VDD_0/VDD
+c0_io_inst/VDD_1/VDD
+c0_io_inst/VSS_0/VSS
+c0_io_inst/VSS_1/VSS
+} -supply {primary ss_low}
 create_power_domain PD_C0_IO -elements \
 { \
 c0_io_inst
