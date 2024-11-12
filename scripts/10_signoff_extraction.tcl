@@ -39,10 +39,7 @@ set_app_options -name route.track.crosstalk_driven -value $route_track_crosstalk
 
 update_timing -full
 
-connect_pg_net -net VDD [get_pins -hierarchical */VDD]
-connect_pg_net -net VSS [get_pins -hierarchical */VSS]
-connect_pg_net -net VDD [get_pins -physical_context */VDD]
-connect_pg_net -net VSS [get_pins -physical_context */VSS]
+connect_pg_net -automatic
 
 check_mv_design
 

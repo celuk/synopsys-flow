@@ -50,13 +50,7 @@ compile_fusion -from final_opto -to final_opto
 
 check_legality
 
-#connect_pg_net -net VDD [get_pins -hierarchical */VDD]
-#connect_pg_net -net VSS [get_pins -hierarchical */VSS]
-#connect_pg_net -net VDD [get_pins -physical_context */VDD]
-#connect_pg_net -net VSS [get_pins -physical_context */VSS]
-#
-#check_pg_connectivity
-#check_pg_drc
+connect_pg_net -automatic
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

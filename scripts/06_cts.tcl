@@ -45,10 +45,7 @@ clock_opt
 #set clock_nets [get_nets -hierarchical -filter "net_type == clock"]
 #create_shields -nets ${clock_nets} -with_ground VSS
 
-connect_pg_net -net VDD [get_pins -hierarchical */VDD]
-connect_pg_net -net VSS [get_pins -hierarchical */VSS]
-connect_pg_net -net VDD [get_pins -physical_context */VDD]
-connect_pg_net -net VSS [get_pins -physical_context */VSS]
+connect_pg_net -automatic
 
 check_legality
 

@@ -11,22 +11,18 @@ create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" 
 
 check_legality
 
-connect_pg_net -net VDD [get_pins -hierarchical */VDD]
-connect_pg_net -net VSS [get_pins -hierarchical */VSS]
-connect_pg_net -net VDD [get_pins -physical_context */VDD]
-connect_pg_net -net VSS [get_pins -physical_context */VSS]
+connect_pg_net -automatic
 
 check_mv_design
 
 remove_stdcell_fillers_with_violation
 
-connect_pg_net
+connect_pg_net -automatic
 check_mv_design
 
 verify_pg_nets
 
-connect_pg_net -net VDD [get_pins -hierarchical  */VDD]
-connect_pg_net -net VSS [get_pins -hierarchical  */VSS]
+connect_pg_net -automatic
 check_mv_design
 
 save_lib -all

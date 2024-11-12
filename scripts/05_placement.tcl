@@ -99,10 +99,7 @@ source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
 createNplace_bondpads -inline_pad_ref_name PAD70N
 
-connect_pg_net -net VDD [get_pins -hierarchical */VDD]
-connect_pg_net -net VSS [get_pins -hierarchical */VSS]
-connect_pg_net -net VDD [get_pins -physical_context */VDD]
-connect_pg_net -net VSS [get_pins -physical_context */VSS]
+connect_pg_net -automatic
 
 check_mv_design
 
