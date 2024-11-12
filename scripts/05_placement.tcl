@@ -7,6 +7,15 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+#set_app_options -name place.coarse.congestion_driven_max_util -value 0.83
+#set_app_options -name place.coarse.pin_density_aware -value false
+#set_app_options -name place.coarse.enhanced_auto_density_control -value false
+#set_app_options -name compile.flow.high_effort_timing -value 0
+#set_app_options -name place.coarse.auto_timing_control -value false
+#set_app_options -name place.coarse.cong_restruct -value on
+#set_app_options -name place.coarse.cong_restruct_effort -value high
+#set_app_options -name place.coarse.cong_restruct_iterations -value 2
+
 set_app_options -name place.coarse.continue_on_missing_scandef -value true
 set_app_options -name place_opt.final_place.effort -value high
 set_app_options -name place_opt.place.congestion_effort -value high

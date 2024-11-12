@@ -7,6 +7,8 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+set_app_options -name opt.common.enable_via_ladder_insertion -value true
+
 set_app_options -name time.si_enable_analysis -value true
 set_app_options -name time.enable_ccs_rcv_cap -value true
 
@@ -41,7 +43,7 @@ route_global
 
 route_track
 
-route_detail -max_number_iterations 1000
+route_detail -incremental -max_number_iterations 1000
 
 route_opt
 

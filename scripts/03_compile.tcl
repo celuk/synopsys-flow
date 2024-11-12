@@ -42,6 +42,8 @@ set_shaping_options -guard_band_size 10
 shape_blocks
 connect_pg_net -automatic
 
+set_app_options -name opt.common.enable_via_ladder_insertion -value true
+
 compile_fusion -check_only
 
 compile_fusion -to initial_map
