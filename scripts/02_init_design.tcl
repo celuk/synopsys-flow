@@ -53,6 +53,9 @@ set_scenario_status FUNC_12_TT -all -active true
 
 #create_voltage_area -power_domains PD_CORE -region {{0 0} {850 850}} -guard_band {{10 10}}
 
+#create_voltage_area -name VA_IO -power_domain PD_C0_IO -power VDDPST -ground VSS
+#create_voltage_area -name VA_SOC -power_domain PD_C0_SOC -power VDD -ground VSS
+
 connect_pg_net
 
 check_mv_design

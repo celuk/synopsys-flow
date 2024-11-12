@@ -11,6 +11,8 @@ link_block
 
 set_app_options -name route.common.connect_within_pins_by_layer_name -value { {M1 via_wire_all_pins} }
 
+set_app_options -name plan.pins.incremental -value true
+
 #set pgports [remove_from_collection [get_ports] {VDDPST VDD VSS}]
 #place_pins -self -ports $pgports
 
@@ -21,9 +23,11 @@ place_pins -ports [get_ports *]
 
 #place_io
 
-source scripts/createNplace_bondpads.tcl
-sh cat scripts/createNplace_bondpads.tcl
-createNplace_bondpads -inline_pad_ref_name PAD70N
+#source scripts/createNplace_bondpads.tcl
+#sh cat scripts/createNplace_bondpads.tcl
+#createNplace_bondpads -inline_pad_ref_name PAD70N
+
+#set_dont_touch [get_cells *PAD*]
 
 #source scripts/bmp2lay_offset.tcl
 #sh cat scripts/bmp2lay_offset.tcl
