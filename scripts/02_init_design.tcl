@@ -20,6 +20,8 @@ set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
 
 set_app_options -name mv.incomplete_upf.enable -value true
 
+#set_app_options -name mv.upf.enable_missing_voltage_area -value true
+
 load_upf $UPF_FILE
 commit_upf
 

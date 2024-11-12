@@ -7,7 +7,15 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x}
+#set_app_options -name signoff.create_metal_fill.runset -value {fill.rs}
+#set_app_options -name signoff.create_metal_fill.base_metal_layers -value {fill.rs}
+#set_app_options -name signoff.create_metal_fill.fix_density_errors -value true
+#signoff_create_metal_fill -all_runset_layers -track_fill generic -foundry_fill_type feol -auto_eco true
+#set_app_options -name signoff.physical.merge_stream_files $GDS_FILES_TO_MERGE
+#set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
+
+## post_route_auto_delete is not in docs??
+create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x post_route_auto_delete}
 
 check_legality
 

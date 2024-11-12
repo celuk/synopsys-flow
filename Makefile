@@ -1,3 +1,5 @@
+FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
+
 OUTPUTS_DIR ?= outputs
 REPORTS_DIR ?= reports
 LOGS_DIR ?= logs
@@ -28,50 +30,50 @@ ndms: $(LOGS_DIR)
 	lm_shell -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log
 
 s1: $(LOGS_DIR)
-#	fc_shell -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's/^[0-9]*_//').log
-	fc_shell -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's|^.*/||').log
+#	$(FC_EXEC) -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's/^[0-9]*_//').log
+	$(FC_EXEC) -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's|^.*/||').log
 
 s2:
-	fc_shell -f $(script2) | tee $(LOGS_DIR)/$(shell basename $(script2) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script2) | tee $(LOGS_DIR)/$(shell basename $(script2) .tcl | sed 's|^.*/||').log
 
 s3:
-	fc_shell -f $(script3) | tee $(LOGS_DIR)/$(shell basename $(script3) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script3) | tee $(LOGS_DIR)/$(shell basename $(script3) .tcl | sed 's|^.*/||').log
 
 s4:
-	fc_shell -f $(script4) | tee $(LOGS_DIR)/$(shell basename $(script4) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script4) | tee $(LOGS_DIR)/$(shell basename $(script4) .tcl | sed 's|^.*/||').log
 
 s5:
-	fc_shell -f $(script5) | tee $(LOGS_DIR)/$(shell basename $(script5) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script5) | tee $(LOGS_DIR)/$(shell basename $(script5) .tcl | sed 's|^.*/||').log
 
 s6:
-	fc_shell -f $(script6) | tee $(LOGS_DIR)/$(shell basename $(script6) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script6) | tee $(LOGS_DIR)/$(shell basename $(script6) .tcl | sed 's|^.*/||').log
 
 s7:
-	fc_shell -f $(script7) | tee $(LOGS_DIR)/$(shell basename $(script7) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script7) | tee $(LOGS_DIR)/$(shell basename $(script7) .tcl | sed 's|^.*/||').log
 
 s8:
-	fc_shell -f $(script8) | tee $(LOGS_DIR)/$(shell basename $(script8) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script8) | tee $(LOGS_DIR)/$(shell basename $(script8) .tcl | sed 's|^.*/||').log
 
 s9:
-	fc_shell -f $(script9) | tee $(LOGS_DIR)/$(shell basename $(script9) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script9) | tee $(LOGS_DIR)/$(shell basename $(script9) .tcl | sed 's|^.*/||').log
 
 s10:
-	fc_shell -f $(script10) | tee $(LOGS_DIR)/$(shell basename $(script10) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script10) | tee $(LOGS_DIR)/$(shell basename $(script10) .tcl | sed 's|^.*/||').log
 
 s11:
-	fc_shell -f $(script11) | tee $(LOGS_DIR)/$(shell basename $(script11) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script11) | tee $(LOGS_DIR)/$(shell basename $(script11) .tcl | sed 's|^.*/||').log
 
 s12:
-	fc_shell -f $(script12) | tee $(LOGS_DIR)/$(shell basename $(script12) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script12) | tee $(LOGS_DIR)/$(shell basename $(script12) .tcl | sed 's|^.*/||').log
 
 s13:
-	fc_shell -f $(script13) | tee $(LOGS_DIR)/$(shell basename $(script13) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script13) | tee $(LOGS_DIR)/$(shell basename $(script13) .tcl | sed 's|^.*/||').log
 
 s14:
-	fc_shell -f $(script14) | tee $(LOGS_DIR)/$(shell basename $(script14) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script14) | tee $(LOGS_DIR)/$(shell basename $(script14) .tcl | sed 's|^.*/||').log
 
 s15:
-	fc_shell -f $(script15) | tee $(LOGS_DIR)/$(shell basename $(script15) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -f $(script15) | tee $(LOGS_DIR)/$(shell basename $(script15) .tcl | sed 's|^.*/||').log
 
 clean:
 	rm -rf \
@@ -108,7 +110,7 @@ clean_ndms:
 clean_all: clean clean_ndms
 
 show:
-	fc_shell -gui
+	$(FC_EXEC) -gui
 
 cli:
-	fc_shell
+	$(FC_EXEC)

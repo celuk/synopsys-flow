@@ -76,16 +76,16 @@ set MIN_ROUTING_LAYER "M3"
 set MAX_ROUTING_LAYER "M8"
 
 set ROUTING_LAYER_DIRECTION_OFFSET_LIST [list \
-{M1 horizontal 0} \
-{M2 vertical 0} \
 {M3 horizontal 0} \
 {M4 vertical 0} \
 {M5 horizontal 0} \
 {M6 vertical 0} \
 {M7 horizontal 0} \
 {M8 vertical 0} \
-{M9 horizontal 0} \
 ];
+# {M1 horizontal 0} \
+# {M2 vertical 0} \
+# {M9 horizontal 0} \
 
 # timing|leakage_power|total_power
 set QOR_STRATEGY_METRIC "timing"

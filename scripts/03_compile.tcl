@@ -38,6 +38,10 @@ set_app_options -name place.coarse.continue_on_missing_scandef -value true
 #set_app_options -name place.coarse.cong_restruct_effort -value high
 #set_app_options -name place.coarse.cong_restruct_iterations -value 2
 
+set_shaping_options -guard_band_size 10
+shape_blocks
+connect_pg_net -automatic
+
 compile_fusion -check_only
 
 compile_fusion -to initial_map
@@ -51,6 +55,9 @@ compile_fusion -from final_opto -to final_opto
 check_legality
 
 connect_pg_net -automatic
+check_mv_design
+
+report_power_domain
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
