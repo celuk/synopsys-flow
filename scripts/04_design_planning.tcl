@@ -55,8 +55,7 @@ set_app_options -name plan.pgroute.merge_shapes_for_via_creation -value true
 
 #set_app_options -name plan.pgroute.snap_stdcell_rail -value true
 
-## reduce memory during via drc checking
-set_app_options -name plan.pgroute.high_capacity_mode -value true
+
 ## disabling via creation at partial intersection
 set_app_option -name plan.pgroute.via_site_threshold -value 1
 
@@ -73,9 +72,23 @@ set_app_options -name plan.pgroute.decide_rail_width_from_routing_area -value tr
 
 #set_app_options -name plan.pgroute.maximize_total_cut_area -value all
 
+#set_app_options -name plan.pgroute.treat_multiple_pins_as_one_target -value true
+
 #set_app_options -name plan.pgroute.disable_stapling_via_fixing -value true
 #set_app_options -name plan.pgroute.discard_stackvia_with_drc -value true
-set_app_options -name plan.pgroute.fix_via_drc_multiple_viadef -name true
+set_app_options -name plan.pgroute.fix_via_drc_multiple_viadef -value true
+
+set_app_options -name plan.pgroute.use_via_matrix -value true
+set_app_options -name plan.pgroute.use_shape_pattern -value true
+## reduce memory during via drc checking
+set_app_options -name plan.pgroute.high_capacity_mode -value 1
+
+set_app_options -name plan.pgroute.verbose -value true
+
+set_app_options -name plan.pgroute.optimize_track_alignment -value true
+set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
+
+
 
 #create_pg_vias -nets VDDPST
 #create_pg_vias -nets VDD
