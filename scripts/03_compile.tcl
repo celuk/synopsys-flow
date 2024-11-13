@@ -44,15 +44,15 @@ connect_pg_net -automatic
 
 set_app_options -name opt.common.enable_via_ladder_insertion -value true
 
-set_level_shifter LVLSHS_STD -domain PD_C0_SOC
-set_level_shifter LVLSHS_IO -domain PD_C0_IO
-map_level_shifter_cell LVLSHS_STD -domain PD_C0_SOC -lib_cells $STD_LEVEL_SHIFTER_CELLS
-map_level_shifter_cell LVLSHS_IO -domain PD_C0_IO -lib_cells $IO_LEVEL_SHIFTER_CELLS
-
-set_isolation ISO_STD -domain PD_C0_SOC
-set_isolation ISO_IO -domain PD_C0_IO
-map_isolation_cell ISO_STD -domain PD_C0_SOC -lib_cells $STD_ISOLATION_CELLS
-map_isolation_cell ISO_IO -domain PD_C0_IO -lib_cells $IO_ISOLATION_CELLS
+#set_level_shifter LVLSHS_STD -domain PD_C0_SOC
+#set_level_shifter LVLSHS_IO -domain PD_C0_IO
+#map_level_shifter_cell LVLSHS_STD -domain PD_C0_SOC -lib_cells $STD_LEVEL_SHIFTER_CELLS
+#map_level_shifter_cell LVLSHS_IO -domain PD_C0_IO -lib_cells $IO_LEVEL_SHIFTER_CELLS
+#
+#set_isolation ISO_STD -domain PD_C0_SOC
+#set_isolation ISO_IO -domain PD_C0_IO
+#map_isolation_cell ISO_STD -domain PD_C0_SOC -lib_cells $STD_ISOLATION_CELLS
+#map_isolation_cell ISO_IO -domain PD_C0_IO -lib_cells $IO_ISOLATION_CELLS
 
 create_mv_cells -all -verbose
 connect_pg_net -automatic

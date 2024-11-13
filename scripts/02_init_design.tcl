@@ -53,6 +53,19 @@ set_voltage -object_list VDD 1.2
 set_voltage -object_list VSS 0.0
 set_scenario_status FUNC_12_TT -all -active true
 
+#create_corner TT
+#set_parasitics_parameters -early_spec nomTLU -late_spec nomTLU -corners {TT}
+#create_mode FUNC_12
+#current_mode FUNC_12
+#create_scenario -mode FUNC_12 -corner TT -name FUNC_12_TT
+#current_scenario FUNC_12_TT
+#read_sdc $CONSTRAINT_FILE
+#current_corner TT
+#current_mode FUNC_12
+#current_scenario FUNC_12_TT
+#set_operating_conditions $TT_OPC_STDCELL
+#set_scenario_status FUNC_12_TT -all -active true
+
 #create_voltage_area -power_domains PD_CORE -region {{0 0} {850 850}} -guard_band {{10 10}}
 
 #create_voltage_area -name VA_IO -power_domain PD_C0_IO -power VDDPST -ground VSS
