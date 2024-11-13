@@ -14,13 +14,17 @@ link_block
 #set_attribute [get_site_defs unit] symmetry {X Y}
 #set_attribute [get_site_defs unit] is_default true
 
+#set VDD [get_nets VDD -all]
+#set VSS [get_nets VSS -all]
+
 read_sdc $CONSTRAINT_FILE
 
 set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
 
 set_app_options -name mv.incomplete_upf.enable -value true
 
-#set_app_options -name mv.upf.enable_missing_voltage_area -value true
+## to create voltage area automatically, it should be false
+set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
 load_upf $UPF_FILE
 commit_upf

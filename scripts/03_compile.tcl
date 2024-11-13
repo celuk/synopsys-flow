@@ -26,6 +26,7 @@ set_app_options -name compile.auto_floorplan.initialize -value auto
 set_app_options -name compile.auto_floorplan.place_pins -value all
 set_app_options -name compile.auto_floorplan.shape_voltage_areas -value all
 set_app_options -name compile.auto_floorplan.place_ios -value all
+#set_app_options -name compile.auto_floorplan.place_hard_macros -value true
 
 set_app_options -name place.coarse.continue_on_missing_scandef -value true
 

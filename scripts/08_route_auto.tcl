@@ -35,6 +35,8 @@ set_app_options -name route.common.global_min_layer_mode -value allow_pin_connec
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
 
+report_ignored_layers
+
 sizeof_collection [get_nets -hierarchical *]
 
 check_routability

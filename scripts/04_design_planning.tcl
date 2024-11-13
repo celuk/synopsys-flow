@@ -48,13 +48,55 @@ set_attribute -objects [get_nets VDD] -name net_type -value power
 set_attribute -objects [get_nets VSS] -name net_type -value ground
 
 set_app_options -name plan.pgroute.honor_signal_route_drc -value true
+set_app_options -name plan.pgroute.honor_std_cell_drc -value true
 set_app_options -name plan.pgroute.merge_shapes_for_via_creation -value true
 
+#set_app_options -name plan.pgroute.maximum_cell_gap_for_alignment_strap -value 0.0
+
+#set_app_options -name plan.pgroute.snap_stdcell_rail -value true
+
+## reduce memory during via drc checking
+set_app_options -name plan.pgroute.high_capacity_mode -value true
+## disabling via creation at partial intersection
+set_app_option -name plan.pgroute.via_site_threshold -value 1
+
+## merge metal shapes in specified pad cell types while performing DRC checks
+## -value {io_pad corner_pad}
+set_app_option -name plan.pgroute.merge_shapes_in_pad_cell -value {io_pad}
+
+set_app_option -name plan.pgroute.auto_connect_pg_net -value true
+set_app_options -name plan.pgroute.via_array_size_control -value try_cuts_in_intersection
+
+set_app_options -name plan.pgroute.connect_user_route_shapes -value true
+
+set_app_options -name plan.pgroute.decide_rail_width_from_routing_area -value true
+
+#set_app_options -name plan.pgroute.maximize_total_cut_area -value all
+
+#set_app_options -name plan.pgroute.disable_stapling_via_fixing -value true
+#set_app_options -name plan.pgroute.discard_stackvia_with_drc -value true
+set_app_options -name plan.pgroute.fix_via_drc_multiple_viadef -name true
+
+#create_pg_vias -nets VDDPST
+#create_pg_vias -nets VDD
+#create_pg_vias -nets VSS
+
+compile_pg
+
+#generate_pg_script -template
+
+#set floating_shapes [check_pg_connectivity]
+#remove_objects $floating_shapes
+##remove_objects [check_pg_connectivity]
+
+#compile_pg -show_phantom
+#create_pg_vias -show_phantom
+#create_pg_strap -show_phantom
 
 check_pg_connectivity
 check_pg_drc
 
-#check_pg_drc -load_routing_of_all_nets
+#check_pg_drc -load_routing_of_all_nets -check_detail_route_shapes
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
