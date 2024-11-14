@@ -41,4 +41,4 @@ check_lvs -checks all -max_errors 0
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-#exit
+exit

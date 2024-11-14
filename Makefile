@@ -1,4 +1,5 @@
 FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
+LM_EXEC ?= /usr/synopsys/icc2/V-2023.12/bin/lm_shell
 
 OUTPUTS_DIR ?= outputs
 REPORTS_DIR ?= reports
@@ -27,7 +28,7 @@ $(LOGS_DIR):
 all: s1 s2 s3 s4 s5 s6 s8 s10 s12 s13 s15
 
 ndms: $(LOGS_DIR)
-	lm_shell -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log
+	$(LM_EXEC) -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log
 
 s1: $(LOGS_DIR)
 #	$(FC_EXEC) -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's/^[0-9]*_//').log

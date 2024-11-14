@@ -34,10 +34,6 @@ create_tap_cells -lib_cell $TAP_CELL -distance 50 -pattern every_row
 
 #set_dont_touch [get_cells *PAD*]
 
-#source scripts/bmp2lay_offset.tcl
-#sh cat scripts/bmp2lay_offset.tcl
-#bmp2lay -f $LOGO_FILE -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
-
 #remove_pg_via_master_rules -all
 #remove_pg_patterns -all
 #remove_pg_strategies -all
@@ -184,4 +180,4 @@ check_pg_drc
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-#exit
+exit

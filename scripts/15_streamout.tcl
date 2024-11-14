@@ -8,8 +8,12 @@ current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
 create_cell SealRing $SEALRING_CELL
-set sealring [get_cells -filter "is_hard_macro == true" -hier]
-set_attribute $sealring -name physical_status -value fixed
+#set sealring [get_cells -filter "is_hard_macro == true" -hier]
+#set_attribute $sealring -name physical_status -value fixed
+
+source scripts/bmp2lay_offset.tcl
+sh cat scripts/bmp2lay_offset.tcl
+bmp2lay -f $LOGO_FILE -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
 
 write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
 -lib_cell_view {design frame layout} \
@@ -47,4 +51,4 @@ redirect -file $REPORTS_DIR/15_${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_t
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-#exit
+exit

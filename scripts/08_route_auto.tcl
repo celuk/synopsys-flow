@@ -51,7 +51,7 @@ route_global
 
 route_track
 
-route_detail -incremental -max_number_iterations 1000
+route_detail -incremental true -max_number_iterations 1000
 
 route_opt
 
@@ -81,4 +81,4 @@ check_legality
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-#exit
+exit

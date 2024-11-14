@@ -443,4 +443,4 @@ check_workspace
 commit_workspace -output ${NDM_PATH}/sealring.ndm -force
 remove_workspace
 
-#exit
+exit
