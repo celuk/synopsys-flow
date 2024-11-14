@@ -36,7 +36,7 @@ create_tap_cells -lib_cell $TAP_CELL -distance 50 -pattern every_row
 
 #source scripts/bmp2lay_offset.tcl
 #sh cat scripts/bmp2lay_offset.tcl
-#bmp2lay -f /home/ananas/denemeler/snpsdenemeler/kasirgalogo.bmp -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
+#bmp2lay -f $LOGO_FILE -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
 
 #remove_pg_via_master_rules -all
 #remove_pg_patterns -all

@@ -22,6 +22,7 @@ set SDC_PATH "data/sdc"
 set UPF_PATH "data/upf"
 set TECH_PATH "data/tech"
 set STARRC_PATH "data/starrc"
+set LOGO_PATH "data/logo"
 
 lappend search_path $NDM_PATH
 lappend search_path $RTL_PATH
@@ -29,6 +30,7 @@ lappend search_path $SDC_PATH
 lappend search_path $UPF_PATH
 lappend search_path $TECH_PATH
 lappend search_path $STARRC_PATH
+lappend search_path $LOGO_PATH
 
 source scripts/00_pdk_setup.tcl
 
@@ -48,6 +50,8 @@ ${NDM_PATH}/sealring.ndm \
 
 #${NDM_PATH}/sealring.ndm \
 
+set LOGO_FILE "${LOGO_PATH}/kasirga_logo.bmp"
+
 set UPF_FILE "${UPF_PATH}/c0_soc.upf"
 
 set CONSTRAINT_FILE "${SDC_PATH}/${DESIGN_NAME}.sdc"
@@ -61,6 +65,8 @@ set STREAMOUT_GDS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.gds"
 set STREAMOUT_DEF_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.def"
 set STREAMOUT_SDF_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.sdf"
 set STREAMOUT_PARASITICS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.spef"
+
+set GDS_FILES_TO_MERGE [lreplace $GDS_FILES_TO_MERGE end end $SEALRING_WLCSP_GDS_FILE]
 
 ## report_lib $STDCELL_LIB_NAME
 set STDCELL_LIB_NAME "stdcell"
@@ -80,12 +86,16 @@ set MIN_ROUTING_LAYER "M3"
 set MAX_ROUTING_LAYER "M8"
 
 set ROUTING_LAYER_DIRECTION_OFFSET_LIST [list \
+{M1 horizontal 0} \
+{M2 vertical 0} \
 {M3 horizontal 0} \
 {M4 vertical 0} \
 {M5 horizontal 0} \
 {M6 vertical 0} \
 {M7 horizontal 0} \
 {M8 vertical 0} \
+{M9 horizontal 0} \
+{AP vertical 0} \
 ];
 # {M1 horizontal 0} \
 # {M2 vertical 0} \

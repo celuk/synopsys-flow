@@ -119,10 +119,6 @@ sizeof_collection [ get_cells -hierarchical -filter "is_level_shifter==true"]
 
 report_multibit
 
-create_cell SealRing $SEALRING_CELL
-set sealring [get_cells -filter "is_hard_macro == true" -hier]
-set_attribute $sealring -name physical_status -value fixed
-
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
