@@ -36,6 +36,8 @@ set REFERENCE_LIBRARY [list \
 ${NDM_PATH}/stdcell.ndm \
 ${NDM_PATH}/stdcell_physical_only.ndm \
 \
+${NDM_PATH}/stdcell_lvl.ndm \
+\
 ${NDM_PATH}/io.ndm \
 ${NDM_PATH}/io_physical_only.ndm \
 \

@@ -73,9 +73,8 @@ set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
 report_ignored_layers
 
-create_mv_cells -all -verbose
-connect_pg_net -automatic
-check_mv_design
+## do not use stdcell main rail as supply, use VDDPST
+set_app_options -global {mv.upf.ignore_ls_main_rail true}
 
 compile_fusion -check_only
 
@@ -99,6 +98,10 @@ set_app_options -name compile.flow.enable_multibit_debanking -value true
 compile_fusion -from final_opto -to final_opto
 
 check_legality
+
+create_mv_cells -all -verbose
+connect_pg_net -automatic
+check_mv_design
 
 connect_pg_net -automatic
 check_mv_design
