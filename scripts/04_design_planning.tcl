@@ -26,6 +26,7 @@ place_pins -ports [get_ports *]
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
 create_tap_cells -lib_cell $TAP_CELL -distance 50 -pattern every_row
+create_boundary_cells -left_boundary_cell $BOUNDARY_CELL -right_boundary_cell $BOUNDARY_CELL
 #create_io_break_cells
 
 #source scripts/createNplace_bondpads.tcl
@@ -162,13 +163,13 @@ set_pg_strategy macro_connect \
 
 compile_pg -strategies macro_connect -via_rule {adjacent_only}
 
-create_pg_strap -layer M4 -direction vertical \
--net VDD -width 0.6 \
--start 200 -stop 800 -pitch 20
-
-create_pg_strap -layer M5 -direction horizontal \
--net VSS -width 0.6 \
--start 200 -stop 800 -pitch 20
+#create_pg_strap -layer M4 -direction vertical \
+#-net VDD -width 0.6 \
+#-start 200 -stop 800 -pitch 20
+#
+#create_pg_strap -layer M5 -direction horizontal \
+#-net VSS -width 0.6 \
+#-start 200 -stop 800 -pitch 20
 
 create_pg_vias -nets {VDD VSS} \
 -within_bbox [get_attribute [get_core_area] bbox] \

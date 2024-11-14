@@ -17,8 +17,9 @@ set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_DRC_FOLDER
 set_app_options -name signoff.fix_drc.init_drc_error_db -value $SIGNOFF_CHECK_DRC_FOLDER
 set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_DRC_FOLDER
 set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
+set_app_options -name signoff.physical.merge_stream_files $GDS_FILES_TO_MERGE
 
-#set_app_options -name signoff.physical.merge_stream_files $GDS_FILES_TO_MERGE
+create_cell SealRing $SEALRING_CELL
 
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
