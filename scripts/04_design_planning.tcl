@@ -26,7 +26,7 @@ place_pins -ports [get_ports *]
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
 create_tap_cells -lib_cell $TAP_CELL -distance 50 -pattern every_row
-create_io_break_cells
+#create_io_break_cells
 
 #source scripts/createNplace_bondpads.tcl
 #sh cat scripts/createNplace_bondpads.tcl

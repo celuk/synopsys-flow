@@ -71,7 +71,7 @@ set_app_options -name place.coarse.enhanced_auto_density_control -value true
 
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
-report_ignored_layerss
+report_ignored_layers
 
 create_mv_cells -all -verbose
 connect_pg_net -automatic

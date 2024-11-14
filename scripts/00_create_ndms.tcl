@@ -68,105 +68,103 @@ read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name maxTLU -tlup $PARASITIC
 read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name nomTLU -tlup $PARASITICS_NOM_TLUPLUS_FILE
 read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name minTLU -tlup $PARASITICS_MIN_TLUPLUS_FILE
 
-read_db [glob ${STDCELL_DB_PREFIX}*.db]
+### BC1D11D1COM
+read_db ${STDCELL_DB_PREFIX}bc1d11d1.db
+### BC1D11D32COM
+read_db ${STDCELL_DB_PREFIX}bc1d11d32.db
+### BC1D1COM
+#read_db ${STDCELL_DB_PREFIX}bc1d1.db
+### BC1D321D1COM
+read_db ${STDCELL_DB_PREFIX}bc1d321d1.db
+### BC1D321D32COM
+read_db ${STDCELL_DB_PREFIX}bc1d321d32.db
 
-#### BC1D11D1COM
-#read_db ${STDCELL_DB_PREFIX}bc1d11d1.db
-#### BC1D11D32COM
-#read_db ${STDCELL_DB_PREFIX}bc1d11d32.db
-#### BC1D1COM
-##read_db ${STDCELL_DB_PREFIX}bc1d1.db
-#### BC1D321D1COM
-#read_db ${STDCELL_DB_PREFIX}bc1d321d1.db
-#### BC1D321D32COM
-#read_db ${STDCELL_DB_PREFIX}bc1d321d32.db
-#
-### BCCOM
-##read_db ${STDCELL_DB_PREFIX}bc.db
-#
-#### LT1D11D1COM
-#read_db ${STDCELL_DB_PREFIX}lt1d11d1.db
-#### LT1D11D32COM
-#read_db ${STDCELL_DB_PREFIX}lt1d11d32.db
-#### LT1D1COM
-##read_db ${STDCELL_DB_PREFIX}lt1d1.db
-#### LT1D321D1COM
-#read_db ${STDCELL_DB_PREFIX}lt1d321d1.db
-#### LT1D321D32COM
-#read_db ${STDCELL_DB_PREFIX}lt1d321d32.db
-#
-### LTCOM
-##read_db ${STDCELL_DB_PREFIX}lt.db
-#
-#### ML1D11D1COM
-#read_db ${STDCELL_DB_PREFIX}ml1d11d1.db
-#### ML1D11D32COM
-#read_db ${STDCELL_DB_PREFIX}ml1d11d32.db
-#### ML1D1COM
-##read_db ${STDCELL_DB_PREFIX}ml1d1.db
-#### ML1D321D1COM
-#read_db ${STDCELL_DB_PREFIX}ml1d321d1.db
-#### ML1D321D32COM
-#read_db ${STDCELL_DB_PREFIX}ml1d321d32.db
-#
-### MLCOM
-##read_db ${STDCELL_DB_PREFIX}ml.db
-#
-#### NC1D01D0COM
-#read_db ${STDCELL_DB_PREFIX}tc1d01d0.db
-#### NC1D01D2COM
-#read_db ${STDCELL_DB_PREFIX}tc1d01d2.db
-#### NC1D0COM
-##read_db ${STDCELL_DB_PREFIX}tc1d0.db
-#### NC1D21D0COM
-#read_db ${STDCELL_DB_PREFIX}tc1d21d0.db
-#### NC1D21D2COM
-#read_db ${STDCELL_DB_PREFIX}tc1d21d2.db
-#
-### NCCOM
-##read_db ${STDCELL_DB_PREFIX}tc.db
-#
-#### WC0D90D9COM
-#read_db ${STDCELL_DB_PREFIX}wc0d90d9.db
-#### WC0D91D08COM
-#read_db ${STDCELL_DB_PREFIX}wc0d91d08.db
-#### WC0D9COM
-##read_db ${STDCELL_DB_PREFIX}wc0d9.db
-#### WC1D080D9COM
-#read_db ${STDCELL_DB_PREFIX}wc1d080d9.db
-#### WC1D081D08COM
-#read_db ${STDCELL_DB_PREFIX}wc1d081d08.db
-#
-### WCCOM
-##read_db ${STDCELL_DB_PREFIX}wc.db
-#
-#### WCL0D90D9COM
-#read_db ${STDCELL_DB_PREFIX}wcl0d90d9.db
-#### WCL0D91D08COM
-#read_db ${STDCELL_DB_PREFIX}wcl0d91d08.db
-#### WCL0D9COM
-##read_db ${STDCELL_DB_PREFIX}wcl0d9.db
-#### WCL1D080D9COM
-#read_db ${STDCELL_DB_PREFIX}wcl1d080d9.db
-#### WCL1D081D08COM
-#read_db ${STDCELL_DB_PREFIX}wcl1d081d08.db
-#
-### WCLCOM
-##read_db ${STDCELL_DB_PREFIX}wcl.db
-#
-#### WCZ0D90D9COM
-#read_db ${STDCELL_DB_PREFIX}wcz0d90d9.db
-#### WCZ0D91D08COM
-#read_db ${STDCELL_DB_PREFIX}wcz0d91d08.db
-#### WCZ0D9COM
-##read_db ${STDCELL_DB_PREFIX}wcz0d9.db
-#### WCZ1D080D9COM
-#read_db ${STDCELL_DB_PREFIX}wcz1d080d9.db
-#### WCZ1D081D08COM
-#read_db ${STDCELL_DB_PREFIX}wcz1d081d08.db
-#
-### WCZCOM
-##read_db ${STDCELL_DB_PREFIX}wcz.db
+## BCCOM
+#read_db ${STDCELL_DB_PREFIX}bc.db
+
+### LT1D11D1COM
+read_db ${STDCELL_DB_PREFIX}lt1d11d1.db
+### LT1D11D32COM
+read_db ${STDCELL_DB_PREFIX}lt1d11d32.db
+### LT1D1COM
+#read_db ${STDCELL_DB_PREFIX}lt1d1.db
+### LT1D321D1COM
+read_db ${STDCELL_DB_PREFIX}lt1d321d1.db
+### LT1D321D32COM
+read_db ${STDCELL_DB_PREFIX}lt1d321d32.db
+
+## LTCOM
+#read_db ${STDCELL_DB_PREFIX}lt.db
+
+### ML1D11D1COM
+read_db ${STDCELL_DB_PREFIX}ml1d11d1.db
+### ML1D11D32COM
+read_db ${STDCELL_DB_PREFIX}ml1d11d32.db
+### ML1D1COM
+#read_db ${STDCELL_DB_PREFIX}ml1d1.db
+### ML1D321D1COM
+read_db ${STDCELL_DB_PREFIX}ml1d321d1.db
+### ML1D321D32COM
+read_db ${STDCELL_DB_PREFIX}ml1d321d32.db
+
+## MLCOM
+#read_db ${STDCELL_DB_PREFIX}ml.db
+
+### NC1D01D0COM
+read_db ${STDCELL_DB_PREFIX}tc1d01d0.db
+### NC1D01D2COM
+read_db ${STDCELL_DB_PREFIX}tc1d01d2.db
+### NC1D0COM
+#read_db ${STDCELL_DB_PREFIX}tc1d0.db
+### NC1D21D0COM
+read_db ${STDCELL_DB_PREFIX}tc1d21d0.db
+### NC1D21D2COM
+read_db ${STDCELL_DB_PREFIX}tc1d21d2.db
+
+## NCCOM
+#read_db ${STDCELL_DB_PREFIX}tc.db
+
+### WC0D90D9COM
+read_db ${STDCELL_DB_PREFIX}wc0d90d9.db
+### WC0D91D08COM
+read_db ${STDCELL_DB_PREFIX}wc0d91d08.db
+### WC0D9COM
+#read_db ${STDCELL_DB_PREFIX}wc0d9.db
+### WC1D080D9COM
+read_db ${STDCELL_DB_PREFIX}wc1d080d9.db
+### WC1D081D08COM
+read_db ${STDCELL_DB_PREFIX}wc1d081d08.db
+
+## WCCOM
+#read_db ${STDCELL_DB_PREFIX}wc.db
+
+### WCL0D90D9COM
+read_db ${STDCELL_DB_PREFIX}wcl0d90d9.db
+### WCL0D91D08COM
+read_db ${STDCELL_DB_PREFIX}wcl0d91d08.db
+### WCL0D9COM
+#read_db ${STDCELL_DB_PREFIX}wcl0d9.db
+### WCL1D080D9COM
+read_db ${STDCELL_DB_PREFIX}wcl1d080d9.db
+### WCL1D081D08COM
+read_db ${STDCELL_DB_PREFIX}wcl1d081d08.db
+
+## WCLCOM
+#read_db ${STDCELL_DB_PREFIX}wcl.db
+
+### WCZ0D90D9COM
+read_db ${STDCELL_DB_PREFIX}wcz0d90d9.db
+### WCZ0D91D08COM
+read_db ${STDCELL_DB_PREFIX}wcz0d91d08.db
+### WCZ0D9COM
+#read_db ${STDCELL_DB_PREFIX}wcz0d9.db
+### WCZ1D080D9COM
+read_db ${STDCELL_DB_PREFIX}wcz1d080d9.db
+### WCZ1D081D08COM
+read_db ${STDCELL_DB_PREFIX}wcz1d081d08.db
+
+## WCZCOM
+#read_db ${STDCELL_DB_PREFIX}wcz.db
 
 read_lef $STDCELL_LEF_FILE
 read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
