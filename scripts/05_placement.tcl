@@ -112,6 +112,8 @@ connect_pg_net -automatic
 
 check_mv_design
 
+check_pin_placement -self
+
 save_block
 
 redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_qor.rpt {report_qor -nosplit}

@@ -24,6 +24,8 @@ signoff_check_drc
 
 #set_app_options -name signoff.fix_drc.init_drc_error_db -value signoff_check_drc_run
 
+save_block
+
 #signoff_fix_isolated_via -save_design true
 signoff_fix_drc -max_number_repair_loop 10
 

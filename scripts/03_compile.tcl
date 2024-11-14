@@ -18,6 +18,9 @@ link_block
 #set_auto_floorplan_constraints -side_length "1200 1200"
 #set_shaping_options -guard_band_size 10
 
+#create_boundary -coordinate {{0 0} {1000 1000}}
+#initialize_floorplan -control_type boundary -left_io2core 500 -bottom_io2core 500 -right_io2core 500 -top_io2core 500
+
 initialize_floorplan -side_length "850 850"
 create_io_ring -name "ring" -corner_height 75
 

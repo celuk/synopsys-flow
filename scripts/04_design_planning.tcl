@@ -23,6 +23,10 @@ place_pins -ports [get_ports *]
 
 #place_io
 
+create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
+
+# create_tap_cells
+
 #source scripts/createNplace_bondpads.tcl
 #sh cat scripts/createNplace_bondpads.tcl
 #createNplace_bondpads -inline_pad_ref_name PAD70N
@@ -94,7 +98,11 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pg_vias -nets VDD
 #create_pg_vias -nets VSS
 
-compile_pg
+#compile_pg
+
+#compile_pg -create_ml_data
+#train_pg_ml_model
+#compile_pg -use_ml_model
 
 #generate_pg_script -template
 

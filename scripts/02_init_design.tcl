@@ -70,6 +70,9 @@ set_scenario_status FUNC_12_TT -all -active true
 #set_operating_conditions $TT_OPC_STDCELL
 #set_scenario_status FUNC_12_TT -all -active true
 
+set_max_transition $MAX_TRANSITION [current_design]
+set_max_fanout $MAX_FANOUT [current_design]
+
 #create_voltage_area -power_domains PD_CORE -region {{0 0} {850 850}} -guard_band {{10 10}}
 
 #create_voltage_area -name VA_IO -power_domain PD_C0_IO -power VDDPST -ground VSS

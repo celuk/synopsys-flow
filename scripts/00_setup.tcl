@@ -87,6 +87,9 @@ set ROUTING_LAYER_DIRECTION_OFFSET_LIST [list \
 # {M2 vertical 0} \
 # {M9 horizontal 0} \
 
+set MAX_TRANSITION 0.5
+set MAX_FANOUT 20
+
 # timing|leakage_power|total_power
 set QOR_STRATEGY_METRIC "timing"
 # balanced|extreme_power|early_design
