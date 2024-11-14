@@ -121,7 +121,7 @@ create_pg_ring_pattern ring_pattern \
 
 set_pg_strategy core_ring \
 -pattern {{name: ring_pattern} \
-{nets: {VSS VDD VDDPST}}{offset: {-10 -10}}} -core
+{nets: {VSS VDD VDDPST}}{offset: {-50 -50}}} -core
 #-extension {{stop: design_boundary_and_generate_pin}}
 
 compile_pg -strategies core_ring
