@@ -40,6 +40,8 @@ module c0_soc(
     PDDW0204CDG PDDW0204CDG_OUT5(.OEN(1'b0),.I(seg[5]),.PAD(seg_o[5]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
     PDDW0204CDG PDDW0204CDG_OUT6(.OEN(1'b0),.I(seg[6]),.PAD(seg_o[6]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
 
+    SEALRING_1KX1K SealRing();
+    
     c0_top c0_top_inst(
         .clk(clk),
         .rstn(rstn),

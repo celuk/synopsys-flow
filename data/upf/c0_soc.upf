@@ -28,6 +28,7 @@ PDDW0204CDG_OUT3 \
 PDDW0204CDG_OUT4 \
 PDDW0204CDG_OUT5 \
 PDDW0204CDG_OUT6 \
+SealRing \
 } \
 -supply {primary ss_high}
 

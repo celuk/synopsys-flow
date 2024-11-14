@@ -61,8 +61,10 @@ set_app_options -name lib.workspace.remove_frame_bus_properties -value false
 #set_app_options -name file.lef.auto_rename_conflict_sites -value true
 #set_app_options -name file.lef.non_real_cut_obs_mode -value true
 
-set_app_options -name file.gds.trace_terminal_type -value PG
-set_app_options -list {file.gds.port_type_map {{power VDDPST} {power VDD} {ground VSS}}}
+#set_app_options -name file.gds.trace_terminal_type -value PG
+#set_app_options -list {file.gds.port_type_map {{power VDDPST} {power VDD} {ground VSS}}}
+
+#set_app_options -name lib.logic_model.use_db_rail_names -value false
 
 ## STDCELLS
 create_workspace stdcell -technology $TECH_FILE -flow normal
