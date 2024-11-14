@@ -7,7 +7,7 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-create_cell SealRing $SEALRING_CELL
+#create_cell SealRing $SEALRING_CELL
 #set sealring [get_cells -filter "is_hard_macro == true" -hier]
 #set_attribute $sealring -name physical_status -value fixed
 

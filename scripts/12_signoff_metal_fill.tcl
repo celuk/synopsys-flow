@@ -14,6 +14,9 @@ link_block
 #set_app_options -name signoff.physical.merge_stream_files $GDS_FILES_TO_MERGE
 #set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
 
+## add sealring before metal filling
+create_cell SealRing $SEALRING_CELL
+
 ## post_route_auto_delete is not in docs??
 create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x post_route_auto_delete}
 
