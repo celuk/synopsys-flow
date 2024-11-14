@@ -111,8 +111,7 @@ set QOR_STRATEGY_METRIC "timing"
 # balanced|extreme_power|early_design
 set QOR_STRATEGY_MODE "balanced"
 
-set METAL_FILL_RUNSET ""
-
+set SIGNOFF_METAL_FILL_FOLDER "signoff_fill_run"
 set SIGNOFF_CHECK_DRC_FOLDER "signoff_check_drc_run"
 set SIGNOFF_FIX_DRC_FOLDER "signoff_fix_drc_run"
 set SIGNOFF_CHECK_LVS_FOLDER "signoff_check_lvs_run"
