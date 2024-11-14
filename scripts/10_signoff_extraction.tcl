@@ -9,7 +9,7 @@ link_block
 
 # fusion_adv or in_design
 set_app_options -name extract.starrc_mode -value fusion_adv
-#set_starrc_in_design -config $STARRC_CONFIG_FILE
+#set_starrc_in_design -config $STARRC_CONFIG_FILE -mode starrc_centric
 #sh cat $STARRC_CONFIG_FILE
 #sh cat $PARASITICS_MAP_FILE
 #sh cat $STARRC_MAPPING_FILE

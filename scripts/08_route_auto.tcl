@@ -36,6 +36,8 @@ set_app_options -name route.common.global_min_layer_mode -value allow_pin_connec
 set_app_options -name opt.buffering.enable_advanced_buffering -value true
 set_app_options -name opt.common.enable_rde -value true
 
+set_app_options -name route.global.export_soft_congestion_maps -value true
+
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
 

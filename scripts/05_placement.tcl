@@ -21,6 +21,9 @@ set_app_options -name place_opt.final_place.effort -value high
 set_app_options -name place_opt.place.congestion_effort -value high
 set_app_options -name opt.common.user_instance_name_prefix -value place_opt
 
+set_app_options -name route.global.export_soft_congestion_maps -value true
+set_app_options -name place.coarse.cong_restruct_iterations -value 3
+
 #compile_fusion -to initial_opto
 #
 ##reset_placement

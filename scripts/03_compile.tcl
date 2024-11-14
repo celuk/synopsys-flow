@@ -60,6 +60,15 @@ set_app_options -name opt.common.enable_via_ladder_insertion -value true
 
 set_app_options -name compile.flow.enable_multibit -value true
 
+set_app_options -name compile.place.congestion_effort -value high
+set_app_options -name compile.final_place.effort -value high
+set_app_options -name compile.initial_place.buffering_aware -value true
+set_app_options -name route.global.export_soft_congestion_maps -value true
+set_app_options -name place.coarse.cong_restruct_iterations -value 3
+set_app_options -name place.coarse.auto_timing_control -value true
+set_app_options -name place.coarse.auto_density_control -value true
+set_app_options -name place.coarse.enhanced_auto_density_control -value true
+
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
 report_ignored_layerss
