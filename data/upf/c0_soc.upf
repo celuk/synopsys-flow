@@ -28,9 +28,10 @@ PDDW0204CDG_OUT3 \
 PDDW0204CDG_OUT4 \
 PDDW0204CDG_OUT5 \
 PDDW0204CDG_OUT6 \
-SealRing \
 } \
 -supply {primary ss_high}
+
+# SealRing \
 
 # set_domain_supply_net PD_C0_SOC -primary_power_net VDDPST -primary_ground_net VSS
 

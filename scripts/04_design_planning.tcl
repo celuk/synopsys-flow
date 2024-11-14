@@ -174,6 +174,8 @@ create_pg_vias -nets VDD \
 -within_bbox [get_attribute [get_core_area] bbox] \
 -from_layers M5 -to_layers M4
 
+#gui_add_missing_vias -min_layer M1 -max_layer M2 [get_shapes -of_objects [get_nets VDD]]
+
 check_pg_connectivity
 check_pg_drc
 

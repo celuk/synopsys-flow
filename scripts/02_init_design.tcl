@@ -104,6 +104,9 @@ foreach direction_offset_pair $ROUTING_LAYER_DIRECTION_OFFSET_LIST {
 
 report_design_mismatch -verbose
 
+#set_attribute [get_mismatch_types missing_logical_reference] current_repair(user_config) create_blackbox
+#report_design_mismatch -verbose
+
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 

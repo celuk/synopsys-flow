@@ -42,6 +42,10 @@ set_app_options -name place.coarse.continue_on_missing_scandef -value true
 #set_app_options -name place.coarse.cong_restruct_effort -value high
 #set_app_options -name place.coarse.cong_restruct_iterations -value 2
 
+#set_app_options -name plan.macro.macro_place_only -value true
+#set_app_options -name plan.macro.allow_unmapped_design -value true
+#create_placement -floorplan
+
 set_shaping_options -guard_band_size 10
 shape_blocks
 connect_pg_net -automatic
@@ -114,6 +118,8 @@ analyze_mv_feasibility
 sizeof_collection [ get_cells -hierarchical -filter "is_level_shifter==true"]
 
 report_multibit
+
+create_cell SealRing $SEALRING_CELL
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

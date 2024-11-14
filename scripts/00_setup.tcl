@@ -42,6 +42,8 @@ ${NDM_PATH}/io.ndm \
 ${NDM_PATH}/io_physical_only.ndm \
 \
 ${NDM_PATH}/wb_bondpad.ndm \
+\
+${NDM_PATH}/sealring.ndm \
 ];
 
 #${NDM_PATH}/sealring.ndm \
