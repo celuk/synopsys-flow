@@ -8,6 +8,9 @@ set LOGS_DIR "logs"
 
 set_host_options -max_cores 8
 
+set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
+set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
+
 set GATE_LEVEL_VERILOG ${OUTPUTS_DIR}/${TOP_MODULE}_gate_level.v
 
 ## needed by icv lvs runset

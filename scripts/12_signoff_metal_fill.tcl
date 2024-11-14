@@ -7,14 +7,18 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
+set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
+set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
+
 set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_BEOL_RUNSET
 set_app_options -name signoff.create_metal_fill.base_layer_runset -value $METAL_FILL_FEOL_RUNSET
 set_app_options -name signoff.create_metal_fill.fix_density_errors -value true
 set_app_options -name signoff.create_metal_fill.run_dir -value $SIGNOFF_METAL_FILL_FOLDER
-
-#signoff_create_metal_fill -all_runset_layers -track_fill generic -foundry_fill_type feol -auto_eco true
-#set_app_options -name signoff.physical.merge_stream_files $GDS_FILES_TO_MERGE
-#set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
+set_app_options -name signoff.create_metal_fill.user_defined_options -value "-64 -D USE_ICC2"
+# -dp8 -turbo
+set_app_options -name signoff.physical.merge_stream_files -value $GDS_FILES_TO_MERGE
+set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
 
 ## post_route_auto_delete is not in docs??
 create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x post_route_auto_delete}
@@ -32,7 +36,8 @@ check_mv_design
 
 verify_pg_nets
 
-signoff_create_metal_fill -all_runset_layers -track_fill generic -foundry_fill_type both -auto_eco true -remove_by_rule {drc_auto}
+signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic
+#signoff_create_metal_fill -all_runset_layers true -track_fill generic -fill_all_tracks true -foundry_fill_type both
 # -fill_all_tracks true -mode overwrite
 
 connect_pg_net -automatic

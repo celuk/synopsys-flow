@@ -91,6 +91,7 @@ clean:
 		pg_model/ \
 		*StarRC*/ \
 		.node* \
+		signoff_fill_run/ \
 		signoff_check_drc_run/ \
 		signoff_check_lvs_run/ \
 		signoff_fix_drc_run/ \
