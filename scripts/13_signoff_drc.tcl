@@ -7,6 +7,10 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
+set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
+set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
+
 set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 #set_app_options -name signoff.check_drc_live.runset -value $DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_DRC_FOLDER

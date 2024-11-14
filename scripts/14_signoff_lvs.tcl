@@ -7,6 +7,10 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
+set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
+set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
+
 #sh export SAED32_PATH=$EDK_PATH
 #exec env SAED32_PATH=$EDK_PATH /bin/sh -c 'echo $SAED32_PATH'
 #exec /bin/sh -c "export SAED32_PATH=$EDK_PATH; /bin/sh -c 'echo \$SAED32_PATH'"

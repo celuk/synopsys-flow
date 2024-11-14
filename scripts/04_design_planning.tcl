@@ -153,20 +153,24 @@ set_pg_strategy M1_rails \
 compile_pg -strategies M1_rails
 
 create_pg_macro_conn_pattern macro_connect_pattern \
--pin_conn_type scattered_pin -nets {VDD VSS} \
+-pin_conn_type scattered_pin -nets {VDDPST VDD VSS} \
 -width {0.3 0.3} -layers {M5 M6}
 
 set_pg_strategy macro_connect \
--pattern {{name: macro_connect_pattern} {nets: VDD VSS}} \
+-pattern {{name: macro_connect_pattern} {nets: VDDPST VDD VSS}} \
 -macros "$iopads"
 
 compile_pg -strategies macro_connect -via_rule {adjacent_only}
 
 create_pg_strap -layer M4 -direction vertical \
 -net VDD -width 0.6 \
--start 20 -stop 200 -pitch 20
+-start 200 -stop 800 -pitch 20
 
-create_pg_vias -nets VDD \
+create_pg_strap -layer M5 -direction horizontal \
+-net VSS -width 0.6 \
+-start 200 -stop 800 -pitch 20
+
+create_pg_vias -nets {VDD VSS} \
 -within_bbox [get_attribute [get_core_area] bbox] \
 -from_layers M5 -to_layers M4
 
