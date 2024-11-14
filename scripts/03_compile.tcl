@@ -60,6 +60,10 @@ set_app_options -name opt.common.enable_via_ladder_insertion -value true
 
 set_app_options -name compile.flow.enable_multibit -value true
 
+set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
+set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
+report_ignored_layerss
+
 create_mv_cells -all -verbose
 connect_pg_net -automatic
 check_mv_design

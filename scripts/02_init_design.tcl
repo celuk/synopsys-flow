@@ -46,6 +46,7 @@ current_scenario FUNC_12_TT
 #set_operating_conditions $TT_OPC_IO
 set_temperature 25
 set_process_number 1.00
+set_voltage 1.2
 set_voltage -object_list VDDPST 2.5
 set_voltage -object_list VSS 0.0
 #set_operating_conditions $TT_OPC_STDCELL
@@ -55,6 +56,9 @@ set_process_number 1.00
 
 set_voltage -object_list VDD 1.2
 set_voltage -object_list VSS 0.0
+
+set_timing_derate -late 1.04
+set_timing_derate -early 0.96
 set_scenario_status FUNC_12_TT -all -active true
 
 #create_corner TT
@@ -82,6 +86,8 @@ connect_pg_net -automatic
 
 check_mv_design
 
+report_pvt
+
 set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
 set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
 
@@ -93,6 +99,10 @@ foreach direction_offset_pair $ROUTING_LAYER_DIRECTION_OFFSET_LIST {
 	set_attribute [get_layers $layer] routing_direction $direction
 	set_attribute [get_layers $layer] track_offset $offset
 }
+
+#commit_block "c0_top"
+
+report_design_mismatch -verbose
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

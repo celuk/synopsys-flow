@@ -87,6 +87,8 @@ set ROUTING_LAYER_DIRECTION_OFFSET_LIST [list \
 # {M2 vertical 0} \
 # {M9 horizontal 0} \
 
+#set IO_PAD_FILLER_CELLS $ALL_IO_PAD_FILLER_CELLS
+
 set MAX_TRANSITION 0.5
 set MAX_FANOUT 20
 
