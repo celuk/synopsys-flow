@@ -10,7 +10,7 @@ source scripts/00_pdk_setup.tcl
 set TECH_PATH "data/tech"
 set NDM_PATH "data/lib"
 
-# ./GenPRTF.tcl -InputPRTF HVH/PRTF_ICC_N65_9M_6X1Z1U_UTRDL.24a.tf -CellHeight 12
+# ./GenPRTF.tcl -InputPRTF HVH/PRTF_ICC_N65_9M_6X1Z1U_RDL.24a.tf -CellHeight 12
 
 set EM_TECH_FILE ""
 
