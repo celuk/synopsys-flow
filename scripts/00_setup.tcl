@@ -117,6 +117,8 @@ set QOR_STRATEGY_MODE "balanced"
 set SIGNOFF_METAL_FILL_FOLDER "signoff_fill_run"
 set SIGNOFF_CHECK_DRC_FOLDER "signoff_check_drc_run"
 set SIGNOFF_FIX_DRC_FOLDER "signoff_fix_drc_run"
+set SIGNOFF_CHECK_ANTENNA_DRC_FOLDER "signoff_check_antenna_drc_run"
+set SIGNOFF_CHECK_MIM_ANTENNA_DRC_FOLDER "signoff_check_mim_antenna_drc_run"
 set SIGNOFF_CHECK_LVS_FOLDER "signoff_check_lvs_run"
 set SIGNOFF_FIX_LVS_FOLDER "signoff_fix_lvs_run"
 
