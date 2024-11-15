@@ -151,21 +151,21 @@ proc rglob {dirlist globlist} {
 
 set VERILOG_FILES [rglob data/rtl/ *]
 
-set SYNTH_BLOCK synthesize
-set INIT_BLOCK init_design
-set COMPILE_BLOCK compile
-set DPLAN_BLOCK design_planning
-set PLACE_BLOCK placement
-set CTS_BLOCK cts
-set CTS_OPT_BLOCK cts_opt
-set ROUTE_BLOCK route_auto
-set ROUTE_OPT_BLOCK route_opt
-set SEXTRACT_BLOCK signoff_extraction
-set SOPT_BLOCK signoff_opt
-set SMFILL_BLOCK signoff_metal_fill
-set SDRC_BLOCK signoff_drc
-set SLVS_BLOCK signoff_lvs
-set STREAMOUT_BLOCK streamout
+set SYNTH_BLOCK 01-synthesize
+set INIT_BLOCK 02-init_design
+set COMPILE_BLOCK 03-compile
+set DPLAN_BLOCK 04-design_planning
+set PLACE_BLOCK 05-placement
+set CTS_BLOCK 06-cts
+set CTS_OPT_BLOCK 07-cts_opt
+set ROUTE_BLOCK 08-route_auto
+set ROUTE_OPT_BLOCK 09-route_opt
+set SEXTRACT_BLOCK 10-signoff_extraction
+set SOPT_BLOCK 11-signoff_opt
+set SMFILL_BLOCK 12-signoff_metal_fill
+set SDRC_BLOCK 13-signoff_drc
+set SLVS_BLOCK 14-signoff_lvs
+set STREAMOUT_BLOCK 15-streamout
 
 if { ![file exists $OUTPUTS_DIR] } {
     file mkdir $OUTPUTS_DIR

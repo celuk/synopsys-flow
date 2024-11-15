@@ -106,7 +106,8 @@ clean:
 		.snps_mv_reports \
 		${OUTPUTS_DIR}/ \
 		${REPORTS_DIR}/ \
-		${LOGS_DIR}/
+		${LOGS_DIR}/ \
+		open_block.tcl
 
 clean_ndms:
 	rm -rf data/lib/*
