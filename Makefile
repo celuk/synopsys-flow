@@ -1,6 +1,8 @@
 FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
 LM_EXEC ?= /usr/synopsys/icc2/V-2023.12/bin/lm_shell
 
+TOP_MODULE ?= c0_soc
+
 OUTPUTS_DIR ?= outputs
 REPORTS_DIR ?= reports
 LOGS_DIR ?= logs
@@ -112,7 +114,9 @@ clean_ndms:
 clean_all: clean clean_ndms
 
 show:
-	$(FC_EXEC) -gui
+	@echo "open_block $(TOP_MODULE).nlib:$(TOP_MODULE)/*;\nlink_block;" > open_block.tcl
+	$(FC_EXEC) -gui -f open_block.tcl
+	rm -f open_block.tcl
 
 cli:
 	$(FC_EXEC)
