@@ -114,7 +114,11 @@ clean_ndms:
 clean_all: clean clean_ndms
 
 show:
-	@echo "open_block $(TOP_MODULE).nlib:$(TOP_MODULE)/*;\nlink_block;" > open_block.tcl
+	@echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl
+	@echo "redirect -var blocks {list_blocks};" >> open_block.tcl
+	@echo "set latest_block_name [lindex [regexp -all -inline {[^ ]+design} \$$blocks] end];" >> open_block.tcl
+	@echo "open_block $(TOP_MODULE).nlib:\$$latest_block_name;" >> open_block.tcl
+	@echo "link_block;" >> open_block.tcl
 	$(FC_EXEC) -gui -f open_block.tcl
 	rm -f open_block.tcl
 
