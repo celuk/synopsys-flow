@@ -42,7 +42,7 @@ set_app_options -name lib.workspace.group_libs_fix_cell_shadowing -value true
 #set_app_options -name lib.workspace.group_libs_physical_only_name -value ""
 ## default false
 ## by this way, we shouldnt need to create and use seperate physical ndms
-#set_app_options -name lib.workspace.keep_all_physical_cells -value true
+set_app_options -name lib.workspace.keep_all_physical_cells -value true
 set_app_options -name lib.workspace.library_developer_mode -value false
 ## should be true ??
 set_app_options -name lib.workspace.remove_frame_bus_properties -value false
@@ -61,10 +61,13 @@ set_app_options -name lib.workspace.remove_frame_bus_properties -value false
 #set_app_options -name file.lef.auto_rename_conflict_sites -value true
 #set_app_options -name file.lef.non_real_cut_obs_mode -value true
 
-#set_app_options -name file.gds.trace_terminal_type -value PG
-#set_app_options -list {file.gds.port_type_map {{power VDDPST} {power VDD} {ground VSS}}}
+set_app_options -name file.gds.trace_terminal_type -value PG
+set_app_options -list {file.gds.port_type_map {{power VDDPST} {power VDD} {ground VSS}}}
 
 #set_app_options -name lib.logic_model.use_db_rail_names -value false
+
+## site mapping for level shifters?
+#set_app_options -name lib.configuration.lef_site_mapping -value {{core unit}}
 
 ## STDCELLS
 create_workspace stdcell -technology $TECH_FILE -flow normal

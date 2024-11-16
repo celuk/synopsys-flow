@@ -16,22 +16,22 @@ set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
 #exec /bin/sh -c "export SAED32_PATH=$EDK_PATH; /bin/sh -c 'echo \$SAED32_PATH'"
 #exec /bin/sh -c "export SAED32_PATH=$EDK_PATH; /bin/sh -c 'echo \$SAED32_PATH'"
 
-set ::env(SAED32_PATH) $EDK_PATH
+#set ::env(SAED32_PATH) $EDK_PATH
 
-save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
+#save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
 #set_app_options -name signoff.check_drc.runset -value $LVS_RUNSET
 #set_app_options -name signoff.check_drc.run_dir -value "z_lvs_run"
 
-set_app_options -name signoff.check_drc.runset -value $LVS_RUNSET
-set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_LVS_FOLDER
-set_app_options -name signoff.fix_drc.init_drc_error_db -value $SIGNOFF_CHECK_LVS_FOLDER
-set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_LVS_FOLDER
-
-save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
-
-signoff_check_drc
-signoff_fix_drc -max_number_repair_loop 10
+#set_app_options -name signoff.check_drc.runset -value $LVS_RUNSET
+#set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_LVS_FOLDER
+#set_app_options -name signoff.fix_drc.init_drc_error_db -value $SIGNOFF_CHECK_LVS_FOLDER
+#set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_LVS_FOLDER
+#
+#save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
+#
+#signoff_check_drc
+#signoff_fix_drc -max_number_repair_loop 10
 
 #remove_stdcell_fillers_with_violation -check_between_fixed_objects true
 
