@@ -42,7 +42,7 @@ set_app_options -name lib.workspace.group_libs_fix_cell_shadowing -value true
 #set_app_options -name lib.workspace.group_libs_physical_only_name -value ""
 ## default false
 ## by this way, we shouldnt need to create and use seperate physical ndms
-set_app_options -name lib.workspace.keep_all_physical_cells -value true
+#set_app_options -name lib.workspace.keep_all_physical_cells -value true
 set_app_options -name lib.workspace.library_developer_mode -value false
 ## should be true ??
 set_app_options -name lib.workspace.remove_frame_bus_properties -value false
@@ -53,9 +53,15 @@ set_app_options -name lib.workspace.remove_frame_bus_properties -value false
 #set_app_options -name lib.logic_model.use_db_rail_names -value true
 #set_app_options -name lib.logic_model.auto_remove_timing_only_designs -value true
 
+## FRAM-045
 #set_app_options -as_user_default -name lib.physical_model.block_all -value false
+#set_app_options -as_user_default -name lib.physical_model.block_core_margin -value {{M1 0.05} {M2 auto_bloat}}
+
 #set_app_options -as_user_default -name lib.physical_model.convert_metal_blockage_to_zero_spacing -value {{PO 0.122} {M1 0.05} {M2 0.056} {M3 0.056} {M4 0.056} {M5 0.056} {M6 0.056} {M7 0.056} {M8 0.056} {M9 0.16} {MRDL 2}}
+
+## FRAM-046
 #set_app_options -as_user_default -name lib.physical_model.trim_metal_blockage_around_pin -value {{PO none} {M1 none} {M2 none} {M3 none} {M4 none} {M5 none} {M6 none} {M7 none} {M8 none} {M9 none} {MRDL none}}
+#set_app_options -as_user_default -name lib.physical_model.preserve_metal_blockage -value false
 
 #set_app_options -name file.lef.allow_site_conflicts -value true
 #set_app_options -name file.lef.auto_rename_conflict_sites -value true
@@ -439,6 +445,13 @@ check_workspace
 commit_workspace -output ${NDM_PATH}/wb_bondpad.ndm -force
 remove_workspace
 
+create_workspace bondpad -technology $TECH_FILE -flow physical_only
+read_lef $BONDPAD_LEF_FILE
+read_gds $BONDPAD_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+check_workspace
+commit_workspace -output ${NDM_PATH}/bondpad.ndm -force
+remove_workspace
+
 ## SEALRING
 create_workspace sealring -technology $TECH_FILE -flow physical_only
 read_gds $SEALRING_WLCSP_GDS_FILE -layer_map $GDSOUT_MAP_FILE
@@ -446,4 +459,4 @@ check_workspace
 commit_workspace -output ${NDM_PATH}/sealring.ndm -force
 remove_workspace
 
-exit
+#exit

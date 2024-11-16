@@ -39,18 +39,15 @@ source scripts/00_pdk_setup.tcl
 
 set REFERENCE_LIBRARY [list \
 ${NDM_PATH}/stdcell.ndm \
+${NDM_PATH}/stdcell_physical_only.ndm \
 \
 ${NDM_PATH}/io.ndm \
+${NDM_PATH}/io_physical_only.ndm \
 \
-${NDM_PATH}/wb_bondpad.ndm \
+${NDM_PATH}/bondpad.ndm \
 ];
 
-#${NDM_PATH}/stdcell_physical_only.ndm \
-
 #${NDM_PATH}/stdcell_lvl.ndm \
-
-#${NDM_PATH}/io_physical_only.ndm \
-
 #${NDM_PATH}/sealring.ndm \
 
 set LOGO_FILE "${LOGO_PATH}/kasirga_logo.bmp"
@@ -85,7 +82,7 @@ set CLK clk_i
 set POWER_NET "VDD"
 set GROUND_NET "VSS"
 
-set MIN_ROUTING_LAYER "M3"
+set MIN_ROUTING_LAYER "M4"
 set MAX_ROUTING_LAYER "M8"
 
 set ROUTING_LAYER_DIRECTION_OFFSET_LIST [list \
@@ -212,4 +209,4 @@ set_svf -off
 
 #set_app_var search_path "scripts"
 
-#exit
+##exit

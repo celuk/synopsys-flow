@@ -81,4 +81,4 @@ check_legality
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit

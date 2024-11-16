@@ -51,4 +51,4 @@ redirect -file $REPORTS_DIR/15_${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_t
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit

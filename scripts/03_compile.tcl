@@ -7,9 +7,6 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-#create_net -power VDD
-#create_net -ground VSS
-
 #set_app_options -name compile.auto_floorplan.enable -value true
 #set_app_option -name compile.auto_floorplan.initialize -value auto
 ##set_app_options -name compile.auto_floorplan.initialize -value true
@@ -21,8 +18,19 @@ link_block
 #create_boundary -coordinate {{0 0} {1000 1000}}
 #initialize_floorplan -control_type boundary -left_io2core 500 -bottom_io2core 500 -right_io2core 500 -top_io2core 500
 
-initialize_floorplan -side_length "850 850"
-create_io_ring -name "ring" -corner_height 75
+initialize_floorplan -side_length "650 650" -core_offset 200
+
+#create_io_guide -name "io_guide" -line {{100 100} 100} -side left
+
+create_io_ring -name "ring_outer" -corner_height 100
+create_io_ring -name "ring_inner" -inside "ring_outer" -corner_height 75
+
+create_net -power {VDD VDDPST}
+create_net -ground VSS
+
+#set_attribute -objects [get_nets VDDPST] -name net_type -value power
+#set_attribute -objects [get_nets VDD] -name net_type -value power
+#set_attribute -objects [get_nets VSS] -name net_type -value ground
 
 set_app_options -name compile.auto_floorplan.enable -value true
 set_app_options -name compile.auto_floorplan.initialize -value auto
@@ -46,9 +54,9 @@ set_app_options -name place.coarse.continue_on_missing_scandef -value true
 #set_app_options -name plan.macro.allow_unmapped_design -value true
 #create_placement -floorplan
 
-set_shaping_options -guard_band_size 10
-shape_blocks
-connect_pg_net -automatic
+#set_shaping_options -guard_band_size 10
+#shape_blocks
+#connect_pg_net -automatic
 
 set_app_options -name opt.common.enable_via_ladder_insertion -value true
 
@@ -78,7 +86,7 @@ set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
 report_ignored_layers
 
 ## do not use stdcell main rail as supply, use VDDPST
-set_app_options -global {mv.upf.ignore_ls_main_rail true}
+#set_app_options -global {mv.upf.ignore_ls_main_rail true}
 
 compile_fusion -check_only
 
@@ -103,23 +111,25 @@ compile_fusion -from final_opto -to final_opto
 
 check_legality
 
-create_mv_cells -all -verbose
-connect_pg_net -automatic
-check_mv_design
+#create_mv_cells -all -verbose
+#connect_pg_net -automatic
+#check_mv_design
 
 connect_pg_net -automatic
 check_mv_design
 
 report_power_domain
 
-analyze_mv_design -level_shifter -global_report -verbose
-report_mv_path
-analyze_mv_feasibility
-sizeof_collection [ get_cells -hierarchical -filter "is_level_shifter==true"]
+#analyze_mv_design -level_shifter -global_report -verbose
+#report_mv_path
+#analyze_mv_feasibility
+#sizeof_collection [ get_cells -hierarchical -filter "is_level_shifter==true"]
+
+check_pg_drc -ignore_std_cells
 
 report_multibit
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit

@@ -108,10 +108,6 @@ place_opt -from initial_drc
 legalize_placement
 report_placement -verbose low
 
-source scripts/createNplace_bondpads.tcl
-sh cat scripts/createNplace_bondpads.tcl
-createNplace_bondpads -inline_pad_ref_name PAD70N
-
 connect_pg_net -automatic
 
 check_mv_design
@@ -129,4 +125,4 @@ redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_place_hold.rpt {rep
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit

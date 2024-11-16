@@ -21,13 +21,13 @@ read_sdc $CONSTRAINT_FILE
 
 set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
 
-set_app_options -name mv.incomplete_upf.enable -value true
+#set_app_options -name mv.incomplete_upf.enable -value true
 
 ## to create voltage area automatically, it should be false
 set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
-load_upf $UPF_FILE
-commit_upf
+#load_upf $UPF_FILE
+#commit_upf
 
 report_incomplete_upf
 
@@ -110,4 +110,4 @@ report_design_mismatch -verbose
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit

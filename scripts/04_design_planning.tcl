@@ -13,6 +13,8 @@ set_app_options -name route.common.connect_within_pins_by_layer_name -value { {M
 
 set_app_options -name plan.pins.incremental -value true
 
+set_app_options -name plan.pgroute.treat_pad_as_macro -value true
+
 #set pgports [remove_from_collection [get_ports] {VDDPST VDD VSS}]
 #place_pins -self -ports $pgports
 
@@ -21,9 +23,14 @@ set_app_options -name plan.pins.incremental -value true
 #-ports $pgports
 place_pins -ports [get_ports *]
 
-#place_io
+place_io
 
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
+
+source scripts/createNplace_bondpads.tcl
+sh cat scripts/createNplace_bondpads.tcl
+createNplace_bondpads -inline_pad_ref_name PAD70GU_SL
+# PAD70GU_SL
 
 create_tap_cells -lib_cell $TAP_CELL -distance 50 -pattern every_row
 #create_boundary_cells -left_boundary_cell $BOUNDARY_CELL -right_boundary_cell $BOUNDARY_CELL
@@ -46,10 +53,6 @@ create_tap_cells -lib_cell $TAP_CELL -distance 50 -pattern every_row
 #set macros_col [get_cells -physical_context -filter "is_hard_macro==true" -quiet]
 
 set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
-
-set_attribute -objects [get_nets VDDPST] -name net_type -value power
-set_attribute -objects [get_nets VDD] -name net_type -value power
-set_attribute -objects [get_nets VSS] -name net_type -value ground
 
 set_app_options -name plan.pgroute.honor_signal_route_drc -value true
 set_app_options -name plan.pgroute.honor_std_cell_drc -value true
@@ -92,6 +95,8 @@ set_app_options -name plan.pgroute.verbose -value true
 set_app_options -name plan.pgroute.optimize_track_alignment -value true
 set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 
+
+
 #create_pg_vias -nets VDDPST
 #create_pg_vias -nets VDD
 #create_pg_vias -nets VSS
@@ -118,7 +123,7 @@ create_pg_ring_pattern ring_pattern \
 
 set_pg_strategy core_ring \
 -pattern {{name: ring_pattern} \
-{nets: {VSS VDD VDDPST}}{offset: {-50 -50}}} -core
+{nets: {VDD VSS}}{offset: {-50 -50}}} -core
 #-extension {{stop: design_boundary_and_generate_pin}}
 
 compile_pg -strategies core_ring
@@ -127,9 +132,9 @@ set_pg_strategy_via_rule adjacent_only \
 -via_rule {{intersection: adjacent}{via_master: default}}
 
 create_pg_mesh_pattern mesh_pattern \
--layers {{{vertical_layer: M6} {width: 0.6} \
+-layers {{{vertical_layer: M6} {width: 0.66} \
 {pitch: 20} {offset: 20}} \
-{{horizontal_layer: M5} {width: 0.6} \
+{{horizontal_layer: M5} {width: 0.66} \
 {pitch: 20} {spacing: interleaving}}}
 
 set_pg_strategy M5M6_mesh \
@@ -138,7 +143,7 @@ set_pg_strategy M5M6_mesh \
 compile_pg -strategies M5M6_mesh -via_rule {adjacent_only}
 
 create_pg_mesh_pattern strap_pattern \
--layers {{{vertical_layer: M4} {width: 0.6} \
+-layers {{{vertical_layer: M4} {width: 0.66} \
 {pitch: 20} {spacing: interleaving} {trim: false}}}
 
 set_pg_strategy M4_straps -core \
@@ -154,11 +159,11 @@ set_pg_strategy M1_rails \
 compile_pg -strategies M1_rails
 
 create_pg_macro_conn_pattern macro_connect_pattern \
--pin_conn_type scattered_pin -nets {VDDPST VDD VSS} \
--width {0.3 0.3} -layers {M5 M6}
+-pin_conn_type scattered_pin -nets {VDD VSS} \
+-width {1.62 1.62} -layers {M5 M6}
 
 set_pg_strategy macro_connect \
--pattern {{name: macro_connect_pattern} {nets: VDDPST VDD VSS}} \
+-pattern {{name: macro_connect_pattern} {nets: VDD VSS}} \
 -macros "$iopads"
 
 compile_pg -strategies macro_connect -via_rule {adjacent_only}
@@ -185,4 +190,4 @@ check_pg_drc
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit
