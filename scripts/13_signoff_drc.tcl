@@ -24,6 +24,7 @@ signoff_check_drc
 
 save_block
 
+#set_app_options -name signoff.fix_isolated_via.isolated_via_max_range -value {{M1 3.0}}
 #signoff_fix_isolated_via -save_design true
 signoff_fix_drc -max_number_repair_loop 10
 

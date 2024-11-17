@@ -108,7 +108,15 @@ place_opt -from initial_drc
 legalize_placement
 report_placement -verbose low
 
+source scripts/createNplace_bondpads.tcl
+sh cat scripts/createNplace_bondpads.tcl
+createNplace_bondpads -inline_pad_ref_name $BONDPAD_CELL
+
 connect_pg_net -automatic
+connect_pg_net -net VDD [get_pins -hierarchical */VDD]
+connect_pg_net -net VSS [get_pins -hierarchical */VSS]
+connect_pg_net -net VDD [get_pins -physical_context */VDD]
+connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 check_mv_design
 

@@ -1,7 +1,6 @@
 *.svf
 *.log
-*.txt
-*.txt.*
+*.txt*
 *.nlib
 *.ndm
 *_rules_*

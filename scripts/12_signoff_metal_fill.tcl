@@ -27,6 +27,8 @@ connect_pg_net -automatic
 check_mv_design
 remove_stdcell_fillers_with_violation
 connect_pg_net -automatic
+
+
 check_mv_design
 verify_pg_nets
 
@@ -35,6 +37,11 @@ signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic
 # -fill_all_tracks true -mode overwrite
 
 connect_pg_net -automatic
+connect_pg_net -net VDD [get_pins -hierarchical */VDD]
+connect_pg_net -net VSS [get_pins -hierarchical */VSS]
+connect_pg_net -net VDD [get_pins -physical_context */VDD]
+connect_pg_net -net VSS [get_pins -physical_context */VSS]
+
 check_mv_design
 
 save_lib -all
