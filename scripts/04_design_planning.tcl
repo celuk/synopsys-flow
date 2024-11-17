@@ -22,26 +22,27 @@ set_app_options -name plan.pgroute.treat_pad_as_macro -value true
 #place_pins -self 
 #-ports $pgports
 
-initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 200
+initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 100
 # initialize_floorplan -side_length "650 650" -core_offset 200
 
 #create_io_ring -name "ioring" -corner_height 75
 #set_attribute -objects ioring -name bounding_box -value 
 
-create_io_guide -name io_guide_left -side left -line {{100 100} 800}
-create_io_guide -name io_guide_top -side top -line {{100 900} 800}
-create_io_guide -name io_guide_right -side right -line {{900 900} 800}
-create_io_guide -name io_guide_bottom -side bottom -line {{900 100} 800}
+#create_io_guide -name io_guide_left -side left -line {{100 100} 800}
+#create_io_guide -name io_guide_top -side top -line {{100 900} 800}
+#create_io_guide -name io_guide_right -side right -line {{900 900} 800}
+#create_io_guide -name io_guide_bottom -side bottom -line {{900 100} 800}
 #create_io_guide -name io_guide_left -side left -line {{0 0} 1000}
 #create_io_guide -name io_guide_top -side top -line {{0 1000} 1000}
 #create_io_guide -name io_guide_right -side right -line {{1000 1000} 1000}
 #create_io_guide -name io_guide_bottom -side bottom -line {{1000 0} 1000}
-create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
+#create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
 
 #place_pins -ports [get_ports *]
 #set pgports [remove_from_collection [get_ports] {VDD VSS}]
 #place_pins -self -ports $pgports
 
+create_io_ring -name "ioring" -corner_height 75
 place_io
 place_pins -self
 
