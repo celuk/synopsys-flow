@@ -18,10 +18,6 @@ link_block
 #create_boundary -coordinate {{0 0} {1000 1000}}
 #initialize_floorplan -control_type boundary -left_io2core 500 -bottom_io2core 500 -right_io2core 500 -top_io2core 500
 
-initialize_floorplan -side_length "850 850"
-# initialize_floorplan -side_length "650 650" -core_offset 200
-create_io_ring -name "ioring" -corner_height 75
-
 #create_io_guide -name "io_guide" -line {{100 100} 100} -side left
 #create_io_ring -name "ring_outer" -corner_height 100
 #create_io_ring -name "ring_inner" -inside "ring_outer" -corner_height 75
@@ -133,4 +129,4 @@ report_multibit
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-#exit
+exit

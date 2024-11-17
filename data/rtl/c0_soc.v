@@ -7,8 +7,8 @@ module c0_soc(
 
     wire clk;
     wire rstn;
-    wire [3:0] d;
-    wire [0:6] seg;
+    wire [1:0] d;
+    wire [0:4] seg;
     
     PCORNER CornerCell1();
     PCORNER CornerCell2();

@@ -21,19 +21,24 @@ set_app_options -name plan.pgroute.treat_pad_as_macro -value true
 #set pgports [remove_from_collection [get_ports] {VDD VSS}]
 #place_pins -self 
 #-ports $pgports
+
+initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 200
+# initialize_floorplan -side_length "650 650" -core_offset 200
+create_io_ring -name "ioring" -corner_height 75
+
 place_pins -ports [get_ports *]
 
-place_io
+#place_io
 
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
 source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
-createNplace_bondpads -inline_pad_ref_name PAD70GU_SL
+createNplace_bondpads -inline_pad_ref_name $BONDPAD_CELL
 # PAD70GU_SL
 
-create_tap_cells -lib_cell $TAP_CELL -distance 50 -pattern every_row
-#create_boundary_cells -left_boundary_cell $BOUNDARY_CELL -right_boundary_cell $BOUNDARY_CELL
+create_tap_cells -lib_cell $TAP_CELL -distance 100 -pattern every_row
+create_boundary_cells -left_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL" -right_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL"
 #create_io_break_cells
 
 #source scripts/createNplace_bondpads.tcl
@@ -117,13 +122,16 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pg_vias -show_phantom
 #create_pg_strap -show_phantom
 
+create_pad_rings -create pg -route_pins_on_layer {M8}
+#create_pad_rings -create all -route_pins_on_layer {M4 M5}
+
 create_pg_ring_pattern ring_pattern \
 -horizontal_layer M7 -horizontal_width {5} -horizontal_spacing {2} \
 -vertical_layer M8 -vertical_width {5} -vertical_spacing {2}
 
 set_pg_strategy core_ring \
 -pattern {{name: ring_pattern} \
-{nets: {VDD VSS}}{offset: {-50 -50}}} -core
+{nets: {VDD VSS}}{offset: {3 3}}} -core
 #-extension {{stop: design_boundary_and_generate_pin}}
 
 compile_pg -strategies core_ring
@@ -190,4 +198,4 @@ check_pg_drc
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-#exit
+exit

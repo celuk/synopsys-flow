@@ -52,7 +52,7 @@ ${NDM_PATH}/stdcell_physical_only.ndm \
 ${NDM_PATH}/io.ndm \
 ${NDM_PATH}/io_physical_only.ndm \
 \
-${NDM_PATH}/wb_bondpad.ndm \
+${NDM_PATH}/bondpad.ndm \
 ];
 
 #${NDM_PATH}/stdcell_lvl.ndm \
@@ -217,4 +217,4 @@ set_svf -off
 
 #set_app_var search_path "scripts"
 
-##exit
+#exit

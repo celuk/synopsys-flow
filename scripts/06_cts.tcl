@@ -65,4 +65,4 @@ redirect -file $REPORTS_DIR/06_${CURRENT_STEP}/${TOP_MODULE}_clocks_skew.rpt {re
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-#exit
+exit
