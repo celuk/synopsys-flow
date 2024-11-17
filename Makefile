@@ -82,7 +82,7 @@ clean:
 	rm -rf \
 		*.svf \
 		*.log \
-		*.txt \
+		*.txt* \
 		*.nlib \
 		*_rules_* \
 		*tmp*/ \

@@ -24,17 +24,25 @@ set_app_options -name plan.pgroute.treat_pad_as_macro -value true
 
 initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 200
 # initialize_floorplan -side_length "650 650" -core_offset 200
-create_io_ring -name "ioring" -corner_height 75
+
+#create_io_ring -name "ioring" -corner_height 75
+#set_attribute -objects ioring -name bounding_box -value 
+
+create_io_guide -name io_guide_left -side left -line {{100 100} 800}
+create_io_guide -name io_guide_top -side top -line {{100 900} 800}
+create_io_guide -name io_guide_right -side right -line {{900 900} 800}
+create_io_guide -name io_guide_bottom -side bottom -line {{900 100} 800}
+create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
 
 place_pins -ports [get_ports *]
 
-#place_io
+place_io
 
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
 source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
-createNplace_bondpads -inline_pad_ref_name $BONDPAD_CELL
+createNplace_bondpads -inline_pad_ref_name PAD70NU_SL
 # PAD70GU_SL
 
 create_tap_cells -lib_cell $TAP_CELL -distance 100 -pattern every_row
@@ -122,7 +130,7 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pg_vias -show_phantom
 #create_pg_strap -show_phantom
 
-create_pad_rings -create pg -route_pins_on_layer {M8}
+#create_pad_rings -create pg -route_pins_on_layer {M8}
 #create_pad_rings -create all -route_pins_on_layer {M4 M5}
 
 create_pg_ring_pattern ring_pattern \
