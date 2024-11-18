@@ -25,6 +25,7 @@ RAIL_DATABASE/
 *.ems
 PreFrameCheck/
 .snps_mv_reports
+pna_output/
 outputs/
 reports/
 logs/

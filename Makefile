@@ -106,6 +106,7 @@ clean:
 		*.ems \
 		PreFrameCheck/ \
 		.snps_mv_reports \
+		pna_output/ \
 		${OUTPUTS_DIR}/ \
 		${REPORTS_DIR}/ \
 		${LOGS_DIR}/ \
