@@ -141,8 +141,8 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pad_rings -create pg -route_pins_on_layer {M8}
 #create_pad_rings -create all -route_pins_on_layer {M4 M5}
 
-#connect_supply_net -ports [get_pins */VDD] VDD
-#connect_supply_net -ports [get_pins */VSS] VSS
+connect_supply_net -ports [get_pins */VDD] VDD
+connect_supply_net -ports [get_pins */VSS] VSS
 
 connect_pg_net -automatic
 

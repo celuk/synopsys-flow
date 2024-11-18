@@ -29,11 +29,17 @@ set_app_options -name mv.upf.enable_missing_voltage_area -value false
 create_net -power {VDD VDDPST}
 create_net -ground VSS
 
+create_supply_net VDD
+create_supply_net VSS
+
+create_power_domain PD_TOP -elements {.}
+set_domain_supply_net PD_TOP -primary_power_net VDD -primary_ground_net VSS
+
 #connect_supply_net -ports [get_pins */VDD] VDD
 #connect_supply_net -ports [get_pins */VSS] VSS
 
-load_upf $UPF_FILE
-commit_upf
+#load_upf $UPF_FILE
+#commit_upf
 
 report_incomplete_upf
 
