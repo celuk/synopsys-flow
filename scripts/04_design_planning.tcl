@@ -138,13 +138,33 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pad_rings -create pg -route_pins_on_layer {M8}
 #create_pad_rings -create all -route_pins_on_layer {M4 M5}
 
-connect_pg_net -automatic
-create_pg_mesh_pattern mesh_pattern -layers { {{horizontal_layer: M1} {width: 0.75} {pitch: 150} {spacing: interleaving}} {{horizontal_layer: M9} {width: 2.4} {pitch: 96} {spacing: interleaving}} {{vertical_layer: M8} {width: 0.84} {pitch: 33.6} {spacing: interleaving}} }
-set_pg_strategy mesh_strategy -core -pattern {{pattern: mesh_pattern}{nets: {VDD VSS}}} -blockage {macros: all}
-create_pg_std_cell_conn_pattern std_cell_pattern
-set_pg_strategy std_cell_strategy -core -pattern {{pattern: std_cell_pattern}{nets: {VDD VSS}}}
+#-via_rule {adjacent_only}
 
-compile_pg
+#create_pg_strap -layer M4 -direction vertical \
+#-net VDD -width 0.6 \
+#-start 200 -stop 800 -pitch 20
+#
+#create_pg_strap -layer M5 -direction horizontal \
+#-net VSS -width 0.6 \
+#-start 200 -stop 800 -pitch 20
+
+#set_pg_via_master_rule via_rule
+# -contact_code {VIA67_BW114 VIA67_BW76 VIA67_BW38_UW38 VIA67_BW21}
+#create_pg_vias -nets {VDD VSS} \
+#-within_bbox [get_attribute [get_core_area] bbox] \
+#-from_layers M5 -to_layers M4 -via_masters {via_rule}
+
+#create_pg_vias -nets VDDPST
+#create_pg_vias -nets VDD -within_bbox [get_attribute [get_core_area] bbox]
+#create_pg_vias -nets VSS -within_bbox [get_attribute [get_core_area] bbox]
+
+compile_pg -create_ml_data
+train_pg_ml_model
+compile_pg -use_ml_model
+
+create_pg_vias -nets {VDD VSS} -create_ml_data
+train_pg_ml_model
+create_pg_vias -nets {VDD VSS} -use_ml_model
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
