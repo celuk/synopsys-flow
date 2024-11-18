@@ -139,33 +139,44 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pad_rings -create pg -route_pins_on_layer {M8}
 #create_pad_rings -create all -route_pins_on_layer {M4 M5}
 
-create_pg_ring_pattern ring_pattern \
--horizontal_layer M7 -horizontal_width {5} -horizontal_spacing {2} \
--vertical_layer M8 -vertical_width {5} -vertical_spacing {2}
+create_pg_ring_pattern pg_ring  -horizontal_layer M9     \
+                                -horizontal_width {5}       \
+                                -horizontal_spacing {2.5}   \
+                                -vertical_layer M8      \
+                                -vertical_width {5}         \
+                                -vertical_spacing {2.5}     \
+                                -corner_bridge false
+set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}} \
+                                  -extension {{stop: core_boundary}}
+compile_pg -strategies s_core_ring
 
-set_pg_strategy core_ring \
--pattern {{name: ring_pattern} \
-{nets: {VDD VSS}}{offset: {3 3}}} -core
-#-extension {{stop: design_boundary_and_generate_pin}}
+create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M9} {spacing: 5}      \
+                                          {width: 5} {pitch: 145} {trim: false}}    \
+                                        {{horizontal_layer: M8} {spacing: 7.4}    \
+                                          {width: 5} {pitch: 145} {trim: false}}}
+set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_start: 141.16 138.56}} \
+                       -core -extension {{stop: outermost_ring}}
+compile_pg -strategies s_mesh
 
-create_pg_mesh_pattern mesh_pattern -layers { {{horizontal_layer: M1} {width: 0.75} {pitch: 150} {spacing: interleaving}} {{horizontal_layer: M9} {width: 2.4} {pitch: 96} {spacing: interleaving}} {{vertical_layer: M8} {width: 0.84} {pitch: 33.6} {spacing: interleaving}} }
-set_pg_strategy mesh_strategy -core -pattern {{pattern: mesh_pattern}{nets: {VDD VSS}}} -blockage {macros: all}
-
-create_pg_std_cell_conn_pattern std_cell_pattern
-set_pg_strategy std_cell_strategy -core -pattern {{pattern: std_cell_pattern}{nets: {VDD VSS}}}
+create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
+set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : outermost_ring}}}
+compile_pg -strategies s_std_cell_rail
 
 create_pg_macro_conn_pattern macro_connect_pattern \
 -pin_conn_type scattered_pin -nets {VDD VSS} \
--width {1.62 1.62} -layers {M5 M6}
-
-set_pg_strategy macro_connect \
+-width {2 2} -layers {M9 M8}
+set_pg_strategy s_macro_connect \
 -pattern {{name: macro_connect_pattern} {nets: VDD VSS}} \
 -macros "$iopads"
+compile_pg -strategies s_macro_connect
 
-create_pg_vias -nets VDD -within_bbox [get_attribute [get_core_area] bbox]
-create_pg_vias -nets VSS -within_bbox [get_attribute [get_core_area] bbox]
+resolve_pg_nets -verbose
+connect_pg_net -automatic
 
-compile_pg
+#create_pg_vias -nets VDD -within_bbox [get_attribute [get_core_area] bbox]
+#create_pg_vias -nets VSS -within_bbox [get_attribute [get_core_area] bbox]
+
+#compile_pg
 #-via_rule {adjacent_only}
 
 #create_pg_strap -layer M4 -direction vertical \
