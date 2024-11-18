@@ -7,7 +7,8 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-#set_block_pin_constraints -self -allowed_layers {M3 M4} -pin_spacing_distance 2
+set_block_pin_constraints -self -allowed_layers {M3 M4}
+#-pin_spacing_distance 2
 
 #set_app_options -name route.common.connect_within_pins_by_layer_name -value { {M1 via_wire_all_pins} }
 
@@ -113,7 +114,7 @@ set_app_options -name plan.pgroute.verbose -value true
 set_app_options -name plan.pgroute.optimize_track_alignment -value true
 set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 
-
+#set_app_options -name plan.pgroute.snap_stdcell_rail -value true
 
 #create_pg_vias -nets VDDPST
 #create_pg_vias -nets VDD

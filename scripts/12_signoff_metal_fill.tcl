@@ -11,8 +11,8 @@ set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_BEOL_R
 set_app_options -name signoff.create_metal_fill.base_layer_runset -value $METAL_FILL_FEOL_RUNSET
 set_app_options -name signoff.create_metal_fill.fix_density_errors -value true
 set_app_options -name signoff.create_metal_fill.run_dir -value $SIGNOFF_METAL_FILL_FOLDER
-set_app_options -name signoff.create_metal_fill.user_defined_options -value "-64 -D USE_ICC2"
-# -dp8 -turbo
+#set_app_options -name signoff.create_metal_fill.user_defined_options -value "-64"
+# -D USE_ICC2 -dp8 -turbo
 set_app_options -name signoff.physical.merge_stream_files -value $GDS_FILES_TO_MERGE
 set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
 
@@ -28,13 +28,14 @@ connect_pg_net -automatic
 check_mv_design
 verify_pg_nets
 
-signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic
+signoff_create_metal_fill -track_fill generic -fill_all_tracks true -select_layers [get_layers *]
+
+signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic -select_layers [get_layers *]
 #-all_runset_layers true
 #signoff_create_metal_fill -all_runset_layers true -track_fill generic -fill_all_tracks true -foundry_fill_type both
 # -fill_all_tracks true -mode overwrite
 
 #signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true
-signoff_create_metal_fill -track_fill generic -fill_all_tracks true
 
 #signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true -foundry_fill_type both -foundry_for_feol_fill generic
 
