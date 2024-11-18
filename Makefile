@@ -27,7 +27,7 @@ script15 ?= scripts/15_streamout.tcl
 $(LOGS_DIR):
 	mkdir -p $(LOGS_DIR)
 
-all: s1 s2 s3 s4 s5 s6 s8 s10 s12 s13 s15
+all: s1 s2 s3 s4 s5 s6 s8 s10 s12 s13 s14 s15
 
 ndms: $(LOGS_DIR)
 	$(LM_EXEC) -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log

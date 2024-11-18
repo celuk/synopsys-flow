@@ -36,6 +36,10 @@ signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic
 #signoff_create_metal_fill -all_runset_layers true -track_fill generic -fill_all_tracks true -foundry_fill_type both
 # -fill_all_tracks true -mode overwrite
 
+signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true
+
+signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true -foundry_fill_type both -foundry_for_feol_fill generic
+
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
 connect_pg_net -net VSS [get_pins -hierarchical */VSS]

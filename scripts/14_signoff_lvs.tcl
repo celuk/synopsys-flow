@@ -34,6 +34,8 @@ link_block
 # 0 for unlimited errors
 check_lvs -checks all -max_errors 0
 
+check_lvs -check_child_cells true -check_zero_spacing_blockages true -report_floating_pins true -open_reporting detailed
+
 #set_app_options -name signoff.check_design.max_errors_per_rule -value 6000
 #set_app_options -global {signoff.check_design.runset $LVS_RUNSET}
 #signoff_check_design
