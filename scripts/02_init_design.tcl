@@ -19,15 +19,21 @@ link_block
 
 read_sdc $CONSTRAINT_FILE
 
-set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
+#set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
 
-#set_app_options -name mv.incomplete_upf.enable -value true
+set_app_options -name mv.incomplete_upf.enable -value true
 
 ## to create voltage area automatically, it should be false
 set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
-#load_upf $UPF_FILE
-#commit_upf
+create_net -power {VDD VDDPST}
+create_net -ground VSS
+
+#connect_supply_net -ports [get_pins */VDD] VDD
+#connect_supply_net -ports [get_pins */VSS] VSS
+
+load_upf $UPF_FILE
+commit_upf
 
 report_incomplete_upf
 

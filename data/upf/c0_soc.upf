@@ -1,87 +1,14 @@
-create_supply_net VDDPST
 create_supply_net VDD
 create_supply_net VSS
 
-create_supply_set ss_high -function {power VDDPST} -function {ground VSS}
-create_supply_set ss_low  -function {power VDD}  -function {ground ss_high.ground}
+create_power_domain PD_TOP -elements {.}
+set_domain_supply_net PD_TOP -primary_power_net VDD -primary_ground_net VSS
 
-create_power_domain PD_C0_SOC -elements {.} -supply {primary ss_low}
-create_power_domain PD_C0_IO -elements \
-{ \
-VDD2POC \
-VDDPST_0 \
-VDDPST_1 \
-VDD_0 \
-VDD_1 \
-VSS_0 \
-VSS_1 \
-PDDW0204CDG_IN_CLK \
-PDDW0204CDG_RSTN \
-PDDW0204CDG_IN0 \
-PDDW0204CDG_IN1 \
-PDDW0204CDG_IN2 \
-PDDW0204CDG_IN3 \
-PDDW0204CDG_OUT0 \
-PDDW0204CDG_OUT1 \
-PDDW0204CDG_OUT2 \
-PDDW0204CDG_OUT3 \
-PDDW0204CDG_OUT4 \
-PDDW0204CDG_OUT5 \
-PDDW0204CDG_OUT6 \
-} \
--supply {primary ss_high}
+create_supply_port VDD -domain PD_TOP -direction inout
+create_supply_port VSS -domain PD_TOP -direction inout
 
-# SealRing \
-
-# set_domain_supply_net PD_C0_SOC -primary_power_net VDDPST -primary_ground_net VSS
-
-create_supply_port VDDPST -domain PD_C0_SOC -direction inout
-create_supply_port VDD -domain PD_C0_IO -direction inout
-create_supply_port VSS -domain PD_C0_SOC -direction inout
-
-connect_supply_net VDDPST -ports VDDPST
 connect_supply_net VDD -ports VDD
 connect_supply_net VSS -ports VSS
 
-#connect_supply_net VDDPST -ports */*VDDPST
 connect_supply_net VDD  -ports */*VDD
 connect_supply_net VSS  -ports */*VSS
-
-## compile_fusion -initial_map --> the tool can automatically fix level shifter violations
-#set_level_shifter risc_ls_in -domain PD_CORE \
-#	-applies_to inputs -rule low_to_high -location self
-#set_level_shifter risc_ls_out -domain PD_CORE \
-#	-applies_to outputs -rule high_to_low -location parent
-
-set_design_attributes -elements {.} -attribute correlated_supply_group {*}
-
-#add_power_state -supply ss_high -state ON  { -supply_expr { power == {FULL_ON 2.25 2.5 2.75} && ground == {FULL_ON 0.0} } }
-#add_power_state -supply ss_low  -state ON  { -supply_expr { power == {FULL_ON 1.08 1.2 1.32} && ground == {FULL_ON 0.0} } }
-
-add_power_state -supply ss_high -state ON  { -supply_expr { power == {FULL_ON 2.5} && ground == {FULL_ON 0.0} } }
-add_power_state -supply ss_low  -state ON  { -supply_expr { power == {FULL_ON 1.2} && ground == {FULL_ON 0.0} } }
-
-create_power_state_group PST
-add_power_state -group PST \
-	-state RUN   {-logic_expr { ss_low==ON && ss_high==ON  }}
-
-#set iosignal_pins " \
-#c0_top_inst/seg[0] \
-#c0_top_inst/seg[1] \
-#c0_top_inst/seg[2] \
-#c0_top_inst/seg[3] \
-#c0_top_inst/seg[4] \
-#c0_top_inst/seg[5] \
-#c0_top_inst/seg[6] \
-#"
-#
-#set_related_supply_net -power VDDPST -ground VSS -object_list ${iosignal_pins}
-
-#set vddvsspins " \
-#c0_io_inst/VDD_0/VDD \
-#c0_io_inst/VDD_1/VDD \
-#c0_io_inst/VSS_0/VSS \
-#c0_io_inst/VSS_1/VSS \
-#"
-#
-#set_related_supply_net -power VDD -ground VSS -object_list ${vddvsspins}

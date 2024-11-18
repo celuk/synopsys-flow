@@ -22,12 +22,7 @@ link_block
 #create_io_ring -name "ring_outer" -corner_height 100
 #create_io_ring -name "ring_inner" -inside "ring_outer" -corner_height 75
 
-create_net -power {VDD VDDPST}
-create_net -ground VSS
-
-#set_attribute -objects [get_nets VDDPST] -name net_type -value power
-#set_attribute -objects [get_nets VDD] -name net_type -value power
-#set_attribute -objects [get_nets VSS] -name net_type -value ground
+#initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 100
 
 set_app_options -name compile.auto_floorplan.enable -value true
 set_app_options -name compile.auto_floorplan.initialize -value auto

@@ -16,6 +16,10 @@ set_app_options -name plan.pins.incremental -value true
 
 set_app_options -name plan.pgroute.treat_pad_as_macro -value true
 
+set_attribute -objects [get_nets VDDPST] -name net_type -value power
+set_attribute -objects [get_nets VDD] -name net_type -value power
+set_attribute -objects [get_nets VSS] -name net_type -value ground
+
 #set pgports [remove_from_collection [get_ports] {VDDPST VDD VSS}]
 #place_pins -self -ports $pgports
 
@@ -70,8 +74,6 @@ create_boundary_cells -left_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL" -ri
 #remove_routes -net_types {power ground} -ring -stripe -macro_pin_connect -lib_cell_pin_connect
 #remove_pg_regions -all
 #set macros_col [get_cells -physical_context -filter "is_hard_macro==true" -quiet]
-
-set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 
 set_app_options -name plan.pgroute.honor_signal_route_drc -value true
 set_app_options -name plan.pgroute.honor_std_cell_drc -value true
@@ -139,6 +141,11 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pad_rings -create pg -route_pins_on_layer {M8}
 #create_pad_rings -create all -route_pins_on_layer {M4 M5}
 
+#connect_supply_net -ports [get_pins */VDD] VDD
+#connect_supply_net -ports [get_pins */VSS] VSS
+
+connect_pg_net -automatic
+
 create_pg_ring_pattern pg_ring  -horizontal_layer M9     \
                                 -horizontal_width {5}       \
                                 -horizontal_spacing {5}   \
@@ -151,10 +158,10 @@ set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}}
 compile_pg -strategies s_core_ring
 
 create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M8} {spacing: 10}      \
-                                          {width: 5} {pitch: 150} {trim: false}}    \
+                                          {width: 5} {pitch: 100} {trim: false}}    \
                                         {{horizontal_layer: M9} {spacing: 10}    \
-                                          {width: 5} {pitch: 150} {trim: false}}}
-set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_start: 150 150}} \
+                                          {width: 5} {pitch: 100} {trim: false}}}
+set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_start: 100 100}} \
                        -core -extension {{stop: outermost_ring}}
 compile_pg -strategies s_mesh
 
@@ -162,6 +169,10 @@ create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
 set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : outermost_ring}}}
 compile_pg -strategies s_std_cell_rail
 
+#create_pg_vias -from_layers M9 -to_layers M8 -nets {VDD VSS} -insert_additional_vias
+#create_pg_vias -from_layers M8 -to_layers M9 -nets {VDD VSS} -insert_additional_vias
+
+set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 create_pg_macro_conn_pattern macro_connect_pattern \
 -pin_conn_type scattered_pin -nets {VDD VSS} \
 -width {2 2} -layers {M9 M8}
@@ -244,6 +255,7 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 synthesize_clock_trunks
 
 check_pg_connectivity
+check_pg_missing_vias
 check_pg_drc
 
 #check_pg_drc -load_routing_of_all_nets -check_detail_route_shapes
