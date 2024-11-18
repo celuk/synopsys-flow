@@ -139,30 +139,20 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pad_rings -create pg -route_pins_on_layer {M8}
 #create_pad_rings -create all -route_pins_on_layer {M4 M5}
 
-create_pg_ring_pattern vdd_ring -horizontal_layer M9     \
+create_pg_ring_pattern pg_ring  -horizontal_layer M9     \
                                 -horizontal_width {5}       \
                                 -horizontal_spacing {5}   \
                                 -vertical_layer M8      \
                                 -vertical_width {5}         \
                                 -vertical_spacing {5}     \
                                 -corner_bridge false
-set_pg_strategy vdd_core_ring -core -pattern {{pattern: vdd_ring}{nets: {VDD}}} \
+set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}} \
                                   -extension {{stop: core_boundary}}
-create_pg_ring_pattern vss_ring -horizontal_layer M8     \
-                                -horizontal_width {5}       \
-                                -horizontal_spacing {5}   \
-                                -vertical_layer M9      \
-                                -vertical_width {5}         \
-                                -vertical_spacing {5}     \
-                                -corner_bridge false
-set_pg_strategy vss_core_ring -core -pattern {{pattern: vss_ring}{nets: {VSS}}} \
-                                  -extension {{stop: core_boundary}}
-compile_pg -strategies vdd_core_ring
-compile_pg -strategies vss_core_ring
+compile_pg -strategies s_core_ring
 
-create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M9} {spacing: 5}      \
+create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M8} {spacing: 10}      \
                                           {width: 5} {pitch: 150} {trim: false}}    \
-                                        {{horizontal_layer: M8} {spacing: 5}    \
+                                        {{horizontal_layer: M9} {spacing: 10}    \
                                           {width: 5} {pitch: 150} {trim: false}}}
 set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_start: 150 150}} \
                        -core -extension {{stop: outermost_ring}}
