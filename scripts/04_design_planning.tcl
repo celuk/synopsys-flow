@@ -141,10 +141,14 @@ set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 #create_pad_rings -create pg -route_pins_on_layer {M8}
 #create_pad_rings -create all -route_pins_on_layer {M4 M5}
 
-connect_supply_net -ports [get_pins */VDD] VDD
-connect_supply_net -ports [get_pins */VSS] VSS
+#connect_supply_net -ports [get_pins */VDD] VDD
+#connect_supply_net -ports [get_pins */VSS] VSS
 
 connect_pg_net -automatic
+connect_pg_net -net VDD [get_pins -hierarchical */VDD]
+connect_pg_net -net VSS [get_pins -hierarchical */VSS]
+connect_pg_net -net VDD [get_pins -physical_context */VDD]
+connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 create_pg_ring_pattern pg_ring  -horizontal_layer M9     \
                                 -horizontal_width {5}       \
@@ -174,12 +178,20 @@ compile_pg -strategies s_std_cell_rail
 
 set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 create_pg_macro_conn_pattern macro_connect_pattern \
--pin_conn_type scattered_pin -nets {VDD VSS} \
--width {2 2} -layers {M9 M8}
+-pin_conn_type scattered_pin -nets {VSS} \
+-width {5 5} -layers {M9 M8}
 set_pg_strategy s_macro_connect \
--pattern {{name: macro_connect_pattern} {nets: VDD VSS}} \
+-pattern {{name: macro_connect_pattern} {nets: VSS}} \
 -macros "$iopads"
 compile_pg -strategies s_macro_connect
+
+create_pg_macro_conn_pattern macro_connect_pattern_vdd \
+-pin_conn_type scattered_pin -nets {VDD} \
+-width {5 5} -layers {M1 M2}
+set_pg_strategy s_vdd_macro_connect \
+-pattern {{name: macro_connect_pattern_vdd} {nets: VDD}} \
+-macros "$iopads"
+compile_pg -strategies s_vdd_macro_connect -ignore_drc
 
 resolve_pg_nets -verbose
 connect_pg_net -automatic

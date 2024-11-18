@@ -19,29 +19,17 @@ link_block
 
 read_sdc $CONSTRAINT_FILE
 
-#set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
+set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
 
-set_app_options -name mv.incomplete_upf.enable -value true
+#set_app_options -name mv.incomplete_upf.enable -value true
 
 ## to create voltage area automatically, it should be false
 set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
-create_net -power {VDD VDDPST}
-create_net -ground VSS
-
-create_supply_net VDD
-create_supply_net VSS
-
-create_power_domain PD_TOP -elements {.}
-set_domain_supply_net PD_TOP -primary_power_net VDD -primary_ground_net VSS
-
-#connect_supply_net -ports [get_pins */VDD] VDD
-#connect_supply_net -ports [get_pins */VSS] VSS
-
 #load_upf $UPF_FILE
 #commit_upf
 
-report_incomplete_upf
+#report_incomplete_upf
 
 create_corner TT
 set_parasitics_parameters -early_spec nomTLU -late_spec nomTLU -corners {TT}
@@ -59,8 +47,8 @@ current_scenario FUNC_12_TT
 set_temperature 25
 set_process_number 1.00
 set_voltage 1.2
-set_voltage -object_list VDDPST 2.5
-set_voltage -object_list VSS 0.0
+#set_voltage -object_list VDDPST 2.5
+#set_voltage -object_list VSS 0.0
 #set_operating_conditions $TT_OPC_STDCELL
 #set_operating_conditions $TT_OPC_IO
 set_temperature 25
