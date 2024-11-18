@@ -20,14 +20,14 @@ set ANT_SCM_FILE ""
 
 ## does merge gds needed when set these to true??
 ## default false
-set_app_options -name lib.workspace.save_design_views -value true
+#set_app_options -name lib.workspace.save_design_views -value true
 ## default false
-set_app_options -name lib.workspace.save_layout_views -value true
+#set_app_options -name lib.workspace.save_layout_views -value true
 set_app_options -name lib.workspace.allow_append_layout_views -value false
 set_app_options -name lib.workspace.allow_commit_workspace_overwrite -value true
 set_app_options -name lib.workspace.allow_loading_layout_view_only_lib -value false
 ## should be true ??
-set_app_options -name lib.workspace.allow_missing_related_pg_pins -value false
+#set_app_options -name lib.workspace.allow_missing_related_pg_pins -value false
 set_app_options -name lib.workspace.create_workspace_tf_verbose -value true
 set_app_options -name lib.workspace.enable_secondary_pg_marking -value true
 #set_app_options -name lib.workspace.exclude_design_filters -value ""
@@ -67,8 +67,8 @@ set_app_options -name lib.workspace.remove_frame_bus_properties -value false
 #set_app_options -name file.lef.auto_rename_conflict_sites -value true
 #set_app_options -name file.lef.non_real_cut_obs_mode -value true
 
-set_app_options -name file.gds.trace_terminal_type -value PG
-set_app_options -list {file.gds.port_type_map {{power VDDPST} {power VDD} {ground VSS}}}
+#set_app_options -name file.gds.trace_terminal_type -value PG
+#set_app_options -list {file.gds.port_type_map {{power VDDPST} {power VDD} {ground VSS}}}
 
 #set_app_options -name lib.logic_model.use_db_rail_names -value false
 
@@ -180,7 +180,7 @@ read_db ${STDCELL_DB_PREFIX}wcl.db
 read_db ${STDCELL_DB_PREFIX}wcz.db
 
 read_lef $STDCELL_LEF_FILE
-read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+#read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
 check_workspace -allow_missing
 commit_workspace -output ${NDM_PATH}/stdcell.ndm -force
 remove_workspace
@@ -289,7 +289,7 @@ read_db ${STDCELL_DB_PREFIX}wcz1d081d08.db
 #read_db ${STDCELL_DB_PREFIX}wcz.db
 
 read_lef $STDCELL_LEF_FILE
-read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+#read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
 check_workspace -allow_missing
 commit_workspace -output ${NDM_PATH}/stdcell_lvl.ndm -force
 remove_workspace
@@ -304,7 +304,7 @@ create_workspace stdcell_physical_only -technology $TECH_FILE -flow physical_onl
 #read_db ${STDCELL_DB_PREFIX}wc.db
 
 read_lef $STDCELL_LEF_FILE
-read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+#read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
 check_workspace
 commit_workspace -output ${NDM_PATH}/stdcell_physical_only.ndm -force
 remove_workspace
@@ -417,7 +417,7 @@ read_db ${IO_DB_PREFIX}wcz1.db
 #read_db ${IO_DB_PREFIX}wcz.db
 
 read_lef $IO_LEF_FILE
-read_gds $IO_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+#read_gds $IO_GDS_FILE -layer_map $GDSOUT_MAP_FILE
 check_workspace
 commit_workspace -output ${NDM_PATH}/io.ndm -force
 remove_workspace
@@ -432,7 +432,7 @@ create_workspace io_physical_only -technology $TECH_FILE -flow physical_only
 #read_db ${IO_DB_PREFIX}wc.db
 
 read_lef $IO_LEF_FILE
-read_gds $IO_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+#read_gds $IO_GDS_FILE -layer_map $GDSOUT_MAP_FILE
 check_workspace
 commit_workspace -output ${NDM_PATH}/io_physical_only.ndm -force
 remove_workspace

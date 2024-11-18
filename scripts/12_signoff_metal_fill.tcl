@@ -7,10 +7,6 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
-set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
-set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
-
 set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_BEOL_RUNSET
 set_app_options -name signoff.create_metal_fill.base_layer_runset -value $METAL_FILL_FEOL_RUNSET
 set_app_options -name signoff.create_metal_fill.fix_density_errors -value true
@@ -33,12 +29,14 @@ check_mv_design
 verify_pg_nets
 
 signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic
+#-all_runset_layers true
 #signoff_create_metal_fill -all_runset_layers true -track_fill generic -fill_all_tracks true -foundry_fill_type both
 # -fill_all_tracks true -mode overwrite
 
-signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true
+#signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true
+signoff_create_metal_fill -track_fill generic -fill_all_tracks true
 
-signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true -foundry_fill_type both -foundry_for_feol_fill generic
+#signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true -foundry_fill_type both -foundry_for_feol_fill generic
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
