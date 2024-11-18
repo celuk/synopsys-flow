@@ -95,6 +95,8 @@ clean:
 		.node* \
 		signoff_fill_run/ \
 		signoff_check_drc_run/ \
+		signoff_check_antenna_drc_run/ \
+		signoff_check_mim_antenna_drc_run/ \
 		signoff_check_lvs_run/ \
 		signoff_fix_drc_run/ \
 		signoff_check_drc_run_after_fix_drc/ \

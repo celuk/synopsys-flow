@@ -57,6 +57,8 @@ set_app_options -name place.coarse.continue_on_missing_scandef -value true
 
 set_app_options -name opt.common.enable_via_ladder_insertion -value true
 
+set_app_options -name opt.port.eliminate_verilog_assign -value true
+
 #set_level_shifter LVLSHS_STD -domain PD_C0_SOC
 #set_level_shifter LVLSHS_IO -domain PD_C0_IO
 #map_level_shifter_cell LVLSHS_STD -domain PD_C0_SOC -lib_cells $STD_LEVEL_SHIFTER_CELLS

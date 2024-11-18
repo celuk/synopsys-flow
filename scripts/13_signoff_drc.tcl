@@ -30,14 +30,16 @@ signoff_fix_drc -max_number_repair_loop 10
 
 save_block
 
-set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_fix_drc"
-
 set_app_options -name signoff.check_drc.runset -value $ANTENNA_DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_ANTENNA_DRC_FOLDER
 signoff_check_drc
 
 set_app_options -name signoff.check_drc.runset -value $MIM_ANTENNA_DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_MIM_ANTENNA_DRC_FOLDER
+signoff_check_drc
+
+set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
+set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_fix_drc"
 signoff_check_drc
 
 save_lib -all
