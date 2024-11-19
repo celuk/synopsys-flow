@@ -30,53 +30,53 @@ $(LOGS_DIR):
 all: s1 s2 s3 s4 s5 s6 s8 s10 s12 s13 s14 s15
 
 ndms: $(LOGS_DIR)
-	$(LM_EXEC) -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log
+	$(LM_EXEC) -batch -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log
 
 s1: $(LOGS_DIR)
 #	$(FC_EXEC) -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's/^[0-9]*_//').log
-	$(FC_EXEC) -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's|^.*/||').log
 
 s2:
-	$(FC_EXEC) -f $(script2) | tee $(LOGS_DIR)/$(shell basename $(script2) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script2) | tee $(LOGS_DIR)/$(shell basename $(script2) .tcl | sed 's|^.*/||').log
 
 s3:
-	$(FC_EXEC) -f $(script3) | tee $(LOGS_DIR)/$(shell basename $(script3) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script3) | tee $(LOGS_DIR)/$(shell basename $(script3) .tcl | sed 's|^.*/||').log
 
 s4:
-	$(FC_EXEC) -f $(script4) | tee $(LOGS_DIR)/$(shell basename $(script4) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script4) | tee $(LOGS_DIR)/$(shell basename $(script4) .tcl | sed 's|^.*/||').log
 
 s5:
-	$(FC_EXEC) -f $(script5) | tee $(LOGS_DIR)/$(shell basename $(script5) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script5) | tee $(LOGS_DIR)/$(shell basename $(script5) .tcl | sed 's|^.*/||').log
 
 s6:
-	$(FC_EXEC) -f $(script6) | tee $(LOGS_DIR)/$(shell basename $(script6) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script6) | tee $(LOGS_DIR)/$(shell basename $(script6) .tcl | sed 's|^.*/||').log
 
 s7:
-	$(FC_EXEC) -f $(script7) | tee $(LOGS_DIR)/$(shell basename $(script7) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script7) | tee $(LOGS_DIR)/$(shell basename $(script7) .tcl | sed 's|^.*/||').log
 
 s8:
-	$(FC_EXEC) -f $(script8) | tee $(LOGS_DIR)/$(shell basename $(script8) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script8) | tee $(LOGS_DIR)/$(shell basename $(script8) .tcl | sed 's|^.*/||').log
 
 s9:
-	$(FC_EXEC) -f $(script9) | tee $(LOGS_DIR)/$(shell basename $(script9) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script9) | tee $(LOGS_DIR)/$(shell basename $(script9) .tcl | sed 's|^.*/||').log
 
 s10:
-	$(FC_EXEC) -f $(script10) | tee $(LOGS_DIR)/$(shell basename $(script10) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script10) | tee $(LOGS_DIR)/$(shell basename $(script10) .tcl | sed 's|^.*/||').log
 
 s11:
-	$(FC_EXEC) -f $(script11) | tee $(LOGS_DIR)/$(shell basename $(script11) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script11) | tee $(LOGS_DIR)/$(shell basename $(script11) .tcl | sed 's|^.*/||').log
 
 s12:
-	$(FC_EXEC) -f $(script12) | tee $(LOGS_DIR)/$(shell basename $(script12) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script12) | tee $(LOGS_DIR)/$(shell basename $(script12) .tcl | sed 's|^.*/||').log
 
 s13:
-	$(FC_EXEC) -f $(script13) | tee $(LOGS_DIR)/$(shell basename $(script13) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script13) | tee $(LOGS_DIR)/$(shell basename $(script13) .tcl | sed 's|^.*/||').log
 
 s14:
-	$(FC_EXEC) -f $(script14) | tee $(LOGS_DIR)/$(shell basename $(script14) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script14) | tee $(LOGS_DIR)/$(shell basename $(script14) .tcl | sed 's|^.*/||').log
 
 s15:
-	$(FC_EXEC) -f $(script15) | tee $(LOGS_DIR)/$(shell basename $(script15) .tcl | sed 's|^.*/||').log
+	$(FC_EXEC) -batch -f $(script15) | tee $(LOGS_DIR)/$(shell basename $(script15) .tcl | sed 's|^.*/||').log
 
 clean:
 	rm -rf \

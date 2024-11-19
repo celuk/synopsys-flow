@@ -43,4 +43,4 @@ check_lvs -check_child_cells true -check_zero_spacing_blockages true -report_flo
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 
-exit
+#exit
