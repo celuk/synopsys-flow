@@ -121,14 +121,13 @@ show:
 	@if [ -n "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
 		echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl; \
 		echo "redirect -var blocks {list_blocks};" >> open_block.tcl; \
-		echo "set number \"$(filter-out $@,$(MAKECMDGOALS))\"" >> open_block.tcl; \
-		echo "set pattern \"c0_soc/0*\$$number-\[^\t \]+\.design\"" >> open_block.tcl; \
-		echo "set matching_blocks [regexp -all -inline \$$pattern \$$blocks]" >> open_block.tcl; \
+		echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> open_block.tcl; \
+		echo "set matching_blocks [lsearch -regexp -inline \$$blocks \".*\$$input.*\"];" >> open_block.tcl; \
 		echo "if {[llength \$$matching_blocks] > 0} {" >> open_block.tcl; \
-		echo "    set latest_block_name [lindex \$$matching_blocks end]" >> open_block.tcl; \
+		echo "    set latest_block_name [lindex \$$matching_blocks end];" >> open_block.tcl; \
 		echo "} else {" >> open_block.tcl; \
-		echo "    puts \"No matching block found for number \$$number\"" >> open_block.tcl; \
-		echo "    exit 1" >> open_block.tcl; \
+		echo "    puts \"No matching block found for input: \$$input\";" >> open_block.tcl; \
+		echo "    exit 1;" >> open_block.tcl; \
 		echo "}" >> open_block.tcl; \
 	else \
 		echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl; \
