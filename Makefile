@@ -139,7 +139,7 @@ show:
 %:
 	@:
 
-remove:
+remove_single_block:
 	@echo "open_lib $(TOP_MODULE).nlib;" > remove_block.tcl; \
 	echo "redirect -var blocks {list_blocks};" >> remove_block.tcl; \
 	echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> remove_block.tcl; \
@@ -156,6 +156,24 @@ remove:
 	$(FC_EXEC) -batch -f remove_block.tcl; \
 	rm -f remove_block.tcl;
 
+remove:
+	@echo "open_lib $(TOP_MODULE).nlib;" > remove_block.tcl; \
+	echo "redirect -var raw_blocks {list_blocks};" >> remove_block.tcl; \
+	echo "set blocks [regexp -all -inline {[^ ]+\.design} \$$raw_blocks];" >> remove_block.tcl; \
+	echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> remove_block.tcl; \
+	echo "set matching_start_index [lsearch -regexp \$$blocks \".*\$$input.*\"];" >> remove_block.tcl; \
+	echo "if {\$$matching_start_index != -1} {" >> remove_block.tcl; \
+	echo "    set blocks_to_remove [lrange \$$blocks \$$matching_start_index end];" >> remove_block.tcl; \
+	echo "    foreach block \$$blocks_to_remove {" >> remove_block.tcl; \
+	echo "        puts \"Removing block: \$$block\";" >> remove_block.tcl; \
+	echo "        remove_blocks -force \$$block;" >> remove_block.tcl; \
+	echo "    }" >> remove_block.tcl; \
+	echo "} else {" >> remove_block.tcl; \
+	echo "    puts \"No matching block found for input: \$$input\";" >> remove_block.tcl; \
+	echo "    exit 1;" >> remove_block.tcl; \
+	echo "}" >> remove_block.tcl; \
+	$(FC_EXEC) -batch -f remove_block.tcl; \
+	rm -f remove_block.tcl;
 
 cli:
 	$(FC_EXEC)
