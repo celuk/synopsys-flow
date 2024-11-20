@@ -136,8 +136,6 @@ show:
 	@echo "link_block;" >> open_block.tcl
 	$(FC_EXEC) -gui -f open_block.tcl
 	rm -f open_block.tcl
-%:
-	@:
 
 remove_single_block:
 	@echo "open_lib $(TOP_MODULE).nlib;" > remove_block.tcl; \
@@ -160,7 +158,7 @@ remove:
 	@echo "open_lib $(TOP_MODULE).nlib;" > remove_block.tcl; \
 	echo "redirect -var raw_blocks {list_blocks};" >> remove_block.tcl; \
 	echo "set blocks [regexp -all -inline {[^ ]+\.design} \$$raw_blocks];" >> remove_block.tcl; \
-	echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> remove_block.tcl; \
+	echo "set input \"$(word 1, $(filter-out $@,$(MAKECMDGOALS)))\";" >> remove_block.tcl; \
 	echo "set matching_start_index [lsearch -regexp \$$blocks \".*\$$input.*\"];" >> remove_block.tcl; \
 	echo "if {\$$matching_start_index != -1} {" >> remove_block.tcl; \
 	echo "    set blocks_to_remove [lrange \$$blocks \$$matching_start_index end];" >> remove_block.tcl; \
@@ -177,3 +175,6 @@ remove:
 
 cli:
 	$(FC_EXEC)
+
+%:
+	@:
