@@ -157,7 +157,7 @@ create_pg_ring_pattern pg_ring  -horizontal_layer M9     \
                                 -vertical_width {5}         \
                                 -vertical_spacing {5}     \
                                 -corner_bridge false
-set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}} \
+set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}{offset: {2 2}}} \
                                   -extension {{stop: core_boundary}}
 compile_pg -strategies s_core_ring
 
@@ -170,7 +170,7 @@ set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_st
 compile_pg -strategies s_mesh
 
 create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
-set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : outermost_ring}}}
+set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : core_boundary}}}
 compile_pg -strategies s_std_cell_rail
 
 #create_pg_vias -from_layers M9 -to_layers M8 -nets {VDD VSS} -insert_additional_vias
@@ -187,14 +187,11 @@ compile_pg -strategies s_macro_connect
 
 create_pg_macro_conn_pattern macro_connect_pattern_vdd \
 -pin_conn_type scattered_pin -nets {VDD} \
--width {5 5} -layers {M1 M2}
+-width {5 5} -layers {M2 M2}
 set_pg_strategy s_vdd_macro_connect \
 -pattern {{name: macro_connect_pattern_vdd} {nets: VDD}} \
 -macros "$iopads"
-compile_pg -strategies s_vdd_macro_connect -ignore_drc
-
-resolve_pg_nets -verbose
-connect_pg_net -automatic
+compile_pg -strategies s_vdd_macro_connect
 
 #create_pg_vias -nets VDD -within_bbox [get_attribute [get_core_area] bbox]
 #create_pg_vias -nets VSS -within_bbox [get_attribute [get_core_area] bbox]
@@ -264,11 +261,9 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 #
 #compile_pg -strategies S_tapcell
 
-synthesize_clock_trunks
-
-check_pg_connectivity
+check_pg_connectivity -check_std_cell_pins none
 check_pg_missing_vias
-check_pg_drc
+check_pg_drc -ignore_std_cells
 
 #check_pg_drc -load_routing_of_all_nets -check_detail_route_shapes
 

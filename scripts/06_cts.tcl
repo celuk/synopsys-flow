@@ -15,6 +15,8 @@ set_app_options -name opt.common.enable_rde -value true
 
 set_app_options -name route.global.export_soft_congestion_maps -value true
 
+synthesize_clock_trunks
+
 #set_app_options -name cts.common.max_fanout -value 100
 #set_app_options -name cts.compile.enable_cell_relocation -value timing_aware
 #set_app_options -name cts.compile.size_pre_existing_cell_to_cts_references -value true
