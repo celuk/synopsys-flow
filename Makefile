@@ -118,28 +118,44 @@ clean_ndms:
 clean_all: clean clean_ndms
 
 show:
+	@echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl;
+	@echo "redirect -var blocks {list_blocks};" >> open_block.tcl;
 	@if [ -n "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
-		echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl; \
-		echo "redirect -var blocks {list_blocks};" >> open_block.tcl; \
 		echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> open_block.tcl; \
 		echo "set matching_blocks [lsearch -regexp -inline \$$blocks \".*\$$input.*\"];" >> open_block.tcl; \
 		echo "if {[llength \$$matching_blocks] > 0} {" >> open_block.tcl; \
-		echo "    set latest_block_name [lindex \$$matching_blocks end];" >> open_block.tcl; \
+		echo "    set block_name [lindex \$$matching_blocks end];" >> open_block.tcl; \
 		echo "} else {" >> open_block.tcl; \
 		echo "    puts \"No matching block found for input: \$$input\";" >> open_block.tcl; \
 		echo "    exit 1;" >> open_block.tcl; \
 		echo "}" >> open_block.tcl; \
 	else \
-		echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl; \
-		echo "redirect -var blocks {list_blocks};" >> open_block.tcl; \
-		echo "set latest_block_name [lindex [regexp -all -inline {[^ ]+design} \$$blocks] end];" >> open_block.tcl; \
+		echo "set block_name [lindex [regexp -all -inline {[^ ]+design} \$$blocks] end];" >> open_block.tcl; \
 	fi
-	@echo "open_block $(TOP_MODULE).nlib:\$$latest_block_name;" >> open_block.tcl
+	@echo "open_block $(TOP_MODULE).nlib:\$$block_name;" >> open_block.tcl
 	@echo "link_block;" >> open_block.tcl
 	$(FC_EXEC) -gui -f open_block.tcl
 	rm -f open_block.tcl
 %:
 	@:
+
+remove:
+	@echo "open_lib $(TOP_MODULE).nlib;" > remove_block.tcl; \
+	echo "redirect -var blocks {list_blocks};" >> remove_block.tcl; \
+	echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> remove_block.tcl; \
+	echo "set matching_blocks [lsearch -regexp -inline \$$blocks \".*\$$input.*\"];" >> remove_block.tcl; \
+	echo "if {[llength \$$matching_blocks] > 0} {" >> remove_block.tcl; \
+	echo "    foreach block \$$matching_blocks {" >> remove_block.tcl; \
+	echo "        puts \"Removing block: \$$block\";" >> remove_block.tcl; \
+	echo "        remove_blocks -force \$$block;" >> remove_block.tcl; \
+	echo "    }" >> remove_block.tcl; \
+	echo "} else {" >> remove_block.tcl; \
+	echo "    puts \"No matching block found for input: \$$input\";" >> remove_block.tcl; \
+	echo "    exit 1;" >> remove_block.tcl; \
+	echo "}" >> remove_block.tcl; \
+	$(FC_EXEC) -batch -f remove_block.tcl; \
+	rm -f remove_block.tcl;
+
 
 cli:
 	$(FC_EXEC)
