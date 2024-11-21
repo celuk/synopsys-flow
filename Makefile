@@ -124,7 +124,12 @@ show:
 	echo "set blocks [regexp -all -inline {[^ ]+\.design} \$$raw_blocks];" >> open_block.tcl; \
 	if [ -n "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
 		echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> open_block.tcl; \
-		echo "set matching_blocks [lsearch -regexp -all -inline \$$blocks \".*\$$input.*\"];" >> open_block.tcl; \
+		echo "if {[regexp {^0?[0-9]+$$} \$$input]} {" >> open_block.tcl; \
+		echo "    set padded_input [format \"%02d\" \$$input];" >> open_block.tcl; \
+		echo "    set matching_blocks [lsearch -regexp -all -inline \$$blocks \".*\$$padded_input.*\"];" >> open_block.tcl; \
+		echo "} else {" >> open_block.tcl; \
+		echo "    set matching_blocks [lsearch -regexp -all -inline \$$blocks \".*\$$input.*\"];" >> open_block.tcl; \
+		echo "}" >> open_block.tcl; \
 		echo "if {[llength \$$matching_blocks] > 0} {" >> open_block.tcl; \
 		echo "    set block_name [lindex \$$matching_blocks end];" >> open_block.tcl; \
 		echo "} else {" >> open_block.tcl; \
