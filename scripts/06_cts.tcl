@@ -15,6 +15,8 @@ set_app_options -name opt.common.enable_rde -value true
 
 set_app_options -name route.global.export_soft_congestion_maps -value true
 
+set_lib_cell_purpose -include optimization [get_lib_cells */*TIE*]
+
 synthesize_clock_trunks
 
 #set_app_options -name cts.common.max_fanout -value 100

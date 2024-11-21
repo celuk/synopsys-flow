@@ -76,7 +76,8 @@ create_boundary_cells -left_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL" -ri
 #set macros_col [get_cells -physical_context -filter "is_hard_macro==true" -quiet]
 
 set_app_options -name plan.pgroute.honor_signal_route_drc -value true
-set_app_options -name plan.pgroute.honor_std_cell_drc -value true
+## should it be true?
+set_app_options -name plan.pgroute.honor_std_cell_drc -value false
 set_app_options -name plan.pgroute.merge_shapes_for_via_creation -value true
 
 #set_app_options -name plan.pgroute.maximum_cell_gap_for_alignment_strap -value 0.0

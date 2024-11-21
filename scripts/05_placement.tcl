@@ -24,6 +24,10 @@ set_app_options -name opt.common.user_instance_name_prefix -value place_opt
 set_app_options -name route.global.export_soft_congestion_maps -value true
 set_app_options -name place.coarse.cong_restruct_iterations -value 3
 
+set_lib_cell_purpose -include optimization [get_lib_cells */TIE*]
+
+add_tie_cells
+
 #compile_fusion -to initial_opto
 #
 ##reset_placement

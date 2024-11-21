@@ -218,3 +218,8 @@ set_svf -off
 #set_app_var search_path "scripts"
 
 ##exit
+
+#set_attribute -objects [get_lib_cells */*FILL*] -design_type filler
+
+#set_attribute [get_site_defs unit] symmetry Y
+#set_attribute [get_site_defs unit] is_default true
