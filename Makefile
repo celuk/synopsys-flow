@@ -110,7 +110,8 @@ clean:
 		${OUTPUTS_DIR}/ \
 		${REPORTS_DIR}/ \
 		${LOGS_DIR}/ \
-		open_block.tcl
+		open_block.tcl \
+		remove_block.tcl
 
 clean_ndms:
 	rm -rf data/lib/*
@@ -118,24 +119,25 @@ clean_ndms:
 clean_all: clean clean_ndms
 
 show:
-	@echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl;
-	@echo "redirect -var blocks {list_blocks};" >> open_block.tcl;
-	@if [ -n "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
+	@echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl; \
+	echo "redirect -var raw_blocks {list_blocks};" >> open_block.tcl; \
+	echo "set blocks [regexp -all -inline {[^ ]+\.design} \$$raw_blocks];" >> open_block.tcl; \
+	if [ -n "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
 		echo "set input \"$(filter-out $@,$(MAKECMDGOALS))\";" >> open_block.tcl; \
 		echo "set matching_blocks [lsearch -regexp -inline \$$blocks \".*\$$input.*\"];" >> open_block.tcl; \
-		echo "if {[llength \$$matching_blocks] > 0} {" >> open_block.tcl; \
-		echo "    set block_name [lindex \$$matching_blocks end];" >> open_block.tcl; \
+		echo "if {\$$matching_blocks != \"\"} {" >> open_block.tcl; \
+		echo "    set block_name \$$matching_blocks;" >> open_block.tcl; \
 		echo "} else {" >> open_block.tcl; \
 		echo "    puts \"No matching block found for input: \$$input\";" >> open_block.tcl; \
 		echo "    exit 1;" >> open_block.tcl; \
 		echo "}" >> open_block.tcl; \
 	else \
-		echo "set block_name [lindex [regexp -all -inline {[^ ]+design} \$$blocks] end];" >> open_block.tcl; \
-	fi
-	@echo "open_block $(TOP_MODULE).nlib:\$$block_name;" >> open_block.tcl
-	@echo "link_block;" >> open_block.tcl
-	$(FC_EXEC) -gui -f open_block.tcl
-	rm -f open_block.tcl
+		echo "set block_name [lindex \$$blocks end];" >> open_block.tcl; \
+	fi; \
+	echo "open_block $(TOP_MODULE).nlib:\$$block_name;" >> open_block.tcl; \
+	echo "link_block;" >> open_block.tcl; \
+	$(FC_EXEC) -gui -f open_block.tcl; \
+	rm -f open_block.tcl;
 
 remove_single_block:
 	@echo "open_lib $(TOP_MODULE).nlib;" > remove_block.tcl; \

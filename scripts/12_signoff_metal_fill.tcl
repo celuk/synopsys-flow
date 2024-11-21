@@ -30,8 +30,8 @@ verify_pg_nets
 
 signoff_create_metal_fill -track_fill generic -fill_all_tracks true -select_layers [get_layers *]
 
-signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic -select_layers [get_layers *]
-#-all_runset_layers true
+signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic -all_runset_layers true
+#signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic -select_layers [get_layers *]
 #signoff_create_metal_fill -all_runset_layers true -track_fill generic -fill_all_tracks true -foundry_fill_type both
 # -fill_all_tracks true -mode overwrite
 
