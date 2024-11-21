@@ -2,6 +2,7 @@ FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
 LM_EXEC ?= /usr/synopsys/icc2/V-2023.12/bin/lm_shell
 
 TOP_MODULE ?= c0_soc
+SETUP_TCL ?= scripts/00_setup.tcl
 
 OUTPUTS_DIR ?= outputs
 REPORTS_DIR ?= reports
@@ -141,6 +142,7 @@ show:
 	fi; \
 	echo "open_block $(TOP_MODULE).nlib:\$$block_name;" >> open_block.tcl; \
 	echo "link_block;" >> open_block.tcl; \
+	echo "source $(SETUP_TCL);" >> open_block.tcl; \
 	$(FC_EXEC) -gui -f open_block.tcl; \
 	rm -f open_block.tcl;
 
