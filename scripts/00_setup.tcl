@@ -219,7 +219,9 @@ set_svf -off
 
 ##exit
 
-#set_attribute -objects [get_lib_cells */*FILL*] -design_type filler
+set_app_options -name design.enable_lib_cell_editing -value "mutable"
+set_attribute [get_lib_cells */*FILL*] design_type filler
+#get_attribute [lindex $NON_METAL_FILLER_CELLS 0] design_type
 
 #set_attribute [get_site_defs unit] symmetry Y
 #set_attribute [get_site_defs unit] is_default true
