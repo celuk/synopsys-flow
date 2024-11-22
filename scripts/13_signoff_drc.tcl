@@ -7,9 +7,15 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
+## ICV DRC LIVE
 #set_app_options -name signoff.check_drc_live.runset -value $DRC_RUNSET
+#set_app_options -name signoff.check_drc_live.exclude_command_class -value {{density false} {connectivity false}}
+
+set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_DRC_FOLDER
+set_app_options -name signoff.check_drc.fill_view_data -value read
+## View --> Map --> ICV Heatmap
+set_app_options -name signoff.check_drc.enable_icv_explorer_mode -value true
 set_app_options -name signoff.fix_drc.init_drc_error_db -value $SIGNOFF_CHECK_DRC_FOLDER
 set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_DRC_FOLDER
 set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE

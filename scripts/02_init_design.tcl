@@ -31,6 +31,19 @@ set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
 #report_incomplete_upf
 
+#create_net -power VDDPST
+#create_net -power VDD
+#create_net -ground VSS
+
+#save_block
+
+#create_supply_net VDDPST
+#create_supply_net VDD
+#create_supply_net VSS
+#
+#create_supply_set ss_high -function {power VDDPST} -function {ground VSS}
+#create_supply_set ss_low  -function {power VDD}  -function {ground ss_high.ground}
+
 create_corner TT
 set_parasitics_parameters -early_spec nomTLU -late_spec nomTLU -corners {TT}
 create_mode FUNC_12
@@ -41,11 +54,11 @@ read_sdc $CONSTRAINT_FILE
 current_corner TT
 current_mode FUNC_12
 current_scenario FUNC_12_TT
-set_operating_conditions $TT_OPC_STDCELL -library $STDCELL_LIB_NAME
-set_operating_conditions $TT_OPC_IO -library $IO_LIB_NAME
-#set_operating_conditions $TT_OPC_IO
-#set_temperature 25
-#set_process_number 1.00
+#set_operating_conditions -min $TT_OPC_IO -max $TT_OPC_IO -library $IO_LIB_NAME
+#set_operating_conditions -min $TT_OPC_STDCELL -max $TT_OPC_STDCELL -library $STDCELL_LIB_NAME
+#set_operating_conditions $TT_OPC_STDCELL
+set_temperature 25
+set_process_number 1.00
 #set_voltage 1.2
 #set_voltage -object_list VDDPST 2.5
 #set_voltage -object_list VSS 0.0
@@ -54,11 +67,11 @@ set_operating_conditions $TT_OPC_IO -library $IO_LIB_NAME
 #set_temperature 25
 #set_process_number 1.00
 
-#set_voltage -object_list VDD 1.2
-#set_voltage -object_list VSS 0.0
+set_voltage -object_list VDD 1.2
+set_voltage -object_list VSS 0.0
 
-set_timing_derate -late 1.04
-set_timing_derate -early 0.96
+#set_timing_derate -late 1.04
+#set_timing_derate -early 0.96
 set_scenario_status FUNC_12_TT -all -active true
 
 #create_corner TT
@@ -82,7 +95,7 @@ set_max_fanout $MAX_FANOUT [current_design]
 #create_voltage_area -name VA_IO -power_domain PD_C0_IO -power VDDPST -ground VSS
 #create_voltage_area -name VA_SOC -power_domain PD_C0_SOC -power VDD -ground VSS
 
-connect_pg_net -automatic
+#connect_pg_net -automatic
 
 check_mv_design
 

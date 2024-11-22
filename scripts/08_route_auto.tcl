@@ -17,6 +17,7 @@ set_app_options -name route.global.force_rerun_after_global_route_opt -value tru
 set_app_options -name route.global.timing_driven -value true
 set_app_options -name route.track.timing_driven -value true
 set_app_options -name route.detail.timing_driven -value true
+set_app_options -name route.detail.force_max_number_iterations -value true
 
 #set_app_options -name route.common.connect_within_pins_by_layer_name -value {{M1 via_wire_standard_cell_pins} {M2 off} {M3 off} {M4 off} {M5 off} {M6 off} {M7 off} {M8 off} }
 set_app_options -name route.common.net_max_layer_mode -value allow_pin_connection
@@ -75,6 +76,9 @@ route_eco
 check_routes
 remove_redundant_shapes -remove_loop_shapes true -report_changed_nets true -initial_drc_from_input false
 
+check_routes
+
+optimize_routes -max_detail_route_iterations 1000
 check_routes
 
 check_lvs
