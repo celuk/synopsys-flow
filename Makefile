@@ -123,7 +123,8 @@ show show_cli:
 	@echo "open_lib $(TOP_MODULE).nlib;" > open_block.tcl; \
 	echo "redirect -var raw_blocks {list_blocks};" >> open_block.tcl; \
 	echo "set blocks [regexp -all -inline {[^ ]+\.design} \$$raw_blocks];" >> open_block.tcl; \
-	$(eval SHOW_ARGS := $(if $(filter show,$(MAKECMDGOALS)),$(shell echo "$(MAKECMDGOALS)" | sed -n 's/.*show *\([^ ]*\).*/\1/p'),)) \
+	$(eval IS_CLI := $(filter show_cli,$(MAKECMDGOALS))) \
+	$(eval SHOW_ARGS := $(if $(IS_CLI),$(shell echo "$(MAKECMDGOALS)" | sed -n 's/.*show_cli *\([^ ]*\).*/\1/p'),$(shell echo "$(MAKECMDGOALS)" | sed -n 's/.*show *\([^ ]*\).*/\1/p'))) \
 	if [ -n "$(SHOW_ARGS)" ]; then \
 		echo "set input \"$(SHOW_ARGS)\";" >> open_block.tcl; \
 		echo "if {[regexp {^0?[0-9]+$$} \$$input]} {" >> open_block.tcl; \
@@ -144,7 +145,7 @@ show show_cli:
 	echo "open_block $(TOP_MODULE).nlib:\$$block_name;" >> open_block.tcl; \
 	echo "link_block;" >> open_block.tcl; \
 	echo "source $(SETUP_TCL);" >> open_block.tcl; \
-	if echo "$(MAKECMDGOALS)" | grep -q "show_cli"; then \
+	if [ -n "$(IS_CLI)" ]; then \
 		$(FC_EXEC) -f open_block.tcl; \
 	else \
 		$(FC_EXEC) -gui -f open_block.tcl; \
