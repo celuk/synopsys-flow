@@ -7,12 +7,16 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+set_design_options
+
 # fusion_adv or in_design
-set_app_options -name extract.starrc_mode -value fusion_adv
+
 #set_starrc_in_design -config $STARRC_CONFIG_FILE -mode starrc_centric
 #sh cat $STARRC_CONFIG_FILE
 #sh cat $PARASITICS_MAP_FILE
 #sh cat $STARRC_MAPPING_FILE
+
+set_app_options -name extract.starrc_mode -value fusion_adv
 set_app_options -name extract.fusion_without_starrc_config -value 1
 
 set route_global_timing_driven [get_app_option_value -name route.global.timing_driven]

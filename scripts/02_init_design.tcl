@@ -7,7 +7,9 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-#set_app_options -name mv.upf.enable_golden_upf -value true
+set_design_options
+
+
 
 #set_max_transition 5.0 [current_design]
 
@@ -18,13 +20,6 @@ link_block
 #set VSS [get_nets VSS -all]
 
 read_sdc $CONSTRAINT_FILE
-
-set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
-
-#set_app_options -name mv.incomplete_upf.enable -value true
-
-## to create voltage area automatically, it should be false
-set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
 #load_upf $UPF_FILE
 #commit_upf

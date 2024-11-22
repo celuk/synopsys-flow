@@ -7,18 +7,7 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-set_block_pin_constraints -self -allowed_layers {M3 M4}
-#-pin_spacing_distance 2
-
-#set_app_options -name route.common.connect_within_pins_by_layer_name -value { {M1 via_wire_all_pins} }
-
-set_app_options -name plan.pins.incremental -value true
-
-set_app_options -name plan.pgroute.treat_pad_as_macro -value true
-
-set_attribute -objects [get_nets VDDPST] -name net_type -value power
-set_attribute -objects [get_nets VDD] -name net_type -value power
-set_attribute -objects [get_nets VSS] -name net_type -value ground
+set_design_options
 
 #set pgports [remove_from_collection [get_ports] {VDDPST VDD VSS}]
 #place_pins -self -ports $pgports
@@ -75,49 +64,7 @@ create_boundary_cells -left_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL" -ri
 #remove_pg_regions -all
 #set macros_col [get_cells -physical_context -filter "is_hard_macro==true" -quiet]
 
-set_app_options -name plan.pgroute.honor_signal_route_drc -value true
-## should it be true?
-set_app_options -name plan.pgroute.honor_std_cell_drc -value false
-set_app_options -name plan.pgroute.merge_shapes_for_via_creation -value true
 
-#set_app_options -name plan.pgroute.maximum_cell_gap_for_alignment_strap -value 0.0
-
-#set_app_options -name plan.pgroute.snap_stdcell_rail -value true
-
-
-## disabling via creation at partial intersection
-set_app_option -name plan.pgroute.via_site_threshold -value 1
-
-## merge metal shapes in specified pad cell types while performing DRC checks
-## -value {io_pad corner_pad}
-set_app_option -name plan.pgroute.merge_shapes_in_pad_cell -value {io_pad}
-
-set_app_option -name plan.pgroute.auto_connect_pg_net -value true
-set_app_options -name plan.pgroute.via_array_size_control -value try_cuts_in_intersection
-
-set_app_options -name plan.pgroute.connect_user_route_shapes -value true
-
-set_app_options -name plan.pgroute.decide_rail_width_from_routing_area -value true
-
-#set_app_options -name plan.pgroute.maximize_total_cut_area -value all
-
-#set_app_options -name plan.pgroute.treat_multiple_pins_as_one_target -value true
-
-#set_app_options -name plan.pgroute.disable_stapling_via_fixing -value true
-#set_app_options -name plan.pgroute.discard_stackvia_with_drc -value true
-set_app_options -name plan.pgroute.fix_via_drc_multiple_viadef -value true
-
-set_app_options -name plan.pgroute.use_via_matrix -value true
-set_app_options -name plan.pgroute.use_shape_pattern -value true
-## reduce memory during via drc checking
-set_app_options -name plan.pgroute.high_capacity_mode -value 1
-
-set_app_options -name plan.pgroute.verbose -value true
-
-set_app_options -name plan.pgroute.optimize_track_alignment -value true
-set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
-
-#set_app_options -name plan.pgroute.snap_stdcell_rail -value true
 
 #create_pg_vias -nets VDDPST
 #create_pg_vias -nets VDD
@@ -230,7 +177,7 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 #gui_add_missing_vias -min_layer M1 -max_layer M2 [get_shapes -of_objects [get_nets VDD]]
 
 #place_io
-#set_app_options -name plan.pgroute.hmpin_connection_target_layers -value D6
+
 # 
 #create_pg_macro_conn_pattern io_to_ring -pin_conn_type scattered_pin \
 #    -pin_layers {G1} -layers {G1 D6} -width 0.7 \
@@ -247,7 +194,7 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 #set cellPtr WELLTAP_3_R3_C0_8138
 #
-#set_app_options -name plan.pgroute.treat_cell_type_as_macro -value "well_tap"
+
 #
 #create_pg_macro_conn_pattern P_tapcell \
 #        -pin_conn_type scattered_pin \

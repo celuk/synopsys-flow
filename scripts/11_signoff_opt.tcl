@@ -12,9 +12,7 @@ link_block
 # route.detail.reuse_filler_locations_for_diodes
 # route.detail.diode_insertion_mode
 
-#set_app_options -name route.detail.antenna -value true
-## hop_layers | use_diodes
-#set_app_options -name route.detail.antenna_fixing_preference -value use_diodes
+
 #
 #route_detail -incremental true -initial_drc_from_input true
 #

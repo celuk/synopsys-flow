@@ -7,6 +7,8 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
+set_design_options
+
 #clock_opt -from final_opto -to final_opto
 
 #connect_pg_net -automatic

@@ -4,6 +4,8 @@ set CURRENT_STEP $SYNTH_BLOCK
 # -scale_factor 1000
 create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY
 
+#set_design_options
+
 read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name nomTLU -tlup $PARASITICS_NOM_TLUPLUS_FILE
 current_lib
 

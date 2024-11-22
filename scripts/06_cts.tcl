@@ -7,24 +7,10 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-set_app_options -name opt.common.enable_via_ladder_insertion -value true
-set_app_options -name opt.common.enable_via_ladder_area_api -value true
-
-set_app_options -name opt.buffering.enable_advanced_buffering -value true
-set_app_options -name opt.common.enable_rde -value true
-
-set_app_options -name route.global.export_soft_congestion_maps -value true
-
-set_lib_cell_purpose -include optimization [get_lib_cells */*TIE*]
+set_design_options
 
 synthesize_clock_trunks
 
-#set_app_options -name cts.common.max_fanout -value 100
-#set_app_options -name cts.compile.enable_cell_relocation -value timing_aware
-#set_app_options -name cts.compile.size_pre_existing_cell_to_cts_references -value true
-#set_app_options -name cts.common.user_instance_name_prefix -value clock_opt
-
-set_app_options -name route.detail.antenna -value true
 source -echo $TCL_ANTENNA_RULE_FILE
 
 #set_lib_cell_purpose -include cts $CTS_LIB_CELL_PATTERNS

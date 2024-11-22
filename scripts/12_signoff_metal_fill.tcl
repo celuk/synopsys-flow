@@ -7,16 +7,7 @@ copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_ST
 current_block ${DESIGN_NAME}/${CURRENT_STEP}
 link_block
 
-set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_BEOL_RUNSET
-set_app_options -name signoff.create_metal_fill.base_layer_runset -value $METAL_FILL_FEOL_RUNSET
-set_app_options -name signoff.create_metal_fill.fix_density_errors -value true
-set_app_options -name signoff.create_metal_fill.run_dir -value $SIGNOFF_METAL_FILL_FOLDER
-#set_app_options -name signoff.create_metal_fill.user_defined_options -value "-64"
-# -D USE_ICC2 -dp8 -turbo
-set_app_options -name signoff.physical.merge_stream_files -value $GDS_FILES_TO_MERGE
-set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
-set_app_options -name signoff.report_metal_density.run_dir -value $SIGNOFF_METAL_DENSITY_REPORT_FOLDER
-set_app_options -name signoff.report_metal_density.create_heat_maps -value true
+set_design_options
 
 ## post_route_auto_delete is not in docs??
 create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x post_route_auto_delete}

@@ -62,6 +62,8 @@ set LOGO_FILE "${LOGO_PATH}/kasirga_logo.bmp"
 
 set UPF_FILE "${UPF_PATH}/c0_soc.upf"
 
+
+
 set CONSTRAINT_FILE "${SDC_PATH}/${DESIGN_NAME}.sdc"
 
 set UPF_FILE "${UPF_PATH}/${DESIGN_NAME}.upf"
@@ -227,3 +229,282 @@ set_svf -off
 
 #set_attribute [get_site_defs unit] symmetry Y
 #set_attribute [get_site_defs unit] is_default true
+
+proc set_design_options {} {
+    global \
+    MAX_ROUTING_LAYER \
+    MIN_ROUTING_LAYER \
+    CTS_LIB_CELL_PATTERNS \
+    METAL_FILL_BEOL_RUNSET \
+    METAL_FILL_FEOL_RUNSET \
+    SIGNOFF_METAL_FILL_FOLDER \
+    SIGNOFF_METAL_DENSITY_REPORT_FOLDER \
+    DRC_RUNSET \
+    SIGNOFF_CHECK_DRC_FOLDER \
+    SIGNOFF_FIX_DRC_FOLDER \
+    SIGNOFF_CHECK_ANTENNA_DRC_FOLDER \
+    SIGNOFF_CHECK_MIM_ANTENNA_DRC_FOLDER \
+    SIGNOFF_CHECK_LVS_FOLDER \
+    SIGNOFF_FIX_LVS_FOLDER \
+    GDS_FILES_TO_MERGE \
+    GDSOUT_MAP_FILE
+
+    set_app_options -name lib.setting.enable_via_region_override -value true
+    
+    #set_app_options -name mv.upf.enable_golden_upf -value true
+
+    #set_app_options -name mv.incomplete_upf.enable -value true
+
+    ## to create voltage area automatically, it should be false
+    set_app_options -name mv.upf.enable_missing_voltage_area -value false
+
+    set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
+
+    #set_app_options -name compile.auto_floorplan.enable -value true
+    #set_app_option -name compile.auto_floorplan.initialize -value auto
+    ##set_app_options -name compile.auto_floorplan.initialize -value true
+    ##set_app_options -name compile.auto_floorplan.place_pins -value all
+    #set_app_options -name compile.auto_floorplan.shape_voltage_areas -value all
+    #set_auto_floorplan_constraints -side_length "1200 1200"
+    #set_shaping_options -guard_band_size 10
+
+    #create_boundary -coordinate {{0 0} {1000 1000}}
+    #initialize_floorplan -control_type boundary -left_io2core 500 -bottom_io2core 500 -right_io2core 500 -top_io2core 500
+
+    #create_io_guide -name "io_guide" -line {{100 100} 100} -side left
+    #create_io_ring -name "ring_outer" -corner_height 100
+    #create_io_ring -name "ring_inner" -inside "ring_outer" -corner_height 75
+
+    #initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 100
+
+    set_app_options -name compile.auto_floorplan.enable -value true
+    set_app_options -name compile.auto_floorplan.initialize -value auto
+    set_app_options -name compile.auto_floorplan.place_pins -value all
+    set_app_options -name compile.auto_floorplan.shape_voltage_areas -value all
+    set_app_options -name compile.auto_floorplan.place_ios -value all
+    #set_app_options -name compile.auto_floorplan.place_hard_macros -value true
+
+    set_app_options -name place.coarse.continue_on_missing_scandef -value true
+
+    #set_app_options -name place.coarse.congestion_driven_max_util -value 0.83
+    #set_app_options -name place.coarse.pin_density_aware -value false
+    #set_app_options -name place.coarse.enhanced_auto_density_control -value false
+    #set_app_options -name compile.flow.high_effort_timing -value 0
+    #set_app_options -name place.coarse.auto_timing_control -value false
+    #set_app_options -name place.coarse.cong_restruct -value on
+    #set_app_options -name place.coarse.cong_restruct_effort -value high
+    #set_app_options -name place.coarse.cong_restruct_iterations -value 2
+
+    #set_app_options -name plan.macro.macro_place_only -value true
+    #set_app_options -name plan.macro.allow_unmapped_design -value true
+    #create_placement -floorplan
+
+    #set_shaping_options -guard_band_size 10
+    #shape_blocks
+    #connect_pg_net -automatic
+
+    set_app_options -name opt.common.enable_via_ladder_insertion -value true
+
+    set_app_options -name opt.port.eliminate_verilog_assign -value true
+
+    #set_level_shifter LVLSHS_STD -domain PD_C0_SOC
+    #set_level_shifter LVLSHS_IO -domain PD_C0_IO
+    #map_level_shifter_cell LVLSHS_STD -domain PD_C0_SOC -lib_cells $STD_LEVEL_SHIFTER_CELLS
+    #map_level_shifter_cell LVLSHS_IO -domain PD_C0_IO -lib_cells $IO_LEVEL_SHIFTER_CELLS
+    #
+    #set_isolation ISO_STD -domain PD_C0_SOC
+    #set_isolation ISO_IO -domain PD_C0_IO
+    #map_isolation_cell ISO_STD -domain PD_C0_SOC -lib_cells $STD_ISOLATION_CELLS
+    #map_isolation_cell ISO_IO -domain PD_C0_IO -lib_cells $IO_ISOLATION_CELLS
+
+    set_app_options -name compile.flow.enable_multibit -value true
+
+    set_app_options -name compile.place.congestion_effort -value high
+    set_app_options -name compile.final_place.effort -value high
+    set_app_options -name compile.initial_place.buffering_aware -value true
+    set_app_options -name route.global.export_soft_congestion_maps -value true
+    set_app_options -name place.coarse.cong_restruct_iterations -value 3
+    set_app_options -name place.coarse.auto_timing_control -value true
+    set_app_options -name place.coarse.auto_density_control -value true
+    set_app_options -name place.coarse.enhanced_auto_density_control -value true
+
+    set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
+    set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
+    report_ignored_layers
+
+    ## do not use stdcell main rail as supply, use VDDPST
+    #set_app_options -global {mv.upf.ignore_ls_main_rail true}
+
+    set_block_pin_constraints -self -allowed_layers {M3 M4}
+    #-pin_spacing_distance 2
+
+    #set_app_options -name route.common.connect_within_pins_by_layer_name -value { {M1 via_wire_all_pins} }
+
+    set_app_options -name plan.pins.incremental -value true
+
+    set_app_options -name plan.pgroute.treat_pad_as_macro -value true
+
+    set_attribute -objects [get_nets VDDPST] -name net_type -value power
+    set_attribute -objects [get_nets VDD] -name net_type -value power
+    set_attribute -objects [get_nets VSS] -name net_type -value ground
+
+    set_app_options -name plan.pgroute.honor_signal_route_drc -value true
+    ## should it be true?
+    set_app_options -name plan.pgroute.honor_std_cell_drc -value false
+    set_app_options -name plan.pgroute.merge_shapes_for_via_creation -value true
+
+    #set_app_options -name plan.pgroute.maximum_cell_gap_for_alignment_strap -value 0.0
+
+    #set_app_options -name plan.pgroute.snap_stdcell_rail -value true
+
+    ## disabling via creation at partial intersection
+    set_app_option -name plan.pgroute.via_site_threshold -value 1
+
+    ## merge metal shapes in specified pad cell types while performing DRC checks
+    ## -value {io_pad corner_pad}
+    set_app_option -name plan.pgroute.merge_shapes_in_pad_cell -value {io_pad}
+
+    set_app_option -name plan.pgroute.auto_connect_pg_net -value true
+    set_app_options -name plan.pgroute.via_array_size_control -value try_cuts_in_intersection
+
+    set_app_options -name plan.pgroute.connect_user_route_shapes -value true
+
+    set_app_options -name plan.pgroute.decide_rail_width_from_routing_area -value true
+
+    #set_app_options -name plan.pgroute.maximize_total_cut_area -value all
+
+    #set_app_options -name plan.pgroute.treat_multiple_pins_as_one_target -value true
+
+    #set_app_options -name plan.pgroute.disable_stapling_via_fixing -value true
+    #set_app_options -name plan.pgroute.discard_stackvia_with_drc -value true
+    set_app_options -name plan.pgroute.fix_via_drc_multiple_viadef -value true
+
+    set_app_options -name plan.pgroute.use_via_matrix -value true
+    set_app_options -name plan.pgroute.use_shape_pattern -value true
+    ## reduce memory during via drc checking
+    set_app_options -name plan.pgroute.high_capacity_mode -value 1
+
+    set_app_options -name plan.pgroute.verbose -value true
+
+    set_app_options -name plan.pgroute.optimize_track_alignment -value true
+    set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
+
+    #set_app_options -name plan.pgroute.snap_stdcell_rail -value true
+
+    #set_app_options -name plan.pgroute.treat_cell_type_as_macro -value "well_tap"
+
+    #set_app_options -name plan.pgroute.hmpin_connection_target_layers -value D6
+
+    #set_app_options -name place.coarse.congestion_driven_max_util -value 0.83
+    #set_app_options -name place.coarse.pin_density_aware -value false
+    #set_app_options -name place.coarse.enhanced_auto_density_control -value false
+    #set_app_options -name compile.flow.high_effort_timing -value 0
+    #set_app_options -name place.coarse.auto_timing_control -value false
+    #set_app_options -name place.coarse.cong_restruct -value on
+    #set_app_options -name place.coarse.cong_restruct_effort -value high
+    #set_app_options -name place.coarse.cong_restruct_iterations -value 2
+
+    set_app_options -name place.coarse.continue_on_missing_scandef -value true
+    set_app_options -name place_opt.final_place.effort -value high
+    set_app_options -name place_opt.place.congestion_effort -value high
+    set_app_options -name opt.common.user_instance_name_prefix -value place_opt
+
+    set_app_options -name opt.common.honor_lib_cell_purpose -value true
+    set_dont_touch [get_lib_cells $CTS_LIB_CELL_PATTERNS] false
+    # -include {optimization cts hold power} all
+    set_lib_cell_purpose -include {optimization cts} [get_lib_cells $CTS_LIB_CELL_PATTERNS]
+    set_app_options -name place.fix_hard_macros -value true
+
+    set_app_options -name route.global.export_soft_congestion_maps -value true
+    set_app_options -name place.coarse.cong_restruct_iterations -value 3
+
+    set_lib_cell_purpose -include optimization [get_lib_cells */*TIE*]
+
+    set_app_options -name opt.common.enable_via_ladder_insertion -value true
+    set_app_options -name opt.common.enable_via_ladder_area_api -value true
+
+    set_app_options -name opt.buffering.enable_advanced_buffering -value true
+    set_app_options -name opt.common.enable_rde -value true
+
+    set_app_options -name route.global.export_soft_congestion_maps -value true
+
+    #set_app_options -name cts.common.max_fanout -value 100
+    #set_app_options -name cts.compile.enable_cell_relocation -value timing_aware
+    #set_app_options -name cts.compile.size_pre_existing_cell_to_cts_references -value true
+    #set_app_options -name cts.common.user_instance_name_prefix -value clock_opt
+
+    set_app_options -name route.detail.antenna -value true
+
+    set_app_options -name opt.common.enable_via_ladder_insertion -value true
+    set_app_options -name opt.common.enable_via_ladder_area_api -value true
+
+    set_app_options -name time.si_enable_analysis -value true
+    set_app_options -name time.enable_ccs_rcv_cap -value true
+
+    set_app_options -name route.global.force_rerun_after_global_route_opt -value true
+    set_app_options -name route.global.timing_driven -value true
+    set_app_options -name route.track.timing_driven -value true
+    set_app_options -name route.detail.timing_driven -value true
+    set_app_options -name route.detail.force_max_number_iterations -value true
+
+    #set_app_options -name route.common.connect_within_pins_by_layer_name -value {{M1 via_wire_standard_cell_pins} {M2 off} {M3 off} {M4 off} {M5 off} {M6 off} {M7 off} {M8 off} }
+    set_app_options -name route.common.net_max_layer_mode -value allow_pin_connection
+    set_app_options -name route.common.global_max_layer_mode -value allow_pin_connection
+    #set_app_options -name route.common.net_min_layer_mode -value soft
+    set_app_options -name route.common.global_min_layer_mode -value allow_pin_connection
+    #set_app_options -name route.common.number_of_vias_under_net_min_layer -value 5
+    #set_app_options -name route.common.number_of_vias_over_net_max_layer -value 5
+    #set_app_options -name route.common.number_of_vias_over_global_max_layer -value 5
+    #set_app_options -name route.common.rotate_default_vias -value false
+    #set_app_options -name route.common.route_top_boundary_mode -value stay_half_min_space_inside
+    #set_app_options -name route.common.shielding_nets -value {}
+    #set_app_options -name route.common.soft_rule_weight_to_effort_level_map -value {}
+    #set_app_options -name route.common.threshold_noise_ratio -value 0.20
+    #set_app_options -name route.common.via_array_mode -value off
+
+    set_app_options -name opt.buffering.enable_advanced_buffering -value true
+    set_app_options -name opt.common.enable_rde -value true
+
+    set_app_options -name route.global.export_soft_congestion_maps -value true
+
+    #set_app_options -name route.detail.antenna -value true
+    ## hop_layers | use_diodes
+    #set_app_options -name route.detail.antenna_fixing_preference -value use_diodes
+
+    set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_BEOL_RUNSET
+    set_app_options -name signoff.create_metal_fill.base_layer_runset -value $METAL_FILL_FEOL_RUNSET
+    set_app_options -name signoff.create_metal_fill.fix_density_errors -value true
+    set_app_options -name signoff.create_metal_fill.run_dir -value $SIGNOFF_METAL_FILL_FOLDER
+    #set_app_options -name signoff.create_metal_fill.user_defined_options -value "-64"
+    # -D USE_ICC2 -dp8 -turbo
+    set_app_options -name signoff.physical.merge_stream_files -value $GDS_FILES_TO_MERGE
+    set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
+    set_app_options -name signoff.report_metal_density.run_dir -value $SIGNOFF_METAL_DENSITY_REPORT_FOLDER
+    set_app_options -name signoff.report_metal_density.create_heat_maps -value true
+
+    #set_app_options -name signoff.check_drc.runset -value $LVS_RUNSET
+    #set_app_options -name signoff.check_drc.run_dir -value "z_lvs_run"
+
+    #set_app_options -name signoff.check_drc.runset -value $LVS_RUNSET
+    #set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_LVS_FOLDER
+    #set_app_options -name signoff.fix_drc.init_drc_error_db -value $SIGNOFF_CHECK_LVS_FOLDER
+    #set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_LVS_FOLDER
+
+    #set_app_options -name signoff.check_design.max_errors_per_rule -value 6000
+    #set_app_options -global {signoff.check_design.runset $LVS_RUNSET}
+
+    set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
+    set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_DRC_FOLDER
+    set_app_options -name signoff.check_drc.fill_view_data -value read
+    ## View --> Map --> ICV Heatmap
+    set_app_options -name signoff.check_drc.enable_icv_explorer_mode -value true
+    set_app_options -name signoff.fix_drc.init_drc_error_db -value $SIGNOFF_CHECK_DRC_FOLDER
+    set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_DRC_FOLDER
+    set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
+    set_app_options -name signoff.physical.merge_stream_files -value $GDS_FILES_TO_MERGE
+    #set_app_options -name signoff.check_drc.user_defined_options -value "-D DENSITY_LAY"
+    set_app_options -name signoff.create_pg_augmentation.power_net_name -value "VDD"
+    set_app_options -name signoff.create_pg_augmentation.ground_net_name -value "VSS"
+    set_app_options -name signoff.check_drc_live.runset -value $DRC_RUNSET
+    set_app_options -name signoff.check_drc_live.exclude_command_class -value {{density false} {connectivity false}}
+}
