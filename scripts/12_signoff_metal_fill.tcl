@@ -15,6 +15,8 @@ set_app_options -name signoff.create_metal_fill.run_dir -value $SIGNOFF_METAL_FI
 # -D USE_ICC2 -dp8 -turbo
 set_app_options -name signoff.physical.merge_stream_files -value $GDS_FILES_TO_MERGE
 set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
+set_app_options -name signoff.report_metal_density.run_dir -value $SIGNOFF_METAL_DENSITY_REPORT_FOLDER
+set_app_options -name signoff.report_metal_density.create_heat_maps -value true
 
 ## post_route_auto_delete is not in docs??
 create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS $NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x post_route_auto_delete}
@@ -38,6 +40,10 @@ signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic
 #signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true
 
 #signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true -foundry_fill_type both -foundry_for_feol_fill generic
+
+signoff_report_metal_density
+
+#set_extraction_options -real_metalfill_extraction auto
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]

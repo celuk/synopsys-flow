@@ -51,7 +51,8 @@ route_global
 
 route_track
 
-route_detail -incremental true -max_number_iterations 1000
+check_routes
+route_detail -incremental true -initial_drc_from_input true -max_number_iterations 1000
 
 route_opt
 
@@ -72,6 +73,10 @@ add_redundant_vias -effort high
 route_eco
 
 check_routes
+remove_redundant_shapes -remove_loop_shapes true -report_changed_nets true -initial_drc_from_input false
+
+check_routes
+
 check_lvs
 
 connect_pg_net -automatic

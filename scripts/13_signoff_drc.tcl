@@ -15,10 +15,16 @@ set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_DRC_FOLDER
 set_app_options -name signoff.physical.layer_map_file -value $GDSOUT_MAP_FILE
 set_app_options -name signoff.physical.merge_stream_files -value $GDS_FILES_TO_MERGE
 #set_app_options -name signoff.check_drc.user_defined_options -value "-D DENSITY_LAY"
+set_app_options -name signoff.create_pg_augmentation.power_net_name -value "VDD"
+set_app_options -name signoff.create_pg_augmentation.ground_net_name -value "VSS"
 
 #create_cell SealRing $SEALRING_CELL
 
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
+
+signoff_create_pg_augmentation
+
+save_block
 
 signoff_check_drc
 #-check_all_runset_layers true

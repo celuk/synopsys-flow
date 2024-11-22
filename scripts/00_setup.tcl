@@ -120,6 +120,7 @@ set QOR_STRATEGY_METRIC "timing"
 set QOR_STRATEGY_MODE "balanced"
 
 set SIGNOFF_METAL_FILL_FOLDER "signoff_fill_run"
+set SIGNOFF_METAL_DENSITY_REPORT_FOLDER "signoff_metal_density_report_run"
 set SIGNOFF_CHECK_DRC_FOLDER "signoff_check_drc_run"
 set SIGNOFF_FIX_DRC_FOLDER "signoff_fix_drc_run"
 set SIGNOFF_CHECK_ANTENNA_DRC_FOLDER "signoff_check_antenna_drc_run"
