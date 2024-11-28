@@ -61,7 +61,7 @@ report_power_domain
 #analyze_mv_design -level_shifter -global_report -verbose
 #report_mv_path
 #analyze_mv_feasibility
-#sizeof_collection [ get_cells -hierarchical -filter "is_level_shifter==true"]
+#sizeof_collection [get_cells -hierarchical -filter "is_level_shifter==true"]
 
 check_pg_drc -ignore_std_cells
 
@@ -69,5 +69,3 @@ report_multibit
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
-
-#exit

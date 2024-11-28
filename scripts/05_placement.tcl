@@ -52,9 +52,6 @@ set rm_leakage_scenarios [get_object_name [get_scenarios -filter active==true&&l
 set rm_dynamic_scenarios [get_object_name [get_scenarios -filter active==true&&dynamic_power==true]]
 set_scenario_status -leakage_power false -dynamic_power false [get_scenarios "$rm_leakage_scenarios $rm_dynamic_scenarios"]
 
-#add_spare_cells -num_cells {and1 10 nor1 5} -cell_name SpareCell -random_distribution
-#place_eco_cells -legalize_only -cells [get_cells -physical_context *SpareCell*]
-
 redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_non_default_app_options.rpt {report_app_options -non_default *}
 redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_lib_cell_purposes.rpt {report_lib_cells -objects [get_lib_cells] -columns {full_name:20 valid_purposes}}
 
@@ -130,5 +127,3 @@ redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_place_hold.rpt {rep
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
-
-#exit

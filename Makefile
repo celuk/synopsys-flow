@@ -121,6 +121,7 @@ clean:
 		signoff_check_drc_run_after_fix_drc/ \
 		signoff_create_pg_augmentation_run/ \
 		signoff_check_drc_live_run/ \
+		signoff_check_design_run/ \
 		RAIL_DATABASE/ \
 		*.ems \
 		PreFrameCheck/ \

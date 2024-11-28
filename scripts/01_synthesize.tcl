@@ -18,8 +18,9 @@
 source scripts/00_setup.tcl
 
 set CURRENT_STEP $SYNTH_BLOCK
-# -scale_factor 1000
+
 create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY
+# -scale_factor 1000
 
 #set_design_options
 
@@ -45,5 +46,3 @@ redirect -file $REPORTS_DIR/01_${CURRENT_STEP}/${TOP_MODULE}_area.rpt {report_ar
 save_lib -all
 
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
-
-#exit

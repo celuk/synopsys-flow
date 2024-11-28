@@ -64,5 +64,3 @@ signoff_check_drc
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
-
-#exit

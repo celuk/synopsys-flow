@@ -72,5 +72,3 @@ redirect -file $REPORTS_DIR/10_${CURRENT_STEP}/${TOP_MODULE}_extracted_clock_tre
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
-
-#exit
