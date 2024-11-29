@@ -25,16 +25,16 @@ set LOGS_DIR "logs"
 
 set_host_options -max_cores 8
 
-# set them if they are not in path
-set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
-set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1/bin"
-set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
-set ICVWB_EXEC_PATH "${ICVWB_HOME_DIR}/bin"
-set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
-set ::env(ICVWB_HOME_DIR) $ICVWB_HOME_DIR
-set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
-set ::env(PATH) "$ICVWB_EXEC_PATH:$env(PATH)"
-set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
+## set them if they are not in path
+#set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
+#set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1/bin"
+#set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
+#set ICVWB_EXEC_PATH "${ICVWB_HOME_DIR}/bin"
+#set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
+#set ::env(ICVWB_HOME_DIR) $ICVWB_HOME_DIR
+#set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
+#set ::env(PATH) "$ICVWB_EXEC_PATH:$env(PATH)"
+#set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
 
 set GATE_LEVEL_VERILOG ${OUTPUTS_DIR}/${TOP_MODULE}_gate_level.v
 

@@ -26,16 +26,16 @@ link_block
 
 set_design_options
 
-initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 100
-
-#create_io_guide -name io_guide_left -side left -line {{100 100} 800}
-#create_io_guide -name io_guide_top -side top -line {{100 900} 800}
-#create_io_guide -name io_guide_right -side right -line {{900 900} 800}
-#create_io_guide -name io_guide_bottom -side bottom -line {{900 100} 800}
-#create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
+initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 120
 
 place_pins -self
-create_io_ring -name "ioring" -corner_height 75
+#create_io_ring -name "ioring" -corner_height 75
+## leave 15um gap for outer bondpad and sealring
+create_io_guide -name io_guide_left -side left -line {{15 15} 970}
+create_io_guide -name io_guide_top -side top -line {{15 985} 970}
+create_io_guide -name io_guide_right -side right -line {{985 985} 970}
+create_io_guide -name io_guide_bottom -side bottom -line {{985 15} 970}
+create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
 place_io
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
