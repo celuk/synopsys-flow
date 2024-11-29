@@ -18,7 +18,7 @@
 source scripts/00_setup.tcl
 
 set PREVIOUS_STEP $CTS_BLOCK
-set CURRENT_STEP $ROUTE_BLOCK
+set CURRENT_STEP $ROUTING_BLOCK
 open_lib $DESIGN_LIBRARY
 copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_STEP}
 current_block ${DESIGN_NAME}/${CURRENT_STEP}

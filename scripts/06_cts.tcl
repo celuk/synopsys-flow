@@ -68,10 +68,10 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 check_legality
 
-redirect -file $REPORTS_DIR/06_${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {report_constraints -nosplit}
-redirect -file $REPORTS_DIR/06_${CURRENT_STEP}/${TOP_MODULE}_clocks.rpt {report_clocks -nosplit}
-redirect -file $REPORTS_DIR/06_${CURRENT_STEP}/${TOP_MODULE}_clocks_skew.rpt {report_clocks -skew -nosplit}
-#redirect -file $REPORTS_DIR/06_${CURRENT_STEP}/${TOP_MODULE}_clock_qor.rpt {report_clock_qor -clocks $CLK -all -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {report_constraints -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clocks.rpt {report_clocks -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clocks_skew.rpt {report_clocks -skew -nosplit}
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_qor.rpt {report_clock_qor -clocks $CLK -all -nosplit}
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

@@ -17,7 +17,7 @@
 
 source scripts/00_setup.tcl
 
-set PREVIOUS_STEP $ROUTE_BLOCK
+set PREVIOUS_STEP $ROUTING_BLOCK
 set CURRENT_STEP $SEXTRACT_BLOCK
 open_lib $DESIGN_LIBRARY
 copy_block -from ${DESIGN_NAME}/${PREVIOUS_STEP} -to ${DESIGN_NAME}/${CURRENT_STEP}
@@ -68,7 +68,7 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 check_mv_design
 
-redirect -file $REPORTS_DIR/10_${CURRENT_STEP}/${TOP_MODULE}_extracted_clock_tree.rpt {report_clock_qor -all -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_extracted_clock_tree.rpt {report_clock_qor -all -nosplit}
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

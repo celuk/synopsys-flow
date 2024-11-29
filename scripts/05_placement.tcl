@@ -52,11 +52,11 @@ set rm_leakage_scenarios [get_object_name [get_scenarios -filter active==true&&l
 set rm_dynamic_scenarios [get_object_name [get_scenarios -filter active==true&&dynamic_power==true]]
 set_scenario_status -leakage_power false -dynamic_power false [get_scenarios "$rm_leakage_scenarios $rm_dynamic_scenarios"]
 
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_non_default_app_options.rpt {report_app_options -non_default *}
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_lib_cell_purposes.rpt {report_lib_cells -objects [get_lib_cells] -columns {full_name:20 valid_purposes}}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_non_default_app_options.rpt {report_app_options -non_default *}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_lib_cell_purposes.rpt {report_lib_cells -objects [get_lib_cells] -columns {full_name:20 valid_purposes}}
 
 #-reduced_effort
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_check_stage_settings.rpt {check_stage_settings -stage pnr -metric $QOR_STRATEGY_METRIC -step placement}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_check_stage_settings.rpt {check_stage_settings -stage pnr -metric $QOR_STRATEGY_METRIC -step placement}
 
 set currentMode [current_mode]
 foreach_in_collection mode [all_modes] {
@@ -119,11 +119,11 @@ check_pin_placement -self
 
 save_block
 
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_qor.rpt {report_qor -nosplit}
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_place_utilization.rpt {report_congestion -nosplit}
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_place_utilization.rpt {report_utilization -verbose}
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_place_setup.rpt {report_timing -nosplit -delay max -max_paths 20}
-redirect -file $REPORTS_DIR/05_${CURRENT_STEP}/${TOP_MODULE}_place_hold.rpt {report_timing -nosplit -delay min -max_paths 20}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_qor.rpt {report_qor -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_place_utilization.rpt {report_congestion -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_place_utilization.rpt {report_utilization -verbose}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_place_setup.rpt {report_timing -nosplit -delay max -max_paths 20}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_place_hold.rpt {report_timing -nosplit -delay min -max_paths 20}
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

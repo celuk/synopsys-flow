@@ -135,7 +135,6 @@ set SIGNOFF_CHECK_ANTENNA_DRC_FOLDER "signoff_check_antenna_drc_run"
 set SIGNOFF_CHECK_MIM_ANTENNA_DRC_FOLDER "signoff_check_mim_antenna_drc_run"
 set SIGNOFF_CHECK_DESIGN_FOLDER "signoff_check_design_run"
 set SIGNOFF_CHECK_LVS_FOLDER "signoff_check_lvs_run"
-set SIGNOFF_FIX_LVS_FOLDER "signoff_fix_lvs_run"
 
 ## borrowed from: https://wiki.tcl-lang.org/page/recursive%5Fglob
 proc rglob {dirlist globlist} {
@@ -172,15 +171,12 @@ set COMPILE_BLOCK 03-compile
 set DPLAN_BLOCK 04-design_planning
 set PLACE_BLOCK 05-placement
 set CTS_BLOCK 06-cts
-set CTS_OPT_BLOCK 07-cts_opt
-set ROUTE_BLOCK 08-route_auto
-set ROUTE_OPT_BLOCK 09-route_opt
-set SEXTRACT_BLOCK 10-signoff_extraction
-set SOPT_BLOCK 11-signoff_opt
-set SMFILL_BLOCK 12-signoff_metal_fill
-set SDRC_BLOCK 13-signoff_drc
-set SLVS_BLOCK 14-signoff_lvs
-set STREAMOUT_BLOCK 15-streamout
+set ROUTING_BLOCK 07-routing
+set SEXTRACT_BLOCK 08-signoff_extraction
+set SMFILL_BLOCK 09-signoff_metal_fill
+set SDRC_BLOCK 10-signoff_drc
+set SLVS_BLOCK 11-signoff_lvs
+set STREAMOUT_BLOCK 12-streamout
 
 if { ![file exists $OUTPUTS_DIR] } {
     file mkdir $OUTPUTS_DIR
@@ -201,20 +197,16 @@ foreach block {
     DPLAN_BLOCK
     PLACE_BLOCK
     CTS_BLOCK
-    CTS_OPT_BLOCK
-    ROUTE_BLOCK
-    ROUTE_OPT_BLOCK
+    ROUTING_BLOCK
     SEXTRACT_BLOCK
-    SOPT_BLOCK
     SMFILL_BLOCK
     SDRC_BLOCK
     SLVS_BLOCK
     STREAMOUT_BLOCK
 } {
     set block_name [set $block]
-    set padded_counter [format "%02d" $counter]
-    if { ![file exists $REPORTS_DIR/${padded_counter}_$block_name] } {
-        file mkdir $REPORTS_DIR/${padded_counter}_$block_name
+    if { ![file exists $REPORTS_DIR/$block_name] } {
+        file mkdir $REPORTS_DIR/$block_name
     }
     incr counter
 }
@@ -241,7 +233,7 @@ proc set_design_options {} {
     SIGNOFF_CHECK_ANTENNA_DRC_FOLDER \
     SIGNOFF_CHECK_MIM_ANTENNA_DRC_FOLDER \
     SIGNOFF_CHECK_LVS_FOLDER \
-    SIGNOFF_FIX_LVS_FOLDER \
+    SIGNOFF_CHECK_DESIGN_FOLDER \
     GDS_FILES_TO_MERGE \
     GDSOUT_MAP_FILE
 

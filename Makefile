@@ -32,26 +32,22 @@ script3  ?= scripts/03_compile.tcl
 script4  ?= scripts/04_design_planning.tcl
 script5  ?= scripts/05_placement.tcl
 script6  ?= scripts/06_cts.tcl
-script7  ?= scripts/07_cts_opt.tcl
-script8  ?= scripts/08_route_auto.tcl
-script9  ?= scripts/09_route_opt.tcl
-script10 ?= scripts/10_signoff_extraction.tcl
-script11 ?= scripts/11_signoff_opt.tcl
-script12 ?= scripts/12_signoff_metal_fill.tcl
-script13 ?= scripts/13_signoff_drc.tcl
-script14 ?= scripts/14_signoff_lvs.tcl
-script15 ?= scripts/15_streamout.tcl
+script7  ?= scripts/07_routing.tcl
+script8  ?= scripts/08_signoff_extraction.tcl
+script9  ?= scripts/09_signoff_metal_fill.tcl
+script10 ?= scripts/10_signoff_drc.tcl
+script11 ?= scripts/11_signoff_lvs.tcl
+script12 ?= scripts/12_streamout.tcl
 
 $(LOGS_DIR):
 	mkdir -p $(LOGS_DIR)
 
-all: s1 s2 s3 s4 s5 s6 s8 s10 s12 s13 s14 s15
+all: s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12
 
 ndms: $(LOGS_DIR)
 	$(LM_EXEC) -batch -f $(ndm_script) | tee $(LOGS_DIR)/$(shell basename $(ndm_script) .tcl | sed 's|^.*/||').log
 
 s1: $(LOGS_DIR)
-#	$(FC_EXEC) -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's/^[0-9]*_//').log
 	$(FC_EXEC) -batch -f $(script1) | tee $(LOGS_DIR)/$(shell basename $(script1) .tcl | sed 's|^.*/||').log
 
 s2:
@@ -86,15 +82,6 @@ s11:
 
 s12:
 	$(FC_EXEC) -batch -f $(script12) | tee $(LOGS_DIR)/$(shell basename $(script12) .tcl | sed 's|^.*/||').log
-
-s13:
-	$(FC_EXEC) -batch -f $(script13) | tee $(LOGS_DIR)/$(shell basename $(script13) .tcl | sed 's|^.*/||').log
-
-s14:
-	$(FC_EXEC) -batch -f $(script14) | tee $(LOGS_DIR)/$(shell basename $(script14) .tcl | sed 's|^.*/||').log
-
-s15:
-	$(FC_EXEC) -batch -f $(script15) | tee $(LOGS_DIR)/$(shell basename $(script15) .tcl | sed 's|^.*/||').log
 
 clean:
 	rm -rf \
