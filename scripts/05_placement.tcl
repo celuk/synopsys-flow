@@ -93,7 +93,7 @@ create_placement -floorplan
 # -congestion_effort high
 create_placement -incremental -timing_driven -congestion -congestion_effort high
 
-save_block -as ${DESIGN_NAME}/${CURRENT_STEP}_two_pass_placement
+#save_block -as ${DESIGN_NAME}/${CURRENT_STEP}_two_pass_placement
 
 place_opt -from initial_drc
 
@@ -105,7 +105,7 @@ report_placement -verbose low
 
 source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
-createNplace_bondpads -inline_pad_ref_name $BONDPAD_CELL
+createNplace_bondpads -inline_pad_ref_name PAD70NU_SL
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
