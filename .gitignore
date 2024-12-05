@@ -31,5 +31,8 @@ pna_output/
 outputs/
 reports/
 logs/
+data/gds/
+data/lef/
+data/nldm/
 open_block.tcl
 remove_block.tcl
