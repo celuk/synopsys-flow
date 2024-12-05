@@ -25,16 +25,16 @@ set LOGS_DIR "logs"
 
 set_host_options -max_cores 8
 
-## set them if they are not in path
-#set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
-#set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1/bin"
-#set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
-#set ICVWB_EXEC_PATH "${ICVWB_HOME_DIR}/bin"
-#set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
-#set ::env(ICVWB_HOME_DIR) $ICVWB_HOME_DIR
-#set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
-#set ::env(PATH) "$ICVWB_EXEC_PATH:$env(PATH)"
-#set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
+## set them if they are not in path or if you want to change the version of it
+set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
+set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1/bin"
+set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
+set ICVWB_EXEC_PATH "${ICVWB_HOME_DIR}/bin"
+set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
+set ::env(ICVWB_HOME_DIR) $ICVWB_HOME_DIR
+set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
+set ::env(PATH) "$ICVWB_EXEC_PATH:$env(PATH)"
+set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
 
 set GATE_LEVEL_VERILOG ${OUTPUTS_DIR}/${TOP_MODULE}_gate_level.v
 
@@ -47,6 +47,10 @@ set UPF_PATH "data/upf"
 set TECH_PATH "data/tech"
 set STARRC_PATH "data/starrc"
 set LOGO_PATH "data/logo"
+set NLDM_PATH "data/nldm"
+set LEF_PATH "data/lef"
+set GDS_PATH "data/gds"
+set TLUPLUS_PATH "data/tech/tluplus"
 
 lappend search_path $NDM_PATH
 lappend search_path $RTL_PATH
@@ -55,6 +59,10 @@ lappend search_path $UPF_PATH
 lappend search_path $TECH_PATH
 lappend search_path $STARRC_PATH
 lappend search_path $LOGO_PATH
+lappend search_path $NLDM_PATH
+lappend search_path $LEF_PATH
+lappend search_path $GDS_PATH
+lappend search_path $TLUPLUS_PATH
 
 source scripts/00_pdk_setup.tcl
 
@@ -84,6 +92,8 @@ set STREAMOUT_GDS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.gds"
 set STREAMOUT_DEF_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.def"
 set STREAMOUT_SDF_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.sdf"
 set STREAMOUT_PARASITICS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.spef"
+
+set LIB_PACKAGE "${OUTPUTS_DIR}/${DESIGN_NAME}_lib_package.pkg"
 
 #set GDS_FILES_TO_MERGE [lreplace $GDS_FILES_TO_MERGE end end $SEALRING_WLCSP_GDS_FILE]
 

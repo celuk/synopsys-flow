@@ -1,8 +1,10 @@
 # synopsys-flow
 
-ICV version U-2022.12-SP4-2 or newer required.
+ICV version U-2022.12-SP4-2 or newer required. If you need to set an ICV executable that is not in your path you need to change related section in ``00_setup.tcl` file.
 
-Before running the flow you need to change paths in `00_create_ndms.tcl` and `00_setup.tcl` files. Changing `TSMCHOME` variable as the PDK path should be sufficient for both. Also, if you need to give a path for `fc_shell` or `lm_shell` change them in `Makefile`.
+Also, if you need to give a path for `fc_shell` or `lm_shell` change them in `Makefile`.
+
+If all tools are in path, there are no changes required.
 
 ## TL;DR
 
@@ -43,6 +45,8 @@ Show 11th block:
 make show 11
 ```
 
+**Note:** After showing the blocks you can immediately run Live ICV by pressing the icon in GUI without bothering to set options again.
+
 Following command removes 5th block and the blocks after (5-6-7-...), then runs the steps 5 and 6 and shows latest(6th) block without gui:
 ```bash
 make remove 5 s5 s6 show_cli
@@ -51,4 +55,9 @@ make remove 5 s5 s6 show_cli
 Following command removes all blocks and runs all again.
 ```bash
 make clean all
+```
+
+Following command cleans all garbage including generated ndms, then generates ndms, runs all the flow scripts and show the latest block at the end of the operations.
+```bash
+make clean_all ndms all show
 ```

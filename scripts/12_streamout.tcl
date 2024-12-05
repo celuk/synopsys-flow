@@ -67,5 +67,7 @@ redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_max_tim.rpt {rep
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_max_tim.rpt {report_timing -capacitance -transition_time -input_pins -nets -delay_type max}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_timing.rpt {report_global_timing -pba_mode [get_app_option_value -name time.pba_optimization_mode] -nosplit}
 
+write_lib_package -include_all_blocks -include_db_files $LIB_PACKAGE
+
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

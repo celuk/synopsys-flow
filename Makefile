@@ -15,10 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-FC_EXEC ?= fc_shell
-#/usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
-LM_EXEC ?= lm_shell
-#/usr/synopsys/icc2/V-2023.12/bin/lm_shell
+FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
+LM_EXEC ?= /usr/synopsys/icc2/V-2023.12/bin/lm_shell
 
 TOP_MODULE ?= c0_soc
 SETUP_TCL ?= scripts/00_setup.tcl

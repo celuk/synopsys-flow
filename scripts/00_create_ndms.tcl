@@ -19,6 +19,10 @@
 
 set TECH_PATH "data/tech"
 set NDM_PATH "data/lib"
+set NLDM_PATH "data/nldm"
+set LEF_PATH "data/lef"
+set GDS_PATH "data/gds"
+set TLUPLUS_PATH "data/tech/tluplus"
 
 set LOGS_DIR "logs"
 if { ![file exists $LOGS_DIR] } {
