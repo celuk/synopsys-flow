@@ -34,5 +34,6 @@ logs/
 data/gds/
 data/lef/
 data/nldm/
+CLIBs/
 open_block.tcl
 remove_block.tcl

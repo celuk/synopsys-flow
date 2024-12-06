@@ -40,6 +40,10 @@ set GATE_LEVEL_VERILOG ${OUTPUTS_DIR}/${TOP_MODULE}_gate_level.v
 
 #set_app_options -name search_path -value "."
 set search_path "."
+lappend search_path "/"
+
+source scripts/00_pdk_setup.tcl
+
 set NDM_PATH "data/lib"
 set RTL_PATH "data/rtl"
 set SDC_PATH "data/sdc"
@@ -63,8 +67,6 @@ lappend search_path $NLDM_PATH
 lappend search_path $LEF_PATH
 lappend search_path $GDS_PATH
 lappend search_path $TLUPLUS_PATH
-
-source scripts/00_pdk_setup.tcl
 
 set REFERENCE_LIBRARY [list \
 ${NDM_PATH}/stdcell.ndm \

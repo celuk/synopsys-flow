@@ -117,6 +117,7 @@ clean:
 		${OUTPUTS_DIR}/ \
 		${REPORTS_DIR}/ \
 		${LOGS_DIR}/ \
+		CLIBs/ \
 		open_block.tcl \
 		remove_block.tcl
 
