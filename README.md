@@ -1,6 +1,6 @@
 # synopsys-flow
 
-ICV version U-2022.12-SP4-2 or newer required. If you need to set an ICV executable that is not in your path you need to change related section in ``00_setup.tcl` file.
+ICV version U-2022.12-SP4-2 or newer required. If you need to set an ICV executable that is not in your path you need to change related section in `00_setup.tcl` file.
 
 Also, if you need to give a path for `fc_shell` or `lm_shell` change them in `Makefile`.
 

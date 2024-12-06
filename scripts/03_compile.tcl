@@ -63,7 +63,7 @@ report_power_domain
 #analyze_mv_feasibility
 #sizeof_collection [get_cells -hierarchical -filter "is_level_shifter==true"]
 
-check_pg_drc -ignore_std_cells
+check_pg_drc -ignore_std_cells -do_not_check_shapes_in_hier_blocks
 
 report_multibit
 

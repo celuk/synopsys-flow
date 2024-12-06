@@ -105,7 +105,7 @@ report_placement -verbose low
 
 source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
-createNplace_bondpads -inline_pad_ref_name PAD70NU_SL
+createNplace_bondpads -inline_pad_ref_name $BONDPAD_CELL
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]

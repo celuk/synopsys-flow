@@ -134,6 +134,9 @@ read_db ${STDCELL_DB_PREFIX}wcz.db
 
 read_lef $STDCELL_LEF_FILE
 #read_gds $STDCELL_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+
+set_attribute [get_lib_cells $FILLER_CELLS] design_type filler
+
 check_workspace -allow_missing
 commit_workspace -output ${NDM_PATH}/stdcell.ndm -force
 remove_workspace
@@ -141,6 +144,7 @@ remove_workspace
 ## PHYSICAL ONLY STDCELLS
 create_workspace stdcell_physical_only -technology $TECH_FILE -flow physical_only
 read_lef $STDCELL_LEF_FILE
+set_attribute [get_lib_cells $FILLER_CELLS] design_type filler
 check_workspace
 commit_workspace -output ${NDM_PATH}/stdcell_physical_only.ndm -force
 remove_workspace
@@ -279,9 +283,10 @@ remove_workspace
 #commit_workspace -output ${NDM_PATH}/sealring.ndm -force
 #remove_workspace
 
-set ICC_SHELL_EXEC "/usr/synopsys/icc/V-2023.12-SP1/bin/icc_shell"
-set_app_options -name lib.setting.icc_shell_exec -value "$ICC_SHELL_EXEC -shared_license"
-
-generate_frame_from_mw ${NDM_PATH}/stdcell_mw.frame -mw_lib $STD_MILKYWAY -overwrite
-generate_frame_from_mw ${NDM_PATH}/io_mw.frame -mw_lib $IO_MILKYWAY -overwrite
-generate_frame_from_mw ${NDM_PATH}/bondpad_mw.frame -mw_lib $BONDPAD_MILKYWAY -overwrite
+#set ICC_SHELL_EXEC "/usr/synopsys/icc/V-2023.12-SP1/bin/icc_shell"
+#set_app_options -name lib.setting.icc_shell_exec -value "$ICC_SHELL_EXEC -shared_license"
+#
+#
+#generate_frame_from_mw ${NDM_PATH}/stdcell_mw.frame -mw_lib $STD_MILKYWAY -overwrite
+#generate_frame_from_mw ${NDM_PATH}/io_mw.frame -mw_lib $IO_MILKYWAY -overwrite
+#generate_frame_from_mw ${NDM_PATH}/bondpad_mw.frame -mw_lib $BONDPAD_MILKYWAY -overwrite

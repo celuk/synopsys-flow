@@ -44,12 +44,12 @@ ${IO_DB_PREFIX}wcl1.db \
 ${IO_DB_PREFIX}wcz1.db \
 "
 
-create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs " \
-${STD_MILKYWAY} \
-${IO_MILKYWAY} \
-${BONDPAD_MILKYWAY} \
-"
-#-scale_factor 1000
+create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY
+#" \
+#${STD_MILKYWAY} \
+#${IO_MILKYWAY} \
+#${BONDPAD_MILKYWAY} \
+#" -scale_factor 1000
 
 #${STD_MILKYWAY} \
 #${IO_MILKYWAY} \

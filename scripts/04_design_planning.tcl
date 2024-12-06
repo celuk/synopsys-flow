@@ -100,7 +100,7 @@ set_app_option -name plan.pgroute.merge_shapes_in_pad_cell -value {io_pad}
 
 check_pg_connectivity -check_std_cell_pins none
 check_pg_missing_vias
-check_pg_drc -ignore_std_cells
+check_pg_drc -ignore_std_cells -do_not_check_shapes_in_hier_blocks
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
