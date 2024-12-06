@@ -19,14 +19,13 @@ source scripts/00_setup.tcl
 
 set CURRENT_STEP $SYNTH_BLOCK
 
-set NLDM_PATH "data/nldm"
-
-#set search_path ". /"
-set ICC_SHELL_EXEC "/usr/synopsys/icc/V-2023.12-SP1/bin/icc_shell"
+set ICC_SHELL_EXEC "data/icc_shell"
 set_app_options -name lib.configuration.icc_shell_exec -value "$ICC_SHELL_EXEC"
-set_app_options -name lib.setting.icc_shell_exec -value "$ICC_SHELL_EXEC -shared_license"
+#set_app_options -name lib.setting.icc_shell_exec -value "$ICC_SHELL_EXEC -shared_license"
 set_app_options -name lib.workspace.library_developer_mode -value true
 set_app_options -name lib.configuration.display_lm_messages -value true
+
+set_app_options -name shell.common.tmp_dir_path -value $NDM_PATH
 
 set_app_var link_library " \
 ${STDCELL_DB_PREFIX}bc.db \
@@ -46,9 +45,9 @@ ${IO_DB_PREFIX}wcz1.db \
 "
 
 create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs " \
-${NDM_PATH}/stdcell_mw.frame \
-${NDM_PATH}/io_mw.frame \
-${NDM_PATH}/bondpad_mw.frame \
+${STD_MILKYWAY} \
+${IO_MILKYWAY} \
+${BONDPAD_MILKYWAY} \
 "
 #-scale_factor 1000
 

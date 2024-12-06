@@ -1,0 +1,2 @@
+#!/bin/bash
+icc_shell -shared_license "$@"

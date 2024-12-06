@@ -124,7 +124,7 @@ clean:
 		remove_block.tcl
 
 clean_ndms:
-	rm -rf data/lib/*
+	rm -rf data/lib/* data/lib/.[^.]*/ data/lib/..?*/
 
 clean_all: clean clean_ndms
 
