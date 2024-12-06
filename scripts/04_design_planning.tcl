@@ -26,16 +26,16 @@ link_block
 
 set_design_options
 
-initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 120
+initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 130
 
 place_pins -self
-#create_io_ring -name "ioring" -corner_height 75
+create_io_ring -name "ioring" -corner_height 75
 ## leave 15um gap for outer bondpad and sealring
-create_io_guide -name io_guide_left -side left -line {{15 15} 970}
-create_io_guide -name io_guide_top -side top -line {{15 985} 970}
-create_io_guide -name io_guide_right -side right -line {{985 985} 970}
-create_io_guide -name io_guide_bottom -side bottom -line {{985 15} 970}
-create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
+#create_io_guide -name io_guide_left -side left -line {{15 15} 970}
+#create_io_guide -name io_guide_top -side top -line {{15 985} 970}
+#create_io_guide -name io_guide_right -side right -line {{985 985} 970}
+#create_io_guide -name io_guide_bottom -side bottom -line {{985 15} 970}
+#create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
 place_io
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
@@ -49,15 +49,27 @@ connect_pg_net -net VDD [get_pins -physical_context */VDD]
 connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 create_pg_ring_pattern pg_ring -horizontal_layer M9 \
-                               -horizontal_width {5} \
-                               -horizontal_spacing {5} \
+                               -horizontal_width {4} \
+                               -horizontal_spacing {2} \
                                -vertical_layer M8 \
-                               -vertical_width {5} \
-                               -vertical_spacing {5}
+                               -vertical_width {4} \
+                               -vertical_spacing {2}
+
+create_pg_ring_pattern pg_ring2 -horizontal_layer M8 \
+                               -horizontal_width {4} \
+                               -horizontal_spacing {2} \
+                               -vertical_layer M9 \
+                               -vertical_width {4} \
+                               -vertical_spacing {2}
+
 # -corner_bridge true
 set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}{offset: {2 2}}} \
                             -extension {{stop: core_boundary}}
+
+set_pg_strategy s_core_ring2 -core -pattern {{pattern: pg_ring2}{nets: {VSS VDD}}{offset: {20 20}}} \
+                            -extension {{stop: core_boundary}}
 compile_pg -strategies s_core_ring
+compile_pg -strategies s_core_ring2
 
 create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M8} {spacing: 10} \
                                          {width: 5} {pitch: 100} {trim: false}} \
@@ -73,20 +85,12 @@ compile_pg -strategies s_std_cell_rail
 
 set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 create_pg_macro_conn_pattern macro_connect_pattern_vss \
--pin_conn_type scattered_pin -nets {VSS} \
+-pin_conn_type scattered_pin -nets {VDD VSS} \
 -width {5 5} -layers {M9 M8}
 set_pg_strategy s_macro_connect_vss \
--pattern {{name: macro_connect_pattern_vss} {nets: VSS}} \
+-pattern {{name: macro_connect_pattern_vss} {nets: VDD VSS}} \
 -macros "$iopads"
 compile_pg -strategies s_macro_connect_vss
-
-create_pg_macro_conn_pattern macro_connect_pattern_vdd \
--pin_conn_type scattered_pin -nets {VDD} \
--width {5 5} -layers {M2 M2}
-set_pg_strategy s_macro_connect_vdd \
--pattern {{name: macro_connect_pattern_vdd} {nets: VDD}} \
--macros "$iopads"
-compile_pg -strategies s_macro_connect_vdd
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
