@@ -107,6 +107,8 @@ source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
 createNplace_bondpads -inline_pad_ref_name $BONDPAD_CELL
 
+remove_redundant_shapes
+
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
 connect_pg_net -net VSS [get_pins -hierarchical */VSS]

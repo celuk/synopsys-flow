@@ -60,7 +60,7 @@ set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS VD
 compile_pg -strategies s_core_ring
 
 create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M8} {spacing: 10} \
-                                         {width: 5} {pitch: 90} {trim: false}} \
+                                         {width: 5} {pitch: 100} {trim: false}} \
                                         {{horizontal_layer: M9} {spacing: 10} \
                                          {width: 5} {pitch: 100} {trim: false}}}
 set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_start: 100 100}} \
@@ -73,20 +73,20 @@ compile_pg -strategies s_std_cell_rail
 
 set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 create_pg_macro_conn_pattern macro_connect_pattern_vss \
--pin_conn_type scattered_pin -nets {VSS} \
--width {4 4} -layers {M2 M2}
+-pin_conn_type scattered_pin -nets {VDD VSS} \
+-width {4 10} -layers {M2 M2}
 set_pg_strategy s_macro_connect_vss \
--pattern {{name: macro_connect_pattern_vss} {nets: VSS}} \
+-pattern {{name: macro_connect_pattern_vss} {nets: VDD VSS}} \
 -macros "$iopads"
 compile_pg -strategies s_macro_connect_vss
 
-create_pg_macro_conn_pattern macro_connect_pattern_vss1 \
--pin_conn_type scattered_pin -nets {VDD} \
--width {4 4} -layers {M2 M2}
-set_pg_strategy s_macro_connect_vss1 \
--pattern {{name: macro_connect_pattern_vss1} {nets: VDD}} \
--macros "$iopads"
-compile_pg -strategies s_macro_connect_vss1
+#create_pg_macro_conn_pattern macro_connect_pattern_vdd \
+#-pin_conn_type scattered_pin -nets {VDD} \
+#-width {4 4} -layers {M2 M2}
+#set_pg_strategy s_macro_connect_vdd \
+#-pattern {{name: macro_connect_pattern_vdd} {nets: VDD}} \
+#-macros "$iopads"
+#compile_pg -strategies s_macro_connect_vdd
 
 #set_app_options -name plan.pgroute.hmpin_connection_target_layers -value M8
 #
