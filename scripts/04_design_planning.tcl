@@ -82,7 +82,7 @@ compile_pg -strategies s_macro_connect_vss
 
 create_pg_macro_conn_pattern macro_connect_pattern_vss1 \
 -pin_conn_type scattered_pin -nets {VDD} \
--width {4 4} -layers {M9 M8}
+-width {4 4} -layers {M2 M2}
 set_pg_strategy s_macro_connect_vss1 \
 -pattern {{name: macro_connect_pattern_vss1} {nets: VDD}} \
 -macros "$iopads"
