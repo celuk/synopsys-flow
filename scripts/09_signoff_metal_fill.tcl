@@ -34,9 +34,9 @@ check_mv_design
 remove_stdcell_fillers_with_violation
 connect_pg_net -automatic
 
-create_cell SealRing $SEALRING_CELL
-set sealring [get_cells -filter "is_hard_macro == true" -hier]
-set_attribute $sealring -name physical_status -value fixed
+#create_cell SealRing $SEALRING_CELL
+#set sealring [get_cells -filter "is_hard_macro == true" -hier]
+#set_attribute $sealring -name physical_status -value fixed
 
 check_mv_design
 verify_pg_nets
@@ -55,7 +55,7 @@ signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic
 
 #signoff_create_metal_fill -track_fill generic -select_layers [get_layers M*] -fill_all_tracks true -foundry_fill_type both -foundry_for_feol_fill generic
 
-signoff_report_metal_density
+#signoff_report_metal_density
 
 #set_extraction_options -real_metalfill_extraction auto
 
