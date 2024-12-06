@@ -277,11 +277,11 @@ commit_workspace -output ${NDM_PATH}/bondpad.ndm -force
 remove_workspace
 
 ## SEALRING
-#create_workspace sealring -technology $TECH_FILE -flow physical_only
-#read_gds $SEALRING_WLCSP_GDS_FILE -layer_map $GDSOUT_MAP_FILE
-#check_workspace
-#commit_workspace -output ${NDM_PATH}/sealring.ndm -force
-#remove_workspace
+create_workspace sealring -technology $TECH_FILE -flow physical_only
+read_gds $SEALRING_WLCSP_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+check_workspace
+commit_workspace -output ${NDM_PATH}/sealring.ndm -force
+remove_workspace
 
 #set ICC_SHELL_EXEC "/usr/synopsys/icc/V-2023.12-SP1/bin/icc_shell"
 #set_app_options -name lib.setting.icc_shell_exec -value "$ICC_SHELL_EXEC -shared_license"
