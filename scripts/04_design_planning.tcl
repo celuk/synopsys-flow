@@ -64,7 +64,7 @@ create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M8} {spacing: 10} \
                                         {{horizontal_layer: M9} {spacing: 10} \
                                          {width: 5} {pitch: 100} {trim: false}}}
 set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_start: 100 100}} \
-                       -core -extension {{stop: innermost_ring}}
+                       -core -extension {{stop: outermost_ring}}
 compile_pg -strategies s_mesh
 
 create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
@@ -74,7 +74,7 @@ compile_pg -strategies s_std_cell_rail
 set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 create_pg_macro_conn_pattern macro_connect_pattern_vss \
 -pin_conn_type scattered_pin -nets {VDD VSS} \
--width {4 10} -layers {M2 M2}
+-layers {M9 M2}
 set_pg_strategy s_macro_connect_vss \
 -pattern {{name: macro_connect_pattern_vss} {nets: VDD VSS}} \
 -macros "$iopads"
