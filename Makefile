@@ -118,6 +118,8 @@ clean:
 		${REPORTS_DIR}/ \
 		${LOGS_DIR}/ \
 		CLIBs/ \
+		export_mw_fram* \
+		generate_frame_from_mw* \
 		open_block.tcl \
 		remove_block.tcl
 

@@ -34,6 +34,10 @@ logs/
 data/gds/
 data/lef/
 data/nldm/
+data/lib/
+data/tech/
 CLIBs/
+export_mw_fram*
+generate_frame_from_mw*
 open_block.tcl
 remove_block.tcl

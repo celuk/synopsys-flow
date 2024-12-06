@@ -46,11 +46,15 @@ ${IO_DB_PREFIX}wcz1.db \
 "
 
 create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs " \
-${STD_MILKYWAY} \
-${IO_MILKYWAY} \
-${BONDPAD_MILKYWAY} \
-" -scale_factor 1000
+${NDM_PATH}/stdcell_mw.frame \
+${NDM_PATH}/io_mw.frame \
+${NDM_PATH}/bondpad_mw.frame \
+"
+#-scale_factor 1000
 
+#${STD_MILKYWAY} \
+#${IO_MILKYWAY} \
+#${BONDPAD_MILKYWAY} \
 #${STD_MILKYWAY_FRAME_ONLY} \
 #${IO_MILKYWAY_FRAME_ONLY} \
 #${BONDPAD_MILKYWAY_FRAME_ONLY} \

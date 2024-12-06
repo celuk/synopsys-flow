@@ -278,3 +278,10 @@ remove_workspace
 #check_workspace
 #commit_workspace -output ${NDM_PATH}/sealring.ndm -force
 #remove_workspace
+
+set ICC_SHELL_EXEC "/usr/synopsys/icc/V-2023.12-SP1/bin/icc_shell"
+set_app_options -name lib.setting.icc_shell_exec -value "$ICC_SHELL_EXEC -shared_license"
+
+generate_frame_from_mw ${NDM_PATH}/stdcell_mw.frame -mw_lib $STD_MILKYWAY -overwrite
+generate_frame_from_mw ${NDM_PATH}/io_mw.frame -mw_lib $IO_MILKYWAY -overwrite
+generate_frame_from_mw ${NDM_PATH}/bondpad_mw.frame -mw_lib $BONDPAD_MILKYWAY -overwrite
