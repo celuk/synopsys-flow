@@ -59,6 +59,10 @@ set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS VD
                             -extension {{stop: core_boundary}}
 compile_pg -strategies s_core_ring
 
+create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
+set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : outermost_ring}}}
+compile_pg -strategies s_std_cell_rail
+
 create_pg_mesh_pattern pg_mesh -layers {{{vertical_layer: M8} {spacing: 10} \
                                          {width: 5} {pitch: 100} {trim: false}} \
                                         {{horizontal_layer: M9} {spacing: 10} \
@@ -71,10 +75,6 @@ compile_pg -strategies s_mesh
 #create_pg_strap -layer M8 -direction vertical \
 #   -net VDD -width 5 \
 #   -start 200 -stop 800 -pitch 100
-#
-#create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
-#set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : core_boundary}}}
-#compile_pg -strategies s_std_cell_rail
 #
 #create_pg_strap -layer M8 -direction horizontal \
 #   -net VSS -width 5 \
