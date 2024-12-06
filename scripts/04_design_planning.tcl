@@ -67,14 +67,31 @@ set_pg_strategy s_mesh -pattern {{pattern: pg_mesh} {nets: {VDD VSS}} {offset_st
                        -core -extension {{stop: outermost_ring}}
 compile_pg -strategies s_mesh
 
-create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
-set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : core_boundary}}}
-compile_pg -strategies s_std_cell_rail
+## this is worser
+#create_pg_strap -layer M8 -direction vertical \
+#   -net VDD -width 5 \
+#   -start 200 -stop 800 -pitch 100
+#
+#create_pg_std_cell_conn_pattern pg_std_cell_rail -layers {M1}
+#set_pg_strategy s_std_cell_rail -core -pattern {{name: pg_std_cell_rail} {nets: VDD VSS}} -extension {{{stop : core_boundary}}}
+#compile_pg -strategies s_std_cell_rail
+#
+#create_pg_strap -layer M8 -direction horizontal \
+#   -net VSS -width 5 \
+#   -start 200 -stop 800 -pitch 100
+#
+#create_pg_vias -nets VDD \
+#   -within_bbox [get_attribute [get_core_area] bbox] \
+#   -from_layers M8 -to_layers M9
+#
+#create_pg_vias -nets VSS \
+#   -within_bbox [get_attribute [get_core_area] bbox] \
+#   -from_layers M9 -to_layers M8
 
 set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 create_pg_macro_conn_pattern macro_connect_pattern_vss \
 -pin_conn_type scattered_pin -nets {VDD VSS} \
--layers {M9 M2}
+-layers {M2 M2}
 set_pg_strategy s_macro_connect_vss \
 -pattern {{name: macro_connect_pattern_vss} {nets: VDD VSS}} \
 -macros "$iopads"
