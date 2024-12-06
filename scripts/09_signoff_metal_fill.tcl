@@ -34,9 +34,9 @@ check_mv_design
 remove_stdcell_fillers_with_violation
 connect_pg_net -automatic
 
-#create_cell SealRing $SEALRING_CELL
-#set sealring [get_cells -filter "is_hard_macro == true" -hier]
-#set_attribute $sealring -name physical_status -value fixed
+create_cell SealRing $SEALRING_CELL
+set sealring [get_cells -filter "is_hard_macro == true" -hier]
+set_attribute $sealring -name physical_status -value fixed
 
 check_mv_design
 verify_pg_nets
