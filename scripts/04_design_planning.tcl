@@ -28,16 +28,17 @@ set_design_options
 
 remove_cells "SealRing"
 
-initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 110
+initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 140
 
 place_pins -self
 #create_io_ring -name "ioring" -corner_height 75
 ## leave 10um gap for sealring
-create_io_guide -name io_guide_left -side left -line {{10 10} 980}
-create_io_guide -name io_guide_top -side top -line {{10 990} 980}
+
 create_io_guide -name io_guide_right -side right -line {{990 990} 980}
 create_io_guide -name io_guide_bottom -side bottom -line {{990 10} 980}
-create_io_ring -name "io_ring" -guides {io_guide_left io_guide_top io_guide_right io_guide_bottom}
+create_io_guide -name io_guide_top -side top -line {{10 990} 980}
+create_io_guide -name io_guide_left -side left -line {{10 10} 980}
+create_io_ring -name "io_ring" -guides {io_guide_right io_guide_bottom io_guide_top io_guide_left}
 place_io
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
@@ -51,13 +52,13 @@ connect_pg_net -net VDD [get_pins -physical_context */VDD]
 connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 create_pg_ring_pattern pg_ring -horizontal_layer M9 \
-                               -horizontal_width {5} \
+                               -horizontal_width {4} \
                                -horizontal_spacing {2} \
                                -vertical_layer M8 \
-                               -vertical_width {5} \
+                               -vertical_width {4} \
                                -vertical_spacing {2}
 # -corner_bridge true
-set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}{offset: {2 2}}} \
+set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS VDD VSS VDD VSS VDD VSS}}{offset: {2 2 2 2 2 2 2 2}}} \
                             -extension {{stop: core_boundary}}
 compile_pg -strategies s_core_ring
 
@@ -122,6 +123,7 @@ compile_pg -strategies s_macro_connect_vss
 #
 #compile_pg -strategies s_io_to_ring -via_rule rule1
 
+
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
 connect_pg_net -net VSS [get_pins -hierarchical */VSS]
@@ -132,8 +134,8 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 ## -value {io_pad corner_pad}
 set_app_option -name plan.pgroute.merge_shapes_in_pad_cell -value {io_pad}
 
-check_pg_connectivity -check_std_cell_pins none
 check_pg_missing_vias
+check_pg_connectivity -check_std_cell_pins none
 check_pg_drc -ignore_std_cells -do_not_check_shapes_in_hier_blocks
 
 save_lib -all
