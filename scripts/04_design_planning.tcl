@@ -26,7 +26,9 @@ link_block
 
 set_design_options
 
-initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 140
+remove_cells "SealRing"
+
+initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 110
 
 place_pins -self
 #create_io_ring -name "ioring" -corner_height 75
@@ -49,13 +51,13 @@ connect_pg_net -net VDD [get_pins -physical_context */VDD]
 connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 create_pg_ring_pattern pg_ring -horizontal_layer M9 \
-                               -horizontal_width {4} \
+                               -horizontal_width {5} \
                                -horizontal_spacing {2} \
                                -vertical_layer M8 \
-                               -vertical_width {4} \
+                               -vertical_width {5} \
                                -vertical_spacing {2}
 # -corner_bridge true
-set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS VDD VSS VDD VSS VDD VSS}}{offset: {2 2 2 2 2 2 2 2}}} \
+set_pg_strategy s_core_ring -core -pattern {{pattern: pg_ring}{nets: {VDD VSS}}{offset: {2 2}}} \
                             -extension {{stop: core_boundary}}
 compile_pg -strategies s_core_ring
 
@@ -119,7 +121,6 @@ compile_pg -strategies s_macro_connect_vss
 #    {via_master: default}} {{intersection: undefined} {via_master: NIL}}}
 #
 #compile_pg -strategies s_io_to_ring -via_rule rule1
-
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
