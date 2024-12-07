@@ -114,7 +114,7 @@ set CLK clk_i
 set POWER_NET "VDD"
 set GROUND_NET "VSS"
 
-set MIN_ROUTING_LAYER "M4"
+set MIN_ROUTING_LAYER "M2"
 set MAX_ROUTING_LAYER "M7"
 
 set ROUTING_LAYER_DIRECTION_OFFSET_LIST [list \
@@ -258,7 +258,7 @@ proc set_design_options {} {
     ## to create voltage area automatically, it should be false
     set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
-    set_dont_touch [get_cells {Corner* VDD* VSS* PDDW0204CDG*}]
+    set_dont_touch [get_cells {*Corner* *VDD* *VSS* *PDDW0204CDG*}]
 
     set_app_options -name compile.auto_floorplan.enable -value true
     set_app_options -name compile.auto_floorplan.initialize -value auto

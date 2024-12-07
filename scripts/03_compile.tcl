@@ -26,6 +26,8 @@ link_block
 
 set_design_options
 
+check_hier_design -stage pre_placement
+
 compile_fusion -check_only
 
 set_app_options -name compile.flow.enable_rtl_multibit_banking -value true
