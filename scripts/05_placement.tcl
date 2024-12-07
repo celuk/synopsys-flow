@@ -26,6 +26,8 @@ link_block
 
 set_design_options
 
+remove_cells "SealRing"
+
 add_tie_cells
 
 #compile_fusion -to initial_opto

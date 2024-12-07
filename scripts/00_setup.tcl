@@ -76,9 +76,9 @@ ${NDM_PATH}/io.ndm \
 ${NDM_PATH}/io_physical_only.ndm \
 \
 ${NDM_PATH}/bondpad.ndm \
+\
+${NDM_PATH}/sealring.ndm \
 ];
-
-#${NDM_PATH}/sealring.ndm \
 
 set LOGO_FILE "${LOGO_PATH}/kasirga_logo.bmp"
 
@@ -98,7 +98,7 @@ set STREAMOUT_PARASITICS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.spef"
 
 set LIB_PACKAGE "${OUTPUTS_DIR}/${DESIGN_NAME}_lib_package.pkg"
 
-#set GDS_FILES_TO_MERGE [lreplace $GDS_FILES_TO_MERGE end end $SEALRING_WLCSP_GDS_FILE]
+set GDS_FILES_TO_MERGE [lreplace $GDS_FILES_TO_MERGE end end $SEALRING_WLCSP_GDS_FILE]
 
 ## report_lib $STDCELL_LIB_NAME
 set STDCELL_LIB_NAME "stdcell"
