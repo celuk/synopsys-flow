@@ -34,16 +34,6 @@ check_mv_design
 remove_stdcell_fillers_with_violation
 connect_pg_net -automatic
 
-create_cell SealRing $SEALRING_CELL
-set sealring [get_cells -filter "is_hard_macro == true" -hier]
-set_attribute $sealring -name physical_status -value fixed
-
-connect_pg_net -automatic
-connect_pg_net -net VDD [get_pins -hierarchical */VDD]
-connect_pg_net -net VSS [get_pins -hierarchical */VSS]
-connect_pg_net -net VDD [get_pins -physical_context */VDD]
-connect_pg_net -net VSS [get_pins -physical_context */VSS]
-
 check_pg_drc
 check_connectivity
 check_lvs
@@ -74,6 +64,35 @@ connect_pg_net -net VDD [get_pins -hierarchical */VDD]
 connect_pg_net -net VSS [get_pins -hierarchical */VSS]
 connect_pg_net -net VDD [get_pins -physical_context */VDD]
 connect_pg_net -net VSS [get_pins -physical_context */VSS]
+
+save_block
+
+set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
+set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_metal_fill"
+signoff_check_drc -unselect_rules "RR*"
+
+save_block
+
+create_cell SealRing $SEALRING_CELL
+set sealring [get_cells -filter "is_hard_macro == true" -hier]
+set_attribute $sealring -name physical_status -value fixed
+#move_objects -to [list -5 -5] [get_cells "SealRing"]
+
+connect_pg_net -automatic
+connect_pg_net -net VDD [get_pins -hierarchical */VDD]
+connect_pg_net -net VSS [get_pins -hierarchical */VSS]
+connect_pg_net -net VDD [get_pins -physical_context */VDD]
+connect_pg_net -net VSS [get_pins -physical_context */VSS]
+
+save_block
+
+set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
+set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_DRC_FOLDER
+set_app_options -name signoff.check_drc.user_defined_options -value "-D WLCSP_SEALRING"
+signoff_check_drc -unselect_rules "RR*"
+
+#set_app_options -name signoff.create_metal_fill.user_defined_options -value "-D WithSealring"
+#signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic -select_layers "M1 M2 M3 M4 M5 M6 M7 M8 M9 OD PO"
 
 check_mv_design
 

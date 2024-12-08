@@ -33,7 +33,6 @@ initialize_floorplan -control_type die -side_length "1000 1000" -core_offset 140
 place_pins -self
 #create_io_ring -name "ioring" -corner_height 75
 ## leave 10um gap for sealring
-
 create_io_guide -name io_guide_right -side right -line {{990 990} 980}
 create_io_guide -name io_guide_bottom -side bottom -line {{990 10} 980}
 create_io_guide -name io_guide_top -side top -line {{10 990} 980}
