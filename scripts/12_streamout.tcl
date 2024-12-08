@@ -63,8 +63,6 @@ redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_max_tim.rpt {rep
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_max_tim.rpt {report_timing -capacitance -transition_time -input_pins -nets -delay_type max}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_timing.rpt {report_global_timing -pba_mode [get_app_option_value -name time.pba_optimization_mode] -nosplit}
 
-write_lib_package -include_all_blocks -include_db_files $LIB_PACKAGE
-
 source scripts/bmp2lay_offset.tcl
 sh cat scripts/bmp2lay_offset.tcl
 bmp2lay -f $LOGO_FILE -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
@@ -73,10 +71,12 @@ write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
 -lib_cell_view {design frame layout} \
 -layer_map $GDSOUT_MAP_FILE \
 -merge_files "$GDS_FILES_TO_MERGE" \
-${STREAMOUT_GDS_FILE}_wlogo \
+$STREAMOUT_GDS_WLOGO_FILE \
 -verbose \
 -long_names \
 -keep_data_type;
+
+write_lib_package -include_all_blocks -include_db_files $LIB_PACKAGE
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

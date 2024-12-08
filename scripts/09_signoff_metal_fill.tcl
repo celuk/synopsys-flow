@@ -67,6 +67,8 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 save_block
 
+check_lvs -checks all -max_errors 0
+
 set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_metal_fill"
 signoff_check_drc -unselect_rules "RR*"
