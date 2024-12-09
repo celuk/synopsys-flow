@@ -38,6 +38,9 @@ module c0_soc(
    PVDD1CDG VDD_1 ( .VDD() );
    PVSS3CDG VSS_0 ( .VSS() );
    PVSS3CDG VSS_1 ( .VSS() );
+   PVDD2CDG VDDPST_2 ( .VDDPST() );
+   PVDD1CDG VDD_2 ( .VDD() );
+   PVSS3CDG VSS_2 ( .VSS() );
 
    SEALRING_1KX1K SealRing();
 
