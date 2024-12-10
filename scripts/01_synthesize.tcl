@@ -61,6 +61,8 @@ create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY
 #set_design_options
 
 read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name nomTLU -tlup $PARASITICS_NOM_TLUPLUS_FILE
+read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name minTLU -tlup $PARASITICS_MIN_TLUPLUS_FILE
+read_parasitic_tech -layermap $PARASITICS_MAP_FILE -name maxTLU -tlup $PARASITICS_MAX_TLUPLUS_FILE
 current_lib
 
 report_ref_libs
