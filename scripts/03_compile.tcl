@@ -69,5 +69,8 @@ check_pg_drc -ignore_std_cells -do_not_check_shapes_in_hier_blocks
 
 report_multibit
 
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_timing.rpt {report_timing -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_area.rpt {report_area -nosplit}
+
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

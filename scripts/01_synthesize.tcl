@@ -78,9 +78,6 @@ set_top_module $TOP_MODULE
 
 write_verilog $GATE_LEVEL_VERILOG
 
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_timing.rpt {report_timing -nosplit}
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_area.rpt {report_area -nosplit}
-
 save_lib -all
 
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

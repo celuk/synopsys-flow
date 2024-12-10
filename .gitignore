@@ -13,6 +13,8 @@ pg_model/
 *StarRC*/
 .node*
 signoff_fill_run/
+signoff_fill_run_beol/
+signoff_fill_run_feol/
 signoff_metal_density_report_run/
 signoff_check_drc_run_after_metal_fill/
 signoff_check_drc_run/

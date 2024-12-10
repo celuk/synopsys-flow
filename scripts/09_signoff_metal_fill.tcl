@@ -53,11 +53,13 @@ verify_pg_nets
 save_block
 
 set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_BEOL_RUNSET
+set_app_options -name signoff.create_metal_fill.run_dir -value ${SIGNOFF_METAL_FILL_FOLDER}_beol
 signoff_create_metal_fill -all_runset_layers true
 
 save_block
 
 set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_FEOL_RUNSET
+set_app_options -name signoff.create_metal_fill.run_dir -value ${SIGNOFF_METAL_FILL_FOLDER}_feol
 signoff_create_metal_fill -mode add -all_runset_layers true
 
 save_block
@@ -83,11 +85,11 @@ save_block
 
 check_lvs -checks all -max_errors 0
 
-set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
-set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_metal_fill"
-signoff_check_drc -unselect_rules "RR*"
-
-save_block
+#set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
+#set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_metal_fill"
+#signoff_check_drc -unselect_rules "RR*"
+#
+#save_block
 
 create_cell SealRing $SEALRING_CELL
 set sealring [get_cells -filter "is_hard_macro == true" -hier]

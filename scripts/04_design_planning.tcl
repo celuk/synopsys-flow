@@ -41,7 +41,7 @@ create_io_ring -name "io_ring" -guides {io_guide_right io_guide_bottom io_guide_
 place_io
 create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
-create_tap_cells -lib_cell $TAP_CELL -distance 100 -pattern every_row
+create_tap_cells -lib_cell $TAP_CELL -distance 20 -pattern every_row
 create_boundary_cells -left_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL" -right_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL"
 
 connect_pg_net -automatic
