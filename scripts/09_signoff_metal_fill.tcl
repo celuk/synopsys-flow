@@ -58,7 +58,7 @@ signoff_create_metal_fill -all_runset_layers true
 save_block
 
 set_app_options -name signoff.create_metal_fill.runset -value $METAL_FILL_FEOL_RUNSET
-signoff_create_metal_fill -add -all_runset_layers true
+signoff_create_metal_fill -mode add -all_runset_layers true
 
 save_block
 
