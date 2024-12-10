@@ -70,14 +70,14 @@ create_corner LT
 set_parasitics_parameters -early_spec minTLU -late_spec minTLU -corners {LT}
 create_mode FUNC_13240
 current_mode FUNC_13240
-create_scenario -mode FUNC_13240 -corner BC -name FUNC_13240_LT
+create_scenario -mode FUNC_13240 -corner LT -name FUNC_13240_LT
 current_scenario FUNC_13240_LT
 read_sdc $CONSTRAINT_FILE
 current_corner LT
 current_mode FUNC_13240
 current_scenario FUNC_13240_LT
 set_process_number 1.00
-set_temperature 40
+set_temperature -40
 set_voltage -object_list [get_cells -filter {design_type == pad}] 2.75
 set_voltage -object_list VDD 1.32
 set_voltage -object_list VSS 0.0
@@ -134,7 +134,7 @@ current_corner WCL
 current_mode FUNC_10840
 current_scenario FUNC_10840_WCL
 set_process_number 1.00
-set_temperature 125
+set_temperature -40
 set_voltage -object_list [get_cells -filter {design_type == pad}] 2.25
 set_voltage -object_list VDD 1.08
 set_voltage -object_list VSS 0.0
@@ -153,7 +153,7 @@ current_corner WCZ
 current_mode FUNC_1080
 current_scenario FUNC_1080_WCZ
 set_process_number 1.00
-set_temperature 125
+set_temperature 0
 set_voltage -object_list [get_cells -filter {design_type == pad}] 2.25
 set_voltage -object_list VDD 1.08
 set_voltage -object_list VSS 0.0
