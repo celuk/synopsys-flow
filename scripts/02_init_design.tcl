@@ -26,6 +26,10 @@ link_block
 
 set_design_options
 
+#set_app_options -name power.leakage_mode -value "average"
+#set_app_options -name power.swcap_mode -value "on"
+#set_app_options -name power.internal_mode -value "on"
+
 read_sdc $CONSTRAINT_FILE
 
 create_corner TT
@@ -45,7 +49,7 @@ set_voltage -object_list VDD 1.2
 set_voltage -object_list VSS 0.0
 set_timing_derate -late 1.04
 set_timing_derate -early 0.96
-set_scenario_status FUNC_12_TT -all -active true
+set_scenario_status FUNC_12_TT -all -active true -leakage_power true -dynamic_power true
 
 create_corner BC
 set_parasitics_parameters -early_spec minTLU -late_spec minTLU -corners {BC}
@@ -64,7 +68,7 @@ set_voltage -object_list VDD 1.32
 set_voltage -object_list VSS 0.0
 set_timing_derate -late 1.04
 set_timing_derate -early 0.96
-set_scenario_status FUNC_132_BC -all -active true
+set_scenario_status FUNC_132_BC -all -active true -leakage_power true -dynamic_power true
 
 create_corner LT
 set_parasitics_parameters -early_spec minTLU -late_spec minTLU -corners {LT}
@@ -83,7 +87,7 @@ set_voltage -object_list VDD 1.32
 set_voltage -object_list VSS 0.0
 set_timing_derate -late 1.04
 set_timing_derate -early 0.96
-set_scenario_status FUNC_13240_LT -all -active true
+set_scenario_status FUNC_13240_LT -all -active true -leakage_power true -dynamic_power true
 
 create_corner ML
 set_parasitics_parameters -early_spec minTLU -late_spec minTLU -corners {ML}
@@ -102,7 +106,7 @@ set_voltage -object_list VDD 1.32
 set_voltage -object_list VSS 0.0
 set_timing_derate -late 1.04
 set_timing_derate -early 0.96
-set_scenario_status FUNC_132125_ML -all -active true
+set_scenario_status FUNC_132125_ML -all -active true -leakage_power true -dynamic_power true
 
 create_corner WC
 set_parasitics_parameters -early_spec maxTLU -late_spec maxTLU -corners {WC}
@@ -121,7 +125,7 @@ set_voltage -object_list VDD 1.08
 set_voltage -object_list VSS 0.0
 set_timing_derate -late 1.04
 set_timing_derate -early 0.96
-set_scenario_status FUNC_108_WC -all -active true
+set_scenario_status FUNC_108_WC -all -active true -leakage_power true -dynamic_power true
 
 create_corner WCL
 set_parasitics_parameters -early_spec maxTLU -late_spec maxTLU -corners {WCL}
@@ -140,7 +144,7 @@ set_voltage -object_list VDD 1.08
 set_voltage -object_list VSS 0.0
 set_timing_derate -late 1.04
 set_timing_derate -early 0.96
-set_scenario_status FUNC_10840_WCL -all -active true
+set_scenario_status FUNC_10840_WCL -all -active true -leakage_power true -dynamic_power true
 
 create_corner WCZ
 set_parasitics_parameters -early_spec maxTLU -late_spec maxTLU -corners {WCZ}
@@ -159,7 +163,7 @@ set_voltage -object_list VDD 1.08
 set_voltage -object_list VSS 0.0
 set_timing_derate -late 1.04
 set_timing_derate -early 0.96
-set_scenario_status FUNC_1080_WCZ -all -active true
+set_scenario_status FUNC_1080_WCZ -all -active true -leakage_power true -dynamic_power true
 
 set_max_transition $MAX_TRANSITION [current_design]
 set_max_fanout $MAX_FANOUT [current_design]
