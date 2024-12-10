@@ -5,3 +5,6 @@ set_input_transition 1 [all_inputs]
 
 set_input_delay -clock [get_clocks clk_i] -max 2.0 [all_inputs] 
 set_input_delay -clock [get_clocks clk_i] -min 1.0 [all_inputs]
+
+set_output_delay -clock [get_clocks clk_i] -max 2.0 [all_outputs]
+set_output_delay -clock [get_clocks clk_i] -min 1.0 [all_outputs]

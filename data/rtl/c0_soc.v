@@ -1,48 +1,68 @@
 module c0_soc(
+    //inout VDD,
+    //inout VDD_I,
+    //inout VSS,
+    //inout           VDD, //CORE 1.8V
+    //inout           VDDPST, //PAD 3.3V
+    //inout           VSS,
+    //inout VDDH,
+    
     input clk_i,
-    input rstn_i,
-    input [1:0] d_i,
-    output [0:4] seg_o
+    input rst_ni,
+
+   output mem_uart_tx_o,
+   input  mem_uart_rx_i,
+
+   output uart_tx_o,
+   input  uart_rx_i
     );
 
     wire clk;
-    wire rstn;
-    wire [1:0] d;
-    wire [0:4] seg;
-    
-    PCORNER CornerCell1();
-    PCORNER CornerCell2();
-    PCORNER CornerCell3();
-    PCORNER CornerCell4();
+    wire rst_n;
 
-    PVDD2POC VDD2POC ( .VDDPST() );
-    PVDD2CDG VDDPST_0 ( .VDDPST() );
-    PVDD2CDG VDDPST_1 ( .VDDPST() );
-    PVDD1CDG VDD_0 ( .VDD() );
-    PVDD1CDG VDD_1 ( .VDD() );
-    PVSS3CDG VSS_0 ( .VSS() );
-    PVSS3CDG VSS_1 ( .VSS() );
+   wire mem_uart_tx;
+   wire  mem_uart_rx;
 
+   wire uart_tx;
+   wire  uart_rx;
+
+   PCORNER CornerCell1();
+   PCORNER CornerCell2();
+   PCORNER CornerCell3();
+   PCORNER CornerCell4();
+
+   PVDD2POC VDD2POC ( .VDDPST() );
+   PVDD2CDG VDDPST_0 ( .VDDPST() );
+   PVDD2CDG VDDPST_1 ( .VDDPST() );
+   PVDD1CDG VDD_0 ( .VDD() );
+   PVDD1CDG VDD_1 ( .VDD() );
+   PVSS3CDG VSS_0 ( .VSS() );
+   PVSS3CDG VSS_1 ( .VSS() );
+   PVDD2CDG VDDPST_2 ( .VDDPST() );
+   PVDD1CDG VDD_2 ( .VDD() );
+   PVSS3CDG VSS_2 ( .VSS() );
+
+   SEALRING_1KX1K SealRing();
+
+    // inputs
     PDDW0204CDG PDDW0204CDG_IN_CLK(.OEN(1'b1),.I(1'b0),.PAD(clk_i),.C(clk),.DS(1'b0),.PE(1'b0),.IE(1'b1));
+    PDDW0204CDG PDDW0204CDG_IN_RSTN(.OEN(1'b1),.I(1'b0),.PAD(rst_ni),.C(rst_n),.DS(1'b0),.PE(1'b0),.IE(1'b1));
+    PDDW0204CDG PDDW0204CDG_IN0(.OEN(1'b1),.I(1'b0),.PAD(mem_uart_rx_i),.C(mem_uart_rx),.DS(1'b0),.PE(1'b0),.IE(1'b1));
+    PDDW0204CDG PDDW0204CDG_IN1(.OEN(1'b1),.I(1'b0),.PAD(uart_rx_i),.C(uart_rx),.DS(1'b0),.PE(1'b0),.IE(1'b1));
     
-    PDDW0204CDG PDDW0204CDG_IN_RSTN(.OEN(1'b1),.I(1'b0),.PAD(rstn_i),.C(rstn),.DS(1'b0),.PE(1'b0),.IE(1'b1));
-    
-    PDDW0204CDG PDDW0204CDG_IN0(.OEN(1'b1),.I(1'b0),.PAD(d_i[0]),.C(d[0]),.DS(1'b0),.PE(1'b0),.IE(1'b1));
-    PDDW0204CDG PDDW0204CDG_IN1(.OEN(1'b1),.I(1'b0),.PAD(d_i[1]),.C(d[1]),.DS(1'b0),.PE(1'b0),.IE(1'b1));
-
-    PDDW0204CDG PDDW0204CDG_OUT0(.OEN(1'b0),.I(seg[0]),.PAD(seg_o[0]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
-    PDDW0204CDG PDDW0204CDG_OUT1(.OEN(1'b0),.I(seg[1]),.PAD(seg_o[1]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
-    PDDW0204CDG PDDW0204CDG_OUT2(.OEN(1'b0),.I(seg[2]),.PAD(seg_o[2]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
-    PDDW0204CDG PDDW0204CDG_OUT3(.OEN(1'b0),.I(seg[3]),.PAD(seg_o[3]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
-    PDDW0204CDG PDDW0204CDG_OUT4(.OEN(1'b0),.I(seg[4]),.PAD(seg_o[4]),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
-
-    SEALRING_1KX1K SealRing();
+    // outputs
+    PDDW0204CDG PDDW0204CDG_OUT0(.OEN(1'b0),.I(mem_uart_tx),.PAD(mem_uart_tx_o),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
+    PDDW0204CDG PDDW0204CDG_OUT1(.OEN(1'b0),.I(uart_tx),.PAD(uart_tx_o),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
 
     c0_top c0_top_inst(
-        .clk(clk),
-        .rstn(rstn),
-        .d(d),
-        .seg(seg)
+        .clk_i(clk),
+        .rst_ni(rst_n),
+
+    .mem_uart_tx_o(mem_uart_tx),
+    .mem_uart_rx_i(mem_uart_rx),
+
+    .uart_tx_o(uart_tx),
+    .uart_rx_i(uart_rx)
     );
 
 endmodule

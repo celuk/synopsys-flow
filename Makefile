@@ -121,6 +121,7 @@ clean:
 		CLIBs/ \
 		export_mw_fram* \
 		generate_frame_from_mw* \
+		clock_auto_exceptions* \
 		open_block.tcl \
 		remove_block.tcl
 
