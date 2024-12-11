@@ -35,5 +35,7 @@ check_lvs -checks all -max_errors 0
 
 check_lvs -check_child_cells true -check_zero_spacing_blockages true -report_floating_pins true -open_reporting detailed
 
+check_lvs -checks all -max_errors 0 -exclude_child_cell_types {macro}
+
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

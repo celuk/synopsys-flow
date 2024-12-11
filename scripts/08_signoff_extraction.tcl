@@ -56,9 +56,11 @@ set_app_options -name route.detail.timing_driven -value $route_detail_timing_dri
 set_app_options -name route.global.crosstalk_driven -value $route_global_crosstalk_driven
 set_app_options -name route.track.crosstalk_driven -value $route_track_crosstalk_driven
 
-#route_detail -incremental true -initial_drc_from_input true
+route_detail -incremental true -initial_drc_from_input true
 
 update_timing -full
+
+route_eco -max_detail_route_iterations 1000
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
@@ -67,6 +69,8 @@ connect_pg_net -net VDD [get_pins -physical_context */VDD]
 connect_pg_net -net VSS [get_pins -physical_context */VSS]
 
 check_mv_design
+
+check_lvs
 
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_extracted_clock_tree.rpt {report_clock_qor -all -nosplit}
 

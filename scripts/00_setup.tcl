@@ -273,8 +273,8 @@ proc set_design_options {} {
 
     set_app_options -name opt.port.eliminate_verilog_assign -value true
 
-    set_app_options -name opt.timing.effort -value high
-    set_app_options -name ccd.timing_effort -value high
+    #set_app_options -name opt.timing.effort -value high
+    #set_app_options -name ccd.timing_effort -value high
 
     set_app_options -name compile.flow.enable_multibit -value true
 

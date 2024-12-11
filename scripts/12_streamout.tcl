@@ -30,7 +30,7 @@ set_design_options
 #set sealring [get_cells -filter "is_hard_macro == true" -hier]
 #set_attribute $sealring -name physical_status -value fixed
 
-write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
+write_gds -units $STREAMOUT_RESOLUTION -hierarchy design_lib \
 -lib_cell_view {design frame layout} \
 -layer_map $GDSOUT_MAP_FILE \
 -merge_files "$GDS_FILES_TO_MERGE" \
@@ -67,7 +67,7 @@ source scripts/bmp2lay_offset.tcl
 sh cat scripts/bmp2lay_offset.tcl
 bmp2lay -f $LOGO_FILE -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
 
-write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
+write_gds -units $STREAMOUT_RESOLUTION -hierarchy design_lib \
 -lib_cell_view {design frame layout} \
 -layer_map $GDSOUT_MAP_FILE \
 -merge_files "$GDS_FILES_TO_MERGE" \
