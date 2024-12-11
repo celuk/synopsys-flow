@@ -36,7 +36,7 @@ save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_DRC_FOLDER
 set_app_options -name signoff.check_drc.user_defined_options -value "-D WLCSP_SEALRING"
-signoff_check_drc -unselect_rules "RR*"
+signoff_check_drc -check_all_runset_layers true -unselect_rules "RR*"
 #-check_all_runset_layers true
 
 save_block
@@ -53,16 +53,16 @@ save_block
 
 set_app_options -name signoff.check_drc.runset -value $ANTENNA_DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_ANTENNA_DRC_FOLDER
-signoff_check_drc
+signoff_check_drc -check_all_runset_layers true
 
 set_app_options -name signoff.check_drc.runset -value $MIM_ANTENNA_DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_MIM_ANTENNA_DRC_FOLDER
-signoff_check_drc
+signoff_check_drc -check_all_runset_layers true
 
 set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_fix_drc"
 set_app_options -name signoff.check_drc.user_defined_options -value "-D WLCSP_SEALRING"
-signoff_check_drc -unselect_rules "RR*"
+signoff_check_drc -check_all_runset_layers true -unselect_rules "RR*"
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

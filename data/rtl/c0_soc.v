@@ -35,28 +35,29 @@ module c0_soc(
 
    PVDD2CDG VDDPST_0 ( .VDDPST() );
    PVDD2CDG VDDPST_1 ( .VDDPST() );
-   PVDD2CDG VDDPST_2 ( .VDDPST() );
-   PVDD2CDG VDDPST_3 ( .VDDPST() );
-   PVDD2CDG VDDPST_4 ( .VDDPST() );
+   //PVDD2CDG VDDPST_2 ( .VDDPST() );
+   //PVDD2CDG VDDPST_3 ( .VDDPST() );
+   //PVDD2CDG VDDPST_4 ( .VDDPST() );
+   //PVDD2CDG VDDPST_5 ( .VDDPST() );
+   //PVDD2CDG VDDPST_6 ( .VDDPST() );
 
    PVDD1CDG VDD_0 ( .VDD() );
    PVDD1CDG VDD_1 ( .VDD() );
-   PVDD1CDG VDD_2 ( .VDD() );
-   PVDD1CDG VDD_3 ( .VDD() );
-   PVDD1CDG VDD_4 ( .VDD() );
-   PVDD1CDG VDD_5 ( .VDD() );
-   PVDD1CDG VDD_6 ( .VDD() );
+   //PVDD1CDG VDD_2 ( .VDD() );
+   //PVDD1CDG VDD_3 ( .VDD() );
+   //PVDD1CDG VDD_4 ( .VDD() );
+   //PVDD1CDG VDD_5 ( .VDD() );
+   //PVDD1CDG VDD_6 ( .VDD() );
 
    PVSS3CDG VSS_0 ( .VSS() );
    PVSS3CDG VSS_1 ( .VSS() );
-   PVSS3CDG VSS_2 ( .VSS() );
-   PVSS3CDG VSS_3 ( .VSS() );
-   PVSS3CDG VSS_4 ( .VSS() );
-   PVSS3CDG VSS_5 ( .VSS() );
-   PVSS3CDG VSS_6 ( .VSS() );
-   PVSS3CDG VSS_7 ( .VSS() );
-   PVSS3CDG VSS_8 ( .VSS() );
-
+   //PVSS3CDG VSS_2 ( .VSS() );
+   //PVSS3CDG VSS_3 ( .VSS() );
+   //PVSS3CDG VSS_4 ( .VSS() );
+   //PVSS3CDG VSS_5 ( .VSS() );
+   //PVSS3CDG VSS_6 ( .VSS() );
+   //PVSS3CDG VSS_7 ( .VSS() );
+   //PVSS3CDG VSS_8 ( .VSS() );
 
    SEALRING_1KX1K SealRing();
 

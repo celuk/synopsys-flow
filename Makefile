@@ -15,8 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-FC_EXEC ?= /usr/synopsys/fusioncompiler/W-2024.09-SP2/bin/fc_shell
-#/usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
+FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
 LM_EXEC ?= /usr/synopsys/icc2/V-2023.12/bin/lm_shell
 
 TOP_MODULE ?= c0_soc
