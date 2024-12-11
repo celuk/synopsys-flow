@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 set TOP_MODULE "c0_soc"
 set DESIGN_NAME "${TOP_MODULE}"
 set DESIGN_LIBRARY ${DESIGN_NAME}.nlib
@@ -274,7 +273,7 @@ proc set_design_options {} {
 
     set_app_options -name opt.port.eliminate_verilog_assign -value true
 
-    #set_app_options -name opt.timing.effort -value high
+    set_app_options -name opt.timing.effort -value high
     set_app_options -name ccd.timing_effort -value high
 
     set_app_options -name compile.flow.enable_multibit -value true
@@ -329,6 +328,8 @@ proc set_design_options {} {
 
     set_app_options -name plan.pgroute.optimize_track_alignment -value true
     set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
+
+    set_app_options -name plan.pgroute.disable_via_creation -value true
 
     set_app_options -name place.coarse.continue_on_missing_scandef -value true
     set_app_options -name place_opt.final_place.effort -value high

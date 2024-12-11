@@ -13,16 +13,20 @@ module c0_soc(
     wire rst_n;
  
     wire mem_uart_tx;
-    wire  mem_uart_rx;
+    wire mem_uart_rx;
  
     wire uart_tx;
-    wire  uart_rx;
+    wire uart_rx;
  
+    SEALRING_1KX1K SealRing();
+
     PCORNER CornerCell1();
     PCORNER CornerCell2();
     PCORNER CornerCell3();
     PCORNER CornerCell4();
  
+    PVDD2POC VDD2POC ( .VDDPST() );
+
     PVDD2CDG VDDPST_0 ( .VDDPST() );
     PVDD2CDG VDDPST_1 ( .VDDPST() );
     PVDD2CDG VDDPST_2 ( .VDDPST() );
@@ -36,6 +40,7 @@ module c0_soc(
     PVDD1CDG VDD_4 ( .VDD() );
     PVDD1CDG VDD_5 ( .VDD() );
     PVDD1CDG VDD_6 ( .VDD() );
+    PVDD1CDG VDD_7 ( .VDD() );
  
     PVSS3CDG VSS_0 ( .VSS() );
     PVSS3CDG VSS_1 ( .VSS() );
@@ -45,9 +50,6 @@ module c0_soc(
     PVSS3CDG VSS_5 ( .VSS() );
     PVSS3CDG VSS_6 ( .VSS() );
     PVSS3CDG VSS_7 ( .VSS() );
-    PVSS3CDG VSS_8 ( .VSS() );
- 
-    SEALRING_1KX1K SealRing();
 
     // inputs
     PDDW0204CDG PDDW0204CDG_IN_CLK(.OEN(1'b1),.I(1'b0),.PAD(clk_i),.C(clk),.DS(1'b0),.PE(1'b0),.IE(1'b1));
