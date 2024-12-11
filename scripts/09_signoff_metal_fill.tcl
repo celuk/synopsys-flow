@@ -27,8 +27,8 @@ link_block
 set_design_options
 
 ## post_route_auto_delete is not in docs??
-create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS" -rules {check_pnet no_1x post_route_auto_delete}
-create_stdcell_fillers -lib_cells "$NON_METAL_FILLER_CELLS" -rules {check_pnet no_1x post_route_auto_delete}
+create_stdcell_fillers -lib_cells "$NON_METAL_FILLER_CELLS" -rules {check_pnet post_route_auto_delete}
+create_stdcell_fillers -lib_cells "$METAL_FILLER_CELLS" -rules {check_pnet post_route_auto_delete}
 check_legality
 connect_pg_net -automatic
 check_mv_design

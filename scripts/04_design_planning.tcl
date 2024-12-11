@@ -44,6 +44,7 @@ create_io_filler_cells -reference_cells $IO_PAD_FILLER_CELLS
 
 create_tap_cells -lib_cell $TAP_CELL -distance 20 -pattern every_row
 create_boundary_cells -left_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL" -right_boundary_cell "$STDCELL_LIB_NAME/$BOUNDARY_CELL"
+add_tie_cells
 
 source scripts/pns.tcl
 

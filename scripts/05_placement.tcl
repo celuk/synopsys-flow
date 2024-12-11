@@ -26,8 +26,6 @@ link_block
 
 set_design_options
 
-add_tie_cells
-
 #compile_fusion -to initial_opto
 #
 ##reset_placement
@@ -40,68 +38,83 @@ add_tie_cells
 #
 #check_legality
 
-set_qor_strategy -stage pnr -metric $QOR_STRATEGY_METRIC -mode $QOR_STRATEGY_MODE
+compile_fusion -from initial_place -to initial_place
+compile_fusion -from initial_drc -to initial_drc
 
-# -high_effort_congestion
-set_stage -step placement
+set_app_options -name compile.flow.enable_physical_multibit_banking -value true
+set_app_options -name compile.flow.enable_multibit_debanking -value true
+compile_fusion -from initial_opto -to initial_opto
 
-set_app_options -name opt.common.user_instance_name_prefix -value place_opt_
-set_app_options -name cts.common.user_instance_name_prefix -value place_opt_cts_
+set_app_options -name compile.flow.enable_second_pass_multibit_banking -value true
+compile_fusion -from final_place -to final_place
 
-set rm_leakage_scenarios [get_object_name [get_scenarios -filter active==true&&leakage_power==true]]
-set rm_dynamic_scenarios [get_object_name [get_scenarios -filter active==true&&dynamic_power==true]]
-set_scenario_status -leakage_power false -dynamic_power false [get_scenarios "$rm_leakage_scenarios $rm_dynamic_scenarios"]
+set_app_options -name compile.flow.enable_multibit_debanking -value true
+compile_fusion -from final_opto -to final_opto
 
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_non_default_app_options.rpt {report_app_options -non_default *}
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_lib_cell_purposes.rpt {report_lib_cells -objects [get_lib_cells] -columns {full_name:20 valid_purposes}}
+check_legality
 
-#-reduced_effort
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_check_stage_settings.rpt {check_stage_settings -stage pnr -metric $QOR_STRATEGY_METRIC -step placement}
-
-set currentMode [current_mode]
-foreach_in_collection mode [all_modes] {
-    current_mode $mode
-    set clock_tree [all_fanout -flat -clock_tree]
-    if { [sizeof_collection $clock_tree] > 0 } {
-        set_ideal_network $clock_tree
-        remove_propagated_clock [get_pins -hierarchical]
-        remove_propagated_clock [get_ports]
-        remove_propagated_clock [get_clocks -filter !is_virtual]
-    }
-}
-current_mode $currentMode
-
-mark_clock_trees -routing_rules
-
-## if high utilization needed
-#reset_app_options time.delay_calc_wareform_analysis_mode
-#remove_buffer_trees -all
-#create_placement -buffering_aware_timing_driven 
+#set_qor_strategy -stage pnr -metric $QOR_STRATEGY_METRIC -mode $QOR_STRATEGY_MODE
+#
+## -high_effort_congestion
+#set_stage -step placement
+#
+#set_app_options -name opt.common.user_instance_name_prefix -value place_opt_
+#set_app_options -name cts.common.user_instance_name_prefix -value place_opt_cts_
+#
+#set rm_leakage_scenarios [get_object_name [get_scenarios -filter active==true&&leakage_power==true]]
+#set rm_dynamic_scenarios [get_object_name [get_scenarios -filter active==true&&dynamic_power==true]]
+#set_scenario_status -leakage_power false -dynamic_power false [get_scenarios "$rm_leakage_scenarios $rm_dynamic_scenarios"]
+#
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_non_default_app_options.rpt {report_app_options -non_default *}
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_lib_cell_purposes.rpt {report_lib_cells -objects [get_lib_cells] -columns {full_name:20 valid_purposes}}
+#
+##-reduced_effort
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_check_stage_settings.rpt {check_stage_settings -stage pnr -metric $QOR_STRATEGY_METRIC -step placement}
+#
+#set currentMode [current_mode]
+#foreach_in_collection mode [all_modes] {
+#    current_mode $mode
+#    set clock_tree [all_fanout -flat -clock_tree]
+#    if { [sizeof_collection $clock_tree] > 0 } {
+#        set_ideal_network $clock_tree
+#        remove_propagated_clock [get_pins -hierarchical]
+#        remove_propagated_clock [get_ports]
+#        remove_propagated_clock [get_clocks -filter !is_virtual]
+#    }
+#}
+#current_mode $currentMode
+#
+#mark_clock_trees -routing_rules
+#
+### if high utilization needed
+##reset_app_options time.delay_calc_wareform_analysis_mode
+##remove_buffer_trees -all
+##create_placement -buffering_aware_timing_driven 
+##place_opt -from initial_drc -to initial_drc
+#
+##plan.macro.allow_unmapped_design
+##create_placement -floorplan
+#
+### first pass
+#place_opt -from initial_place -to initial_place
 #place_opt -from initial_drc -to initial_drc
-
-#plan.macro.allow_unmapped_design
+#update_timing -full
+#
 #create_placement -floorplan
-
-## first pass
-place_opt -from initial_place -to initial_place
-place_opt -from initial_drc -to initial_drc
-update_timing -full
-
-create_placement -floorplan
-
-## second pass
-# -congestion_effort high
-create_placement -incremental -timing_driven -congestion -congestion_effort high
-
-#save_block -as ${DESIGN_NAME}/${CURRENT_STEP}_two_pass_placement
-
-place_opt -from initial_drc
-
-## if high utilization needed
-#place_opt -from final_place
-
-legalize_placement
-report_placement -verbose low
+#
+### second pass
+## -congestion_effort high
+#create_placement -incremental -timing_driven -congestion -congestion_effort high
+#
+##save_block -as ${DESIGN_NAME}/${CURRENT_STEP}_two_pass_placement
+#
+#place_opt -from initial_drc
+#
+### if high utilization needed
+##place_opt -from final_place
+#
+#legalize_placement
+#report_placement -verbose low
 
 source scripts/createNplace_bondpads.tcl
 sh cat scripts/createNplace_bondpads.tcl
@@ -123,8 +136,14 @@ check_mv_design
 
 check_pin_placement -self
 
+report_power_domain
+
+report_multibit
+
 save_block
 
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_timing.rpt {report_timing -nosplit}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_area.rpt {report_area -nosplit}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_qor.rpt {report_qor -nosplit}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_place_utilization.rpt {report_congestion -nosplit}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_place_utilization.rpt {report_utilization -verbose}
