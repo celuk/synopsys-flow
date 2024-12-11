@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
 set TOP_MODULE "c0_soc"
 set DESIGN_NAME "${TOP_MODULE}"
 set DESIGN_LIBRARY ${DESIGN_NAME}.nlib
@@ -273,7 +274,12 @@ proc set_design_options {} {
 
     set_app_options -name opt.port.eliminate_verilog_assign -value true
 
+    #set_app_options -name opt.timing.effort -value high
+    set_app_options -name ccd.timing_effort -value high
+
     set_app_options -name compile.flow.enable_multibit -value true
+
+    set_app_options -name compile.flow.high_effort_timing -value 1
 
     set_app_options -name compile.place.congestion_effort -value high
     set_app_options -name compile.final_place.effort -value high
