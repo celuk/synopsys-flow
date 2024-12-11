@@ -329,8 +329,6 @@ proc set_design_options {} {
     set_app_options -name plan.pgroute.optimize_track_alignment -value true
     set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 
-    set_app_options -name plan.pgroute.disable_via_creation -value true
-
     set_app_options -name place.coarse.continue_on_missing_scandef -value true
     set_app_options -name place_opt.final_place.effort -value high
     set_app_options -name place_opt.place.congestion_effort -value high

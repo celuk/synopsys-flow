@@ -50,6 +50,8 @@ compile_pg -strategies s_mesh
 #   -within_bbox [get_attribute [get_core_area] bbox] \
 #   -from_layers M9 -to_layers M8
 
+set_app_options -name plan.pgroute.disable_via_creation -value true
+
 #set iopads [get_cells -physical_context -filter {design_type == "pad" && (name =~ "*VDD_*" || name =~ "*VSS_*")} -quiet]
 set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 create_pg_macro_conn_pattern macro_connect_pattern_vss \
@@ -59,6 +61,8 @@ set_pg_strategy s_macro_connect_vss \
 -pattern {{name: macro_connect_pattern_vss} {nets: VDD VSS}} \
 -macros "$iopads"
 compile_pg -strategies s_macro_connect_vss
+
+set_app_options -name plan.pgroute.disable_via_creation -value false
 
 #set iopads [get_cells -physical_context -filter "design_type==pad" -quiet]
 #create_pg_macro_conn_pattern macro_connect_pattern_vdd \
