@@ -53,9 +53,9 @@ source -echo $TCL_ANTENNA_RULE_FILE
 #clock_opt -from build_clock -to route_clock 
 #clock_opt -to final_opto
 
-set_driving_cell -lib_cell $CLOCK_BUFFER_CELL [get_ports $CLK]
+#set_driving_cell -lib_cell $CLOCK_BUFFER_CELL [get_ports $CLK]
 
-set_clock_tree_options -clocks [all_clocks] -target_skew 0.1
+#set_clock_tree_options -clocks [all_clocks] -target_skew 0.1
 
 #set_app_options -name clock_opt.flow.optimize_ndr -value true
 

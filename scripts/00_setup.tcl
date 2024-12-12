@@ -346,6 +346,12 @@ proc set_design_options {} {
 
     #set_early_data_check_policy -policy tolerate -checks opt.sanity_check.large_hold -strategy report_only
 
+    set_app_options -name clock_opt.flow.enable_ccd -value true
+    set_app_options -name cts.multisource.enable_subtree_synthesis_aware_ccd -value true
+    set_app_options -name clock_opt.flow.enable_irap -value true
+    set_app_options -name clock_opt.flow.enable_irdrivenopt -value true
+    set_app_options -name cts.compile.topological_ndr -value true
+
     set_app_options -name opt.common.enable_via_ladder_insertion -value true
     set_app_options -name opt.common.enable_via_ladder_area_api -value true
 
