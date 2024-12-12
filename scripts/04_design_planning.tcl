@@ -50,7 +50,7 @@ source scripts/pns.tcl
 
 ## merge metal shapes in specified pad cell types while performing DRC checks
 ## -value {io_pad corner_pad}
-set_app_option -name plan.pgroute.merge_shapes_in_pad_cell -value {io_pad}
+#set_app_option -name plan.pgroute.merge_shapes_in_pad_cell -value {io_pad}
 
 check_pg_missing_vias
 check_pg_connectivity -check_std_cell_pins none

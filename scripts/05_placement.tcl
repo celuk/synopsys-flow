@@ -41,14 +41,14 @@ set_design_options
 compile_fusion -from initial_place -to initial_place
 compile_fusion -from initial_drc -to initial_drc
 
-set_app_options -name compile.flow.enable_physical_multibit_banking -value true
-set_app_options -name compile.flow.enable_multibit_debanking -value true
+#set_app_options -name compile.flow.enable_physical_multibit_banking -value true
+#set_app_options -name compile.flow.enable_multibit_debanking -value true
 compile_fusion -from initial_opto -to initial_opto
 
-set_app_options -name compile.flow.enable_second_pass_multibit_banking -value true
+#set_app_options -name compile.flow.enable_second_pass_multibit_banking -value true
 compile_fusion -from final_place -to final_place
 
-set_app_options -name compile.flow.enable_multibit_debanking -value true
+#set_app_options -name compile.flow.enable_multibit_debanking -value true
 compile_fusion -from final_opto -to final_opto
 
 check_legality
@@ -138,7 +138,7 @@ check_pin_placement -self
 
 report_power_domain
 
-report_multibit
+#report_multibit
 
 save_block
 

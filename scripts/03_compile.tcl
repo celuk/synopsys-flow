@@ -30,10 +30,10 @@ check_hier_design -stage pre_placement
 
 compile_fusion -check_only
 
-set_app_options -name compile.flow.enable_rtl_multibit_banking -value true
+#set_app_options -name compile.flow.enable_rtl_multibit_banking -value true
 compile_fusion -to initial_map
 
-set_app_options -name compile.flow.enable_rtl_multibit_debanking -value true
+#set_app_options -name compile.flow.enable_rtl_multibit_debanking -value true
 compile_fusion -from logic_opto -to logic_opto
 
 #create_mv_cells -all -verbose
