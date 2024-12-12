@@ -276,17 +276,16 @@ proc set_design_options {} {
     set_app_options -name opt.timing.effort -value high
     set_app_options -name ccd.timing_effort -value high
 
-    #set_app_options -name compile.flow.enable_multibit -value true
+    set_app_options -name compile.flow.enable_multibit -value true
 
-    set_app_options -name compile.flow.high_effort_timing -value 1
-    set_app_options -name compile.flow.areaResynthesis -value true
+    #set_app_options -name compile.flow.high_effort_timing -value 1
 
     set_app_options -name compile.place.congestion_effort -value high
     set_app_options -name compile.final_place.effort -value high
     set_app_options -name compile.initial_place.buffering_aware -value true
     set_app_options -name route.global.export_soft_congestion_maps -value true
     set_app_options -name place.coarse.cong_restruct_iterations -value 3
-    #set_app_options -name place.coarse.auto_timing_control -value true
+    set_app_options -name place.coarse.auto_timing_control -value true
     set_app_options -name place.coarse.auto_density_control -value true
     set_app_options -name place.coarse.enhanced_auto_density_control -value true
 
@@ -331,15 +330,9 @@ proc set_design_options {} {
     set_app_options -name plan.pgroute.derive_cut_net_from_pin -value true
 
     set_app_options -name place.coarse.continue_on_missing_scandef -value true
-    #set_app_options -name place_opt.final_place.effort -value high
-    #set_app_options -name place_opt.place.congestion_effort -value high
+    set_app_options -name place_opt.final_place.effort -value high
+    set_app_options -name place_opt.place.congestion_effort -value high
     set_app_options -name opt.common.user_instance_name_prefix -value place_opt
-
-    set_app_options -name clock_opt.flow.enable_ccd -value true
-    set_app_options -name cts.multisource.enable_subtree_synthesis_aware_ccd -value true
-    set_app_options -name clock_opt.flow.enable_irap -value true
-    set_app_options -name clock_opt.flow.enable_irdrivenopt -value true
-    set_app_options -name cts.compile.topological_ndr -value true
 
     set_app_options -name opt.common.honor_lib_cell_purpose -value true
     set_dont_touch [get_lib_cells $CTS_LIB_CELL_PATTERNS] false
