@@ -278,7 +278,7 @@ proc set_design_options {} {
 
     set_app_options -name compile.flow.enable_multibit -value true
 
-    set_app_options -name compile.flow.high_effort_timing -value 1
+    #set_app_options -name compile.flow.high_effort_timing -value 1
 
     set_app_options -name compile.place.congestion_effort -value high
     set_app_options -name compile.final_place.effort -value high

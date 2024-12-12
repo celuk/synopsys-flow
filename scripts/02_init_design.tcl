@@ -30,7 +30,7 @@ set_design_options
 #set_app_options -name power.swcap_mode -value "on"
 #set_app_options -name power.internal_mode -value "on"
 
-read_sdc $CONSTRAINT_FILE
+#read_sdc $CONSTRAINT_FILE
 
 source scripts/mcmm.tcl
 
