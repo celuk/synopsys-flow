@@ -32,11 +32,6 @@ set_design_options
 
 #read_sdc $CONSTRAINT_FILE
 
-#set_input_delay  -max 5.0 -clock $CLK [remove_from_collection [all_inputs] [get_ports {$CLK}]]
-#set_input_delay  -min 0.0 -clock $CLK [remove_from_collection [all_inputs] [get_ports {$CLK}]]
-#set_output_delay -max 5.0 -clock $CLK [all_outputs]
-#set_output_delay -min 0.0 -clock $CLK [all_outputs]
-
 source scripts/mcmm.tcl
 
 #set_max_transition $MAX_TRANSITION [current_design]
