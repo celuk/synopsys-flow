@@ -47,7 +47,7 @@ save_block
 
 set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_DRC_FOLDER
-set_app_options -name signoff.check_drc.user_defined_options -value "-D WLCSP_SEALRING"
+#set_app_options -name signoff.check_drc.user_defined_options -value "-D WLCSP_SEALRING"
 signoff_check_drc -check_all_runset_layers true -unselect_rules "RR* DRM.R.1*"
 #-check_all_runset_layers true
 
@@ -58,14 +58,14 @@ save_block
 
 set_app_options -name signoff.fix_drc.init_drc_error_db -value $SIGNOFF_CHECK_DRC_FOLDER
 set_app_options -name signoff.fix_drc.run_dir -value $SIGNOFF_FIX_DRC_FOLDER
-set_app_options -name signoff.fix_drc.user_defined_options -value "-D WLCSP_SEALRING"
+#set_app_options -name signoff.fix_drc.user_defined_options -value "-D WLCSP_SEALRING"
 signoff_fix_drc -max_number_repair_loop 10 -unselect_rules "RR* DRM.R.1*"
 
 save_block
 
 set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value "${SIGNOFF_CHECK_DRC_FOLDER}_after_fix_drc"
-set_app_options -name signoff.check_drc.user_defined_options -value "-D WLCSP_SEALRING"
+#set_app_options -name signoff.check_drc.user_defined_options -value "-D WLCSP_SEALRING"
 signoff_check_drc -check_all_runset_layers true -unselect_rules "RR* DRM.R.1*"
 
 save_lib -all

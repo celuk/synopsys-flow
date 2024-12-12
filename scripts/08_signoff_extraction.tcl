@@ -60,7 +60,11 @@ route_detail -incremental true -initial_drc_from_input true
 
 update_timing -full
 
-route_eco -max_detail_route_iterations 1000
+#route_eco -max_detail_route_iterations 1000
+
+#update_timing -full
+
+#route_eco -max_detail_route_iterations 1000
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]

@@ -278,8 +278,8 @@ remove_workspace
 
 ## SEALRING
 create_workspace sealring -technology $TECH_FILE -flow physical_only
-read_gds $SEALRING_WLCSP_GDS_FILE -layer_map $GDSOUT_MAP_FILE
-#read_gds $SEALRING_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+#read_gds $SEALRING_WLCSP_GDS_FILE -layer_map $GDSOUT_MAP_FILE
+read_gds $SEALRING_GDS_FILE -layer_map $GDSOUT_MAP_FILE
 check_workspace
 commit_workspace -output ${NDM_PATH}/sealring.ndm -force
 remove_workspace
