@@ -27,7 +27,9 @@ set_host_options -max_cores 8
 
 ## set them if they are not in path or if you want to change the version of it
 set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
-set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1/bin"
+#"/usr/synopsys/icvalidator/W-2024.09-SP2"
+set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1"
+#"/usr/synopsys/icv_workbench/W-2024.09-SP1"
 set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
 set ICVWB_EXEC_PATH "${ICVWB_HOME_DIR}/bin"
 set ::env(ICV_HOME_DIR) $ICV_HOME_DIR

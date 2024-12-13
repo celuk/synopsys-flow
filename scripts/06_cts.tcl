@@ -57,7 +57,7 @@ source -echo $TCL_ANTENNA_RULE_FILE
 
 #set_clock_tree_options -clocks [all_clocks] -target_skew 0.1
 
-#set_app_options -name clock_opt.flow.optimize_ndr -value true
+set_app_options -name clock_opt.flow.optimize_ndr -value true
 
 clock_opt
 
@@ -66,8 +66,8 @@ clock_opt
 #set clock_nets [get_nets -hierarchical -filter "net_type == clock"]
 #create_shields -nets ${clock_nets} -with_ground VSS
 
-#set_app_options -name refine_opt.flow.optimize_ndr -value true
-#refine_opt
+set_app_options -name refine_opt.flow.optimize_ndr -value true
+refine_opt
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]
