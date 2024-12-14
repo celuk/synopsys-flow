@@ -1,5 +1,8 @@
-create_clock -name clk_i -period 10 [get_ports {clk_i}]
+create_clock -name clk_i -period 20 [get_ports {clk_i}]
 set_load  0.012 [all_outputs]
+#set_max_fanout 5 [all_inputs]
+
+#set_false_path -to c0_top_inst/user_processor_dut/isl_blksiz/cek/getir_dut/ps_reg[18]/D
 
 #set_dont_touch_network      [all_clocks]
 #set_fix_hold                [all_clocks]
@@ -8,21 +11,22 @@ set_load  0.012 [all_outputs]
 
 #set_input_transition 0.2 [all_inputs]
 
-#set_input_delay  -max 1.0 -clock $CLK [remove_from_collection [all_inputs] [get_ports {$CLK}]]
-#set_input_delay  -min 0.0 -clock $CLK [remove_from_collection [all_inputs] [get_ports {$CLK}]]
-#set_output_delay -max 1.0 -clock $CLK [all_outputs]
-#set_output_delay -min 0.0 -clock $CLK [all_outputs]
+#set_input_delay  -max 5.0 -clock clk_i [remove_from_collection [all_inputs] [get_ports {clk_i}]]
+#set_input_delay  -min 0.0 -clock clk_i [remove_from_collection [all_inputs] [get_ports {clk_i}]]
+
+#set_input_delay  -max 2.0 -clock clk_i [all_inputs]
+#set_input_delay  -min 1.0 -clock clk_i [all_inputs]
+#set_output_delay -max 2.0 -clock clk_i [all_outputs]
+#set_output_delay -min 1.0 -clock clk_i [all_outputs]
 
 #set_input_delay -clock [get_clocks clk_i] -max 1 [all_inputs] 
 #set_input_delay -clock [get_clocks clk_i] -min 0 [all_inputs]
 #set_output_delay -clock [get_clocks clk_i] -max 1 [all_outputs]
 #set_output_delay -clock [get_clocks clk_i] -min 0 [all_outputs]
 
-#set_false_path -to [get_pins c0_top/user_processor_dut/isl_blksiz/buyruk_onbellegi_denetleyici_dut/iomem_addr_reg/D]
-#set_false_path -to [get_pins c0_top/user_processor_dut/isl_blksiz/buyruk_onbellegi_denetleyici_dut/l1b_bekle_o_reg/D]
-#set_false_path -to [get_pins c0_top/user_processor_dut/isl_blksiz/buyruk_onbellegi_denetleyici_dut/iomem_valid_reg/D]
-
-#set_max_fanout 6 [all_inputs]
+#set_false_path -to [get_pins c0_top_inst/user_processor_dut/isl_blksiz/buyruk_onbellegi_denetleyici_dut/iomem_addr_reg*/D]
+#set_false_path -to [get_pins c0_top_inst/user_processor_dut/isl_blksiz/buyruk_onbellegi_denetleyici_dut/l1b_bekle_o_reg*/D]
+#set_false_path -to [get_pins c0_top_inst/user_processor_dut/isl_blksiz/buyruk_onbellegi_denetleyici_dut/iomem_valid_reg*/D]
 
 #set_input_delay -clock [get_clocks clk_i] 0.015 [all_inputs] 
 #set_input_delay -clock [get_clocks clk_i] -min 0.5 [all_inputs]

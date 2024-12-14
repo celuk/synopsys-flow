@@ -275,12 +275,16 @@ proc set_design_options {} {
 
     set_app_options -name opt.port.eliminate_verilog_assign -value true
 
-    set_app_options -name opt.timing.effort -value high
-    set_app_options -name ccd.timing_effort -value high
+    #set_app_options -name opt.timing.effort -value high
+    #set_app_options -name ccd.timing_effort -value high
+
+    set_app_options -name ccd.hold_control_effort -value ultra
+
+    #set_app_options -name time.pba_optimization_mode -value exhaustive
 
     set_app_options -name compile.flow.enable_multibit -value true
 
-    #set_app_options -name compile.flow.high_effort_timing -value 1
+    set_app_options -name compile.flow.high_effort_timing -value 1
 
     set_app_options -name compile.place.congestion_effort -value high
     set_app_options -name compile.final_place.effort -value high
@@ -348,11 +352,11 @@ proc set_design_options {} {
 
     #set_early_data_check_policy -policy tolerate -checks opt.sanity_check.large_hold -strategy report_only
 
-    set_app_options -name clock_opt.flow.enable_ccd -value true
-    set_app_options -name cts.multisource.enable_subtree_synthesis_aware_ccd -value true
-    set_app_options -name clock_opt.flow.enable_irap -value true
-    set_app_options -name clock_opt.flow.enable_irdrivenopt -value true
-    set_app_options -name cts.compile.topological_ndr -value true
+    #set_app_options -name clock_opt.flow.enable_ccd -value true
+    #set_app_options -name cts.multisource.enable_subtree_synthesis_aware_ccd -value true
+    #set_app_options -name clock_opt.flow.enable_irap -value true
+    #set_app_options -name clock_opt.flow.enable_irdrivenopt -value true
+    #set_app_options -name cts.compile.topological_ndr -value true
 
     set_app_options -name opt.common.enable_via_ladder_insertion -value true
     set_app_options -name opt.common.enable_via_ladder_area_api -value true

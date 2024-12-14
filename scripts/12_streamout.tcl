@@ -61,7 +61,7 @@ redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_power.rpt {report_powe
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_qor.rpt {report_clock_qor -all -nosplit}
 
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_max_tim.rpt {report_timing -capacitance -transition_time -input_pins -nets -delay_type max}
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_max_tim.rpt {report_timing -capacitance -transition_time -input_pins -nets -delay_type max}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_min_tim.rpt {report_timing -capacitance -transition_time -input_pins -nets -delay_type min}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_timing.rpt {report_global_timing -pba_mode [get_app_option_value -name time.pba_optimization_mode] -nosplit}
 
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {report_constraints -nosplit}

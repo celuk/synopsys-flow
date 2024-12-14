@@ -72,6 +72,8 @@ set_current_mismatch_config auto_fix -enable {library netlist routing}
 set_app_options -name lib.setting.enable_via_region_override -value true
 derive_design_level_via_regions
 
+set_app_options -name hdlin.report.check_no_latch -value true
+
 analyze -format sverilog $VERILOG_FILES
 elaborate $TOP_MODULE
 set_top_module $TOP_MODULE

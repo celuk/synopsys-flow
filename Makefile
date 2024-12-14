@@ -17,7 +17,8 @@
 
 FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
 #/usr/synopsys/fusioncompiler/W-2024.09-SP2/bin/fc_shell
-LM_EXEC ?= /usr/synopsys/icc2/V-2023.12/bin/lm_shell
+LM_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/lm_shell
+#/usr/synopsys/icc2/V-2023.12/bin/lm_shell
 #/usr/synopsys/icc2/W-2024.09-SP2/bin/lm_shell
 
 TOP_MODULE ?= c0_soc
