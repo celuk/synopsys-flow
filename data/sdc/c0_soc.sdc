@@ -1,6 +1,6 @@
 create_clock -name clk_i -period 20 [get_ports {clk_i}]
 set_load  0.012 [all_outputs]
-#set_max_fanout 5 [all_inputs]
+set_max_fanout 5 [all_inputs]
 
 #set_false_path -to c0_top_inst/user_processor_dut/isl_blksiz/cek/getir_dut/ps_reg[18]/D
 
