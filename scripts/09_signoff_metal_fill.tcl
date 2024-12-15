@@ -98,6 +98,8 @@ redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_timi
 
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {report_constraints -nosplit}
 
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {check_pt_qor}
+
 check_lvs -checks all -max_errors 0
 
 #set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET

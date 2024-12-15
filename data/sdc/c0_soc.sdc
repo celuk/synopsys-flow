@@ -1,13 +1,13 @@
 create_clock -name clk_i -period 20 [get_ports {clk_i}] -waveform {0 10}
-set_load 30 [all_outputs]
+set_load 0.012 [all_outputs]
 set_clock_uncertainty -setup 2 [get_clocks clk_i]
 set_clock_uncertainty -hold  0.450 [get_clocks clk_i]
-set_clock_transition 0.1 [get_clocks clk_i]
-set_input_transition -rise 0.5 [all_inputs -exclude_clock_ports]
-set_input_transition -fall 0.5 [all_inputs -exclude_clock_ports]
+#set_clock_transition 0.1 [get_clocks clk_i]
+#set_input_transition -rise 0.5 [all_inputs -exclude_clock_ports]
+#set_input_transition -fall 0.5 [all_inputs -exclude_clock_ports]
 set_input_delay -clock clk_i 5 [all_inputs]
 set_output_delay -clock clk_i 5 [all_outputs]
-set_max_transition 4 [all_outputs]
+set_max_transition 0.4286 [all_outputs]
 set_max_fanout 4 [all_inputs]
 
 #set_false_path -to c0_top_inst/user_processor_dut/isl_blksiz/cek/getir_dut/ps_reg[18]/D
