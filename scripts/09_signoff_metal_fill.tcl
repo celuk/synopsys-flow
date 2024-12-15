@@ -127,6 +127,8 @@ connect_pg_net -net VSS [get_pins -physical_context */VSS]
 #set_app_options -name signoff.create_metal_fill.user_defined_options -value "-D WithSealring"
 #signoff_create_metal_fill -foundry_fill_type both -foundry_for_feol_fill generic -select_layers "M1 M2 M3 M4 M5 M6 M7 M8 M9 OD PO"
 
+check_lvs -checks all -max_errors 0 -exclude_child_cell_types {macro}
+
 check_mv_design
 
 save_lib -all

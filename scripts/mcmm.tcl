@@ -21,7 +21,7 @@ create_mode FUNC_12
 current_mode FUNC_12
 create_scenario -mode FUNC_12 -corner TT -name FUNC_12_TT
 current_scenario FUNC_12_TT
-read_sdc $CONSTRAINT_FILE
+source $CONSTRAINT_FILE
 current_corner TT
 current_mode FUNC_12
 current_scenario FUNC_12_TT
@@ -40,7 +40,7 @@ create_mode FUNC_132
 current_mode FUNC_132
 create_scenario -mode FUNC_132 -corner BC -name FUNC_132_BC
 current_scenario FUNC_132_BC
-read_sdc $CONSTRAINT_FILE
+source $CONSTRAINT_FILE
 current_corner BC
 current_mode FUNC_132
 current_scenario FUNC_132_BC
@@ -97,7 +97,7 @@ create_mode FUNC_108
 current_mode FUNC_108
 create_scenario -mode FUNC_108 -corner WC -name FUNC_108_WC
 current_scenario FUNC_108_WC
-read_sdc $CONSTRAINT_FILE
+source $CONSTRAINT_FILE
 current_corner WC
 current_mode FUNC_108
 current_scenario FUNC_108_WC

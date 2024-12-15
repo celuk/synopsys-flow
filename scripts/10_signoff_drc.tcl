@@ -33,6 +33,8 @@ save_block -as ${DESIGN_NAME}/${CURRENT_STEP}
 #signoff_create_pg_augmentation -node generic
 #save_block
 
+#clock_opt
+
 set_app_options -name signoff.check_drc.runset -value $ANTENNA_DRC_RUNSET
 set_app_options -name signoff.check_drc.run_dir -value $SIGNOFF_CHECK_ANTENNA_DRC_FOLDER
 signoff_check_drc -check_all_runset_layers true

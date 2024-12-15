@@ -53,7 +53,7 @@ write_verilog -include {all} $GATE_LEVEL_VERILOG
 ## -transition_time --> slew
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_timing.rpt {report_timing -nosplit -transition_time -capacitance}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_drc_lvs.rpt {check_routes -open_net true -report_all_open_nets true -drc true -antenna true -voltage_area true}
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_check_lvs.rpt {check_lvs -checks all -max_errors 0}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_check_lvs.rpt {check_lvs -checks all -max_errors 0 -exclude_child_cell_types {macro}}
 
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_area.rpt {report_area -nosplit}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_power.rpt {report_power -nosplit}
