@@ -96,9 +96,9 @@ redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_max_tim.rpt {rep
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_clock_min_tim.rpt {report_timing -capacitance -transition_time -input_pins -nets -delay_type min}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_timing.rpt {report_global_timing -pba_mode [get_app_option_value -name time.pba_optimization_mode] -nosplit}
 
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {report_constraints -nosplit}
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {report_constraints -nosplit}
 
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {check_pt_qor}
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_ptqor.rpt {check_pt_qor}
 
 check_lvs -checks all -max_errors 0
 

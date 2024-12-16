@@ -6,7 +6,7 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+# p
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -59,7 +59,7 @@ set_scenario_status FUNC_132_BC -all -active true -leakage_power true -dynamic_p
 #current_mode FUNC_13240
 #create_scenario -mode FUNC_13240 -corner LT -name FUNC_13240_LT
 #current_scenario FUNC_13240_LT
-#read_sdc $CONSTRAINT_FILE
+#source $CONSTRAINT_FILE
 #current_corner LT
 #current_mode FUNC_13240
 #current_scenario FUNC_13240_LT
@@ -78,7 +78,7 @@ set_scenario_status FUNC_132_BC -all -active true -leakage_power true -dynamic_p
 #current_mode FUNC_132125
 #create_scenario -mode FUNC_132125 -corner ML -name FUNC_132125_ML
 #current_scenario FUNC_132125_ML
-#read_sdc $CONSTRAINT_FILE
+#source $CONSTRAINT_FILE
 #current_corner ML
 #current_mode FUNC_132125
 #current_scenario FUNC_132125_ML
@@ -116,7 +116,7 @@ set_scenario_status FUNC_108_WC -all -active true -leakage_power true -dynamic_p
 #current_mode FUNC_10840
 #create_scenario -mode FUNC_10840 -corner WCL -name FUNC_10840_WCL
 #current_scenario FUNC_10840_WCL
-#read_sdc $CONSTRAINT_FILE
+#source $CONSTRAINT_FILE
 #current_corner WCL
 #current_mode FUNC_10840
 #current_scenario FUNC_10840_WCL
@@ -135,7 +135,7 @@ set_scenario_status FUNC_108_WC -all -active true -leakage_power true -dynamic_p
 #current_mode FUNC_1080
 #create_scenario -mode FUNC_1080 -corner WCZ -name FUNC_1080_WCZ
 #current_scenario FUNC_1080_WCZ
-#read_sdc $CONSTRAINT_FILE
+#source $CONSTRAINT_FILE
 #current_corner WCZ
 #current_mode FUNC_1080
 #current_scenario FUNC_1080_WCZ

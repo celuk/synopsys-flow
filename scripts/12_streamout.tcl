@@ -82,5 +82,10 @@ $STREAMOUT_GDS_WLOGO_FILE \
 
 write_lib_package -include_all_blocks -include_db_files $LIB_PACKAGE
 
+#save_block
+#set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
+#set_app_options -name signoff.check_drc.run_dir -value ${SIGNOFF_CHECK_DRC_FOLDER}_streamout
+#signoff_check_drc -check_all_runset_layers true -unselect_rules "RR* DRM.R.1*"
+
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

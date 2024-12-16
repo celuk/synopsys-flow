@@ -105,6 +105,7 @@ clean:
 		signoff_metal_density_report_run/ \
 		signoff_check_drc_run_after_metal_fill/ \
 		signoff_check_drc_run/ \
+		signoff_check_drc_run_streamout/ \
 		signoff_check_antenna_drc_run/ \
 		signoff_check_mim_antenna_drc_run/ \
 		signoff_check_lvs_run/ \
