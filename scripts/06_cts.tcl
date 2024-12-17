@@ -31,7 +31,7 @@ synthesize_clock_trunks
 source -echo $TCL_ANTENNA_RULE_FILE
 
 #set_lib_cell_purpose -include cts $CTS_LIB_CELL_PATTERNS
-
+#
 #create_routing_rule CTS_NDR -default_reference_rule \
 #	-multiplier_width 2 \
 #	-spacings {M2 0.052 M3 0.052 M4 0.08 M5 0.08} \

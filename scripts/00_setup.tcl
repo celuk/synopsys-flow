@@ -261,7 +261,7 @@ proc set_design_options {} {
     ## to create voltage area automatically, it should be false
     set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
-    set_dont_touch [get_cells {*Corner* *VDD* *VSS* *PDDW0204CDG*}]
+    set_dont_touch [get_cells {*Corner* *VDD* *VSS* *PDDW0204CDG* *PDDW0812CDG*}]
 
     set_app_options -name compile.auto_floorplan.enable -value true
     set_app_options -name compile.auto_floorplan.initialize -value auto

@@ -71,14 +71,14 @@ module c0_soc(
     PVSS3CDG VSS_7 ( .VSS() );
 
     // inputs
-    PDDW0204CDG PDDW0204CDG_IN_CLK(.OEN(1'b1),.I(1'b0),.PAD(clk_i),.C(clk),.DS(1'b0),.PE(1'b0),.IE(1'b1));
-    PDDW0204CDG PDDW0204CDG_IN_RSTN(.OEN(1'b1),.I(1'b0),.PAD(rst_ni),.C(rst_n),.DS(1'b0),.PE(1'b0),.IE(1'b1));
-    PDDW0204CDG PDDW0204CDG_IN0(.OEN(1'b1),.I(1'b0),.PAD(mem_uart_rx_i),.C(mem_uart_rx),.DS(1'b0),.PE(1'b0),.IE(1'b1));
-    PDDW0204CDG PDDW0204CDG_IN1(.OEN(1'b1),.I(1'b0),.PAD(uart_rx_i),.C(uart_rx),.DS(1'b0),.PE(1'b0),.IE(1'b1));
+    PDDW0812CDG PDDW0812CDG_IN_CLK(.OEN(1'b1),.I(1'b0),.PAD(clk_i),.C(clk),.DS(1'b0),.PE(1'b0),.IE(1'b1));
+    PDDW0812CDG PDDW0812CDG_IN_RSTN(.OEN(1'b1),.I(1'b0),.PAD(rst_ni),.C(rst_n),.DS(1'b0),.PE(1'b0),.IE(1'b1));
+    PDDW0812CDG PDDW0812CDG_IN0(.OEN(1'b1),.I(1'b0),.PAD(mem_uart_rx_i),.C(mem_uart_rx),.DS(1'b0),.PE(1'b0),.IE(1'b1));
+    PDDW0812CDG PDDW0812CDG_IN1(.OEN(1'b1),.I(1'b0),.PAD(uart_rx_i),.C(uart_rx),.DS(1'b0),.PE(1'b0),.IE(1'b1));
     
     // outputs
-    PDDW0204CDG PDDW0204CDG_OUT0(.OEN(1'b0),.I(mem_uart_tx),.PAD(mem_uart_tx_o),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
-    PDDW0204CDG PDDW0204CDG_OUT1(.OEN(1'b0),.I(uart_tx),.PAD(uart_tx_o),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
+    PDDW0812CDG PDDW0812CDG_OUT0(.OEN(1'b0),.I(mem_uart_tx),.PAD(mem_uart_tx_o),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
+    PDDW0812CDG PDDW0812CDG_OUT1(.OEN(1'b0),.I(uart_tx),.PAD(uart_tx_o),.C(),.DS(1'b1),.PE(1'b0),.IE(1'b0));
 
     c0_top c0_top_inst(
         .clk(clk),
