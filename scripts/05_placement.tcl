@@ -38,6 +38,8 @@ set_design_options
 #
 #check_legality
 
+set_fix_multiple_port_nets -feedthroughs -outputs -buffer_constants [get_modules *]
+
 compile_fusion -from initial_place -to initial_place
 compile_fusion -from initial_drc -to initial_drc
 

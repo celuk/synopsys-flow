@@ -282,6 +282,8 @@ proc set_design_options {} {
 
     #set_app_options -name time.pba_optimization_mode -value exhaustive
 
+    set_app_options -name compile.seqmap.scan -value false
+
     set_app_options -name compile.flow.enable_multibit -value true
 
     set_app_options -name compile.flow.high_effort_timing -value 1

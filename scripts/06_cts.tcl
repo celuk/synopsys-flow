@@ -45,7 +45,7 @@ source -echo $TCL_ANTENNA_RULE_FILE
 #create_routing_rule CTS_NDR -spacings {M2 0.3 M3 0.5 M4 0.7}
 #set_clock_routing_rules -rules CTS_NDR -min_routing_layer M2 -max_routing_layer M4
 
-#set_clock_tree_options -clocks [all_clocks] -target_skew 0.1
+set_clock_tree_options -clocks [all_clocks] -target_skew 0.1
 
 #get_clocks
 #clock_opt -list_only

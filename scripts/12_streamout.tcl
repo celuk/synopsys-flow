@@ -30,6 +30,10 @@ set_design_options
 #set sealring [get_cells -filter "is_hard_macro == true" -hier]
 #set_attribute $sealring -name physical_status -value fixed
 
+#set_pt_options -pt_exec pt_shell
+#eco_opt -types {setup hold max_transition max_capacitance max_clock_transition}
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_ptqor.rpt {check_pt_qor}
+
 write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
 -lib_cell_view {design frame layout} \
 -layer_map $GDSOUT_MAP_FILE \

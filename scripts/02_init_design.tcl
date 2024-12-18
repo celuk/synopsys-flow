@@ -34,6 +34,7 @@ set_design_options
 
 source scripts/mcmm.tcl
 
+set_max_transition 0.7 [current_design]
 #set_max_transition $MAX_TRANSITION [current_design]
 #set_max_fanout $MAX_FANOUT [current_design]
 

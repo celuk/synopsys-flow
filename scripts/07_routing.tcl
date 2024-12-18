@@ -60,11 +60,11 @@ remove_redundant_shapes -remove_loop_shapes true -report_changed_nets true -init
 
 check_routes
 
-optimize_routes -max_detail_route_iterations 1000
-check_routes
+#optimize_routes -max_detail_route_iterations 1000
+#check_routes
 
-spread_wires -pitch 2.5
-widen_wires
+#spread_wires -pitch 2.5
+#widen_wires
 
 check_lvs
 

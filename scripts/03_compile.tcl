@@ -26,6 +26,8 @@ link_block
 
 set_design_options
 
+set_fix_multiple_port_nets -feedthroughs -outputs -buffer_constants [get_modules *]
+
 check_hier_design -stage pre_placement
 
 compile_fusion -check_only

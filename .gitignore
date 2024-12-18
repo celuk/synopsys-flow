@@ -38,6 +38,7 @@ logs/
 data/gds/
 data/lef/
 data/nldm/
+data/spice/
 data/lib/
 data/tech/
 CLIBs/
