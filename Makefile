@@ -102,6 +102,8 @@ clean:
 		*StarRC*/ \
 		.node* \
 		signoff_fill_run/ \
+		signoff_fill_run_beol/ \
+		signoff_fill_run_feol/ \
 		signoff_metal_density_report_run/ \
 		signoff_check_drc_run_after_metal_fill/ \
 		signoff_check_drc_run/ \
@@ -126,6 +128,7 @@ clean:
 		export_mw_fram* \
 		generate_frame_from_mw* \
 		clock_auto_exceptions* \
+		.graph_data.txt \
 		open_block.tcl \
 		remove_block.tcl
 
