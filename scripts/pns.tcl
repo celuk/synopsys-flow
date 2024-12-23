@@ -1,6 +1,6 @@
 # This file is part of https://github.com/celuk/synopsys-flow
 # Copyright (C) 2024  Seyyid Hikmet Celik
-# 					  seyyid4091@gmail.com
+#                     seyyid4091@gmail.com
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -112,7 +112,6 @@ set_app_options -name plan.pgroute.disable_via_creation -value false
 #    {via_master: default}} {{intersection: undefined} {via_master: NIL}}}
 #
 #compile_pg -strategies s_io_to_ring -via_rule rule1
-
 
 connect_pg_net -automatic
 connect_pg_net -net VDD [get_pins -hierarchical */VDD]

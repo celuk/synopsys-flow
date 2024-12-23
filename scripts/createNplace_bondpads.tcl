@@ -1,7 +1,6 @@
-# Ported and modified from the ICC version of it to use in ICC2 or Fusion Compiler
 # This file is part of https://github.com/celuk/synopsys-flow
 # Copyright (C) 2024  Seyyid Hikmet Celik
-# 					  seyyid4091@gmail.com
+#                     seyyid4091@gmail.com
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

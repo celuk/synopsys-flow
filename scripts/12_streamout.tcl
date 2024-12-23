@@ -1,6 +1,6 @@
 # This file is part of https://github.com/celuk/synopsys-flow
 # Copyright (C) 2024  Seyyid Hikmet Celik
-# 					  seyyid4091@gmail.com
+#                     seyyid4091@gmail.com
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -30,33 +30,29 @@ set_design_options
 #set sealring [get_cells -filter "is_hard_macro == true" -hier]
 #set_attribute $sealring -name physical_status -value fixed
 
-#set_pt_options -pt_exec pt_shell
-#eco_opt -types {setup hold max_transition max_capacitance max_clock_transition}
-#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_ptqor.rpt {check_pt_qor}
-
 write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
 -lib_cell_view {design frame layout} \
 -layer_map $GDSOUT_MAP_FILE \
 -merge_files "$GDS_FILES_TO_MERGE" \
-$STREAMOUT_GDS_FILE \
+$STREAMOUT_GDS_WLOGO_FILE \
 -merge_gds_top_cell $TOP_MODULE \
 -verbose \
 -long_names \
 -keep_data_type;
 
 #change_names -rules verilog -verbose
-write_verilog -include {all} $GATE_LEVEL_VERILOG
+write_verilog -include {all} all_${GATE_LEVEL_VERILOG}
 
-#write_sdf $STREAMOUT_SDF_FILE
+write_sdf $STREAMOUT_SDF_FILE
 
-#write_def -units $STREAMOUT_RESOLUTION $STREAMOUT_DEF_FILE
+write_def -units $STREAMOUT_RESOLUTION $STREAMOUT_DEF_FILE
 
-#write_parasitics -output $STREAMOUT_PARASITICS_FILE -format spef
+write_parasitics -output $STREAMOUT_PARASITICS_FILE -format spef
 
 # -pba_mode exhaustive -slack_lesser_than 0 -max_paths 1000
 ## -transition_time --> slew
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_timing.rpt {report_timing -nosplit -transition_time -capacitance}
-redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_drc_lvs.rpt {check_routes -open_net true -report_all_open_nets true -drc true -antenna true -voltage_area true}
+redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_drc_lvs.rpt {check_routes -open_net true -report_all_open_nets true -drc true -antenna true -voltage_area true -write_blockage_drcs_to_error_cell_as_ignored true}
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_check_lvs.rpt {check_lvs -checks all -max_errors 0 -exclude_child_cell_types {macro}}
 
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_area.rpt {report_area -nosplit}
@@ -70,26 +66,14 @@ redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_hold_setup_global_timi
 
 redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_constraints.rpt {report_constraints -nosplit}
 
-source scripts/bmp2lay_offset.tcl
-sh cat scripts/bmp2lay_offset.tcl
-bmp2lay -f $LOGO_FILE -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
-
-write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
--lib_cell_view {design frame layout} \
--layer_map $GDSOUT_MAP_FILE \
--merge_files "$GDS_FILES_TO_MERGE" \
-$STREAMOUT_GDS_WLOGO_FILE \
--merge_gds_top_cell $TOP_MODULE \
--verbose \
--long_names \
--keep_data_type;
-
 write_lib_package -include_all_blocks -include_db_files $LIB_PACKAGE
 
 #save_block
 #set_app_options -name signoff.check_drc.runset -value $DRC_RUNSET
 #set_app_options -name signoff.check_drc.run_dir -value ${SIGNOFF_CHECK_DRC_FOLDER}_streamout
 #signoff_check_drc -check_all_runset_layers true -unselect_rules "RR* DRM.R.1*"
+
+#/usr/synopsys/icvalidator/V-2023.12/bin/icv_nettran -verilog all_c0_soc_gate_level.v -sp $STDCELL_SPICE_FILE $IO_SPICE_FILE -verilog-b1 VDD -verilog-b0 VSS -outName c0_soc.spi -outType SPICE -dupCell USE_MULTIPLE -sp-dupPort WARNING -sp-resolveDupInstances -globalNets VDD -forceGlobalsOn
 
 save_lib -all
 save_block -as ${DESIGN_NAME}/${CURRENT_STEP}

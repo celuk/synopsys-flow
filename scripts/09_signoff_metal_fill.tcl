@@ -1,6 +1,6 @@
 # This file is part of https://github.com/celuk/synopsys-flow
 # Copyright (C) 2024  Seyyid Hikmet Celik
-# 					  seyyid4091@gmail.com
+#                     seyyid4091@gmail.com
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -118,6 +118,24 @@ connect_pg_net -net VDD [get_pins -hierarchical */VDD]
 connect_pg_net -net VSS [get_pins -hierarchical */VSS]
 connect_pg_net -net VDD [get_pins -physical_context */VDD]
 connect_pg_net -net VSS [get_pins -physical_context */VSS]
+
+write_gds -units $STREAMOUT_RESOLUTION -hierarchy all \
+-lib_cell_view {design frame layout} \
+-layer_map $GDSOUT_MAP_FILE \
+-merge_files "$GDS_FILES_TO_MERGE" \
+$STREAMOUT_GDS_FILE \
+-merge_gds_top_cell $TOP_MODULE \
+-verbose \
+-long_names \
+-keep_data_type;
+
+source scripts/bmp2lay_offset.tcl
+sh cat scripts/bmp2lay_offset.tcl
+bmp2lay -f $LOGO_FILE -layer AP -px 1 -py 1 -offsetx 244 -offsety 244
+
+#set_pt_options -pt_exec "pt_shell"
+#eco_opt -types {setup hold max_transition max_capacitance max_clock_transition}
+#redirect -file $REPORTS_DIR/${CURRENT_STEP}/${TOP_MODULE}_ptqor.rpt {check_pt_qor}
 
 #save_block
 #
