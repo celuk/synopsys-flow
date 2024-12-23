@@ -27,22 +27,7 @@ set_app_options -name lib.configuration.display_lm_messages -value true
 
 set_app_options -name shell.common.tmp_dir_path -value $NDM_PATH
 
-set_app_var link_library " \
-${STDCELL_DB_PREFIX}bc.db \
-${STDCELL_DB_PREFIX}lt.db \
-${STDCELL_DB_PREFIX}ml.db \
-${STDCELL_DB_PREFIX}tc.db \
-${STDCELL_DB_PREFIX}wc.db \
-${STDCELL_DB_PREFIX}wcl.db \
-${STDCELL_DB_PREFIX}wcz.db \
-${IO_DB_PREFIX}bc1.db \
-${IO_DB_PREFIX}lt1.db \
-${IO_DB_PREFIX}ml1.db \
-${IO_DB_PREFIX}tc1.db \
-${IO_DB_PREFIX}wc1.db \
-${IO_DB_PREFIX}wcl1.db \
-${IO_DB_PREFIX}wcz1.db \
-"
+set_app_var link_library [concat $STDCELL_DB_FILES $IO_DB_FILES]
 
 create_lib $DESIGN_LIBRARY -technology $TECH_FILE -ref_libs $REFERENCE_LIBRARY
 #" \

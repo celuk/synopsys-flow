@@ -1,6 +1,6 @@
 # This file is part of https://github.com/celuk/synopsys-flow
 # Copyright (C) 2024  Seyyid Hikmet Celik
-# 					  seyyid4091@gmail.com
+#                     seyyid4091@gmail.com
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,9 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-FC_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
+FC_EXEC ?= fc_shell
+#/usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/fc_shell
 #/usr/synopsys/fusioncompiler/W-2024.09-SP2/bin/fc_shell
-LM_EXEC ?= /usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/lm_shell
+LM_EXEC ?= lm_shell
+#/usr/synopsys/fusioncompiler/V-2023.12-SP3/bin/lm_shell
 #/usr/synopsys/icc2/V-2023.12/bin/lm_shell
 #/usr/synopsys/icc2/W-2024.09-SP2/bin/lm_shell
 

@@ -26,26 +26,23 @@ set LOGS_DIR "logs"
 set_host_options -max_cores 8
 
 ## set them if they are not in path or if you want to change the version of it
-set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
-#"/usr/synopsys/icvalidator/W-2024.09-SP2"
-set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1"
-#"/usr/synopsys/icv_workbench/W-2024.09-SP1"
-set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
-set ICVWB_EXEC_PATH "${ICVWB_HOME_DIR}/bin"
-set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
-set ::env(ICVWB_HOME_DIR) $ICVWB_HOME_DIR
-set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
-set ::env(PATH) "$ICVWB_EXEC_PATH:$env(PATH)"
-set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
+#set ICV_HOME_DIR "/usr/synopsys/icvalidator/V-2023.12"
+##"/usr/synopsys/icvalidator/W-2024.09-SP2"
+#set ICVWB_HOME_DIR "/usr/synopsys/icv_workbench/V-2023.09-SP1"
+##"/usr/synopsys/icv_workbench/W-2024.09-SP1"
+#set ICV_EXEC_PATH "${ICV_HOME_DIR}/bin"
+#set ICVWB_EXEC_PATH "${ICVWB_HOME_DIR}/bin"
+#set ::env(ICV_HOME_DIR) $ICV_HOME_DIR
+#set ::env(ICVWB_HOME_DIR) $ICVWB_HOME_DIR
+#set ::env(PATH) "$ICV_EXEC_PATH:$env(PATH)"
+#set ::env(PATH) "$ICVWB_EXEC_PATH:$env(PATH)"
+#set ::env(ICV_INCLUDES) "${ICV_HOME_DIR}/include"
 
 set GATE_LEVEL_VERILOG ${OUTPUTS_DIR}/${TOP_MODULE}_gate_level.v
 
 #set_app_options -name search_path -value "."
 set search_path "."
 lappend search_path "/"
-
-source scripts/00_pdk_setup.tcl
-
 set NDM_PATH "data/lib"
 set RTL_PATH "data/rtl"
 set SDC_PATH "data/sdc"
@@ -70,6 +67,11 @@ lappend search_path $LEF_PATH
 lappend search_path $GDS_PATH
 lappend search_path $TLUPLUS_PATH
 
+source scripts/00_pdk_setup.tcl
+
+#set IO_PAD_FILLER_CELLS $ALL_IO_PAD_FILLER_CELLS
+#set GDS_FILES_TO_MERGE [lreplace $GDS_FILES_TO_MERGE end end $SEALRING_WLCSP_GDS_FILE]
+
 set REFERENCE_LIBRARY [list \
 ${NDM_PATH}/stdcell.ndm \
 ${NDM_PATH}/stdcell_physical_only.ndm \
@@ -81,6 +83,10 @@ ${NDM_PATH}/bondpad.ndm \
 \
 ${NDM_PATH}/sealring.ndm \
 ];
+
+## report_lib $STDCELL_LIB_NAME
+set STDCELL_LIB_NAME "stdcell"
+set IO_LIB_NAME "io"
 
 set LOGO_FILE "${LOGO_PATH}/kasirga_logo.bmp"
 
@@ -100,12 +106,6 @@ set STREAMOUT_SDF_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.sdf"
 set STREAMOUT_PARASITICS_FILE "${OUTPUTS_DIR}/${DESIGN_NAME}.spef"
 
 set LIB_PACKAGE "${OUTPUTS_DIR}/${DESIGN_NAME}_lib_package.pkg"
-
-#set GDS_FILES_TO_MERGE [lreplace $GDS_FILES_TO_MERGE end end $SEALRING_WLCSP_GDS_FILE]
-
-## report_lib $STDCELL_LIB_NAME
-set STDCELL_LIB_NAME "stdcell"
-set IO_LIB_NAME "io"
 
 ## can also be used in library creation with
 ## create_workspace -scale_factor 1000
@@ -132,8 +132,6 @@ set ROUTING_LAYER_DIRECTION_OFFSET_LIST [list \
 {M9 horizontal 0} \
 {AP vertical 0} \
 ];
-
-#set IO_PAD_FILLER_CELLS $ALL_IO_PAD_FILLER_CELLS
 
 set MAX_TRANSITION 0.015
 set MAX_FANOUT 5
@@ -251,7 +249,8 @@ proc set_design_options {} {
     SIGNOFF_CHECK_LVS_FOLDER \
     SIGNOFF_CHECK_DESIGN_FOLDER \
     GDS_FILES_TO_MERGE \
-    GDSOUT_MAP_FILE
+    GDSOUT_MAP_FILE \
+    DONT_TOUCH_CELL_PATTERNS
 
     set_app_options -name lib.setting.enable_via_region_override -value true
     
@@ -261,7 +260,7 @@ proc set_design_options {} {
     ## to create voltage area automatically, it should be false
     set_app_options -name mv.upf.enable_missing_voltage_area -value false
 
-    set_dont_touch [get_cells {*Corner* *VDD* *VSS* *PDDW0204CDG* *PDDW0812CDG*}]
+    set_dont_touch [get_cells $DONT_TOUCH_CELL_PATTERNS]
 
     set_app_options -name compile.auto_floorplan.enable -value true
     set_app_options -name compile.auto_floorplan.initialize -value auto
