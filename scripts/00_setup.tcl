@@ -296,6 +296,10 @@ proc set_design_options {} {
     set_app_options -name place.coarse.auto_timing_control -value true
     set_app_options -name place.coarse.auto_density_control -value true
     set_app_options -name place.coarse.enhanced_auto_density_control -value true
+    
+    #set_app_options -name place.coarse.auto_density_control -value false
+    #set_app_options -name place.coarse.max_density -value 0.1
+    #set_app_options -name place.coarse.congestion_driven_max_util -value 0.2
 
     set_ignored_layers -min_routing_layer $MIN_ROUTING_LAYER
     set_ignored_layers -max_routing_layer $MAX_ROUTING_LAYER
