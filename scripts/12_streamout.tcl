@@ -41,7 +41,7 @@ $STREAMOUT_GDS_WLOGO_FILE \
 -keep_data_type;
 
 #change_names -rules verilog -verbose
-write_verilog -include {all} all_${GATE_LEVEL_VERILOG}
+write_verilog -include {all} ${TOP_MODULE}_gate_level_all.v
 
 write_sdf $STREAMOUT_SDF_FILE
 
