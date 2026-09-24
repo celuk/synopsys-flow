@@ -4,7 +4,7 @@ Standalone Synopsys Fusion Compiler Flow
 
 Check this for Cadence one: https://github.com/celuk/cadence-flow
 
-ICV version `U-2022.12-SP4-2` or newer required, so Fusion Compiler, too. If you need to set an ICV executable that is not in your path you need to change related section in `00_setup.tcl` file.
+ICV version `U-2022.12-SP4-2` or newer required, so Fusion Compiler, too. If you need to set an ICV executable that is not in your path you need to change related section in [`00_setup.tcl`](scripts/00_setup.tcl) file.
 
 Also, if you need to give a path for `fc_shell` or `lm_shell` change them in `Makefile`.
 
@@ -14,7 +14,7 @@ Before running place all lef, gds, timing libs, tech PDK files correctly in [`da
 
 For using another PDK, you need to modify data folder, whole [`00_pdk_setup.tcl`](scripts/00_pdk_setup.tcl), write an ndm creation script like [`00_create_ndms.tcl`](scripts/00_create_ndms.tcl) and you may need to change some parts of the flow for technology node specific things such as [`tap cells`](scripts/04_design_planning.tcl#L45) in `TSMC65`.
 
-For sramless designs changing the verilog code in [`data/rtl`](data/rtl), changing the constraint in [`data/sdc`](data/sdc/c0_soc.sdc), setting top module name in [00_setup.tcl](scripts/00_setup.tcl#L18), placing required files into [`data`](data) folder and filling variables in [`00_pdk_setup.tcl`](scripts/00_pdk_setup.tcl) should be sufficient to run the whole flow and get a GDS that is ready for fabrication. You should have a soc verilog module for IOs such as [`c0_soc.v`](data/rtl/c0_soc.v) that wraps your top module.
+For sramless designs changing the verilog code in [`data/rtl`](data/rtl), changing the constraint in [`data/sdc`](data/sdc/c0_soc.sdc), setting top module name in [`00_setup.tcl`](scripts/00_setup.tcl#L18), placing required files into [`data`](data) folder and filling variables in [`00_pdk_setup.tcl`](scripts/00_pdk_setup.tcl) should be sufficient to run the whole flow and get a GDS that is ready for fabrication. You should have a soc verilog module for IOs such as [`c0_soc.v`](data/rtl/c0_soc.v) that wraps your top module.
 
 ## USAGE OF THIS FLOW TOOL TL;DR
 
@@ -71,3 +71,7 @@ Following command cleans all garbage including generated ndms, then generates nd
 ```bash
 make clean_all ndms all show
 ```
+
+## Flow Steps
+
+![flow_steps.png](figures/flow_steps.png)
